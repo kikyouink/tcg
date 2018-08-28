@@ -1,13 +1,19 @@
 <template>
     <div id="warp">
         <div id="container">
-            <v-nav></v-nav>
+
         </div>
     </div>
 </template>
 
 <script>
-    import nav from '@/components/area/nav.vue'
+    import nav from '@/components/area/nav.vue';
+
+    Vue.config.errorHandler = function(err, vm, info) {
+        console.log(err);
+        console.log(vm);
+        console.log(info);
+    }
 
     export default {
         name: 'App',
@@ -16,7 +22,7 @@
         },
         data() {
             return {
-                
+
             }
         },
         methods: {

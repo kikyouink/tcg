@@ -9,6 +9,9 @@
 <script>
     export default {
         name: 'tab',
+        props:{
+            items:object
+        },
         data() {
             return {
 

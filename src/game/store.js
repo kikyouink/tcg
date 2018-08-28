@@ -5,7 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-
+        config:{
+            
+        }
     },
     mutations: {
         SET_APP(state, platform) {
