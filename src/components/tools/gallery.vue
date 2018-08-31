@@ -1,6 +1,6 @@
 <template>
-    <div id="nav">
-        <v-tab></v-tab>
+    <div id="gallery">
+        <div v-for="item in "></div>
     </div>
 </template>
 

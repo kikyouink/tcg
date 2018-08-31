@@ -14,9 +14,7 @@
         name: 'player',
         data() {
             return {
-                id: 0,
                 name: '甄姬',
-                sex: 'female',
                 HP: 30,
                 maxHp: 30,
                 maxHandCard: 7,
@@ -56,5 +54,6 @@
         text-align: center;
         line-height: 300px;
         font-size: 20px;
+		background: ;
     }
 </style>
