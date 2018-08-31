@@ -1,19 +1,13 @@
 <template>
     <div id="warp">
         <div id="container">
-
+            <v-nav><v-nav>
         </div>
     </div>
 </template>
 
 <script>
     import nav from '@/components/area/nav.vue';
-
-    Vue.config.errorHandler = function(err, vm, info) {
-        console.log(err);
-        console.log(vm);
-        console.log(info);
-    }
 
     export default {
         name: 'App',
@@ -22,27 +16,31 @@
         },
         data() {
             return {
-
+                version:'0.1-alpha',
+                author:'SAI',
+                date:'2018-08-31',
+                location:'Nan Jing',
             }
+        },
+        mounted(){
+        	console.log('新一轮的阵面对决开始了');
         },
         methods: {
-            hide() {
-                this.mask = false;
-                bus.$emit('hide');
+            restart(){
+                console.log('See you again!');
+                location.reload();
+            },
+            exit(){
+                console.log('See you again!')
             }
         },
-        created() {
-            //这里需要使用箭头函数，否则this错误
-            bus.$on('show', () => {
-                this.mask = true;
-            })
-        }
     }
 </script>
 
 <style lang="scss" type="text/css">
     //阿里图标
     @import url('http://at.alicdn.com/t/font_586765_srq6hpjhrmn.css');
+    
     * {
         overflow: hidden;
         padding: 0;
@@ -82,7 +80,12 @@
     #warp {
         height: 100%;
         #container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
             height: 100%; // transition: all 1s;
+            width:60%;
+            
         }
     }
 </style>

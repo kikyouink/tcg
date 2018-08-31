@@ -5,20 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        config:{
-            
-        }
+        config: {
+        },
+
     },
     mutations: {
-        SET_APP(state, platform) {
-            state.platform = platform;
+        damage(state, e) {
+            console.log(e);
+            var [source, target] = [e.source, e.target];
+            console.log(source.name + '对' + target.name + '造成了' + 'e.num' + '点伤害');
         },
-        testChangex(state, temp) {
-            state.xxxxxx = temp;
-        },
-        change(state, str) {
-            state.test = str;
-        }
 
     },
     actions: {
@@ -27,12 +23,6 @@ export default new Vuex.Store({
         }, platform) {
             commit('SET_APP', platform);
         },
-        testChangex({
-            commit
-        }, xxxxxx) {
-            console.log(xxxxxx);
-            commit('testChangex', "action change value:" + xxxxxx.a);
-        }
     },
     getters: {
         getApp: (state) => state.platform,
