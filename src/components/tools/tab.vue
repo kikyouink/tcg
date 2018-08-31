@@ -20,7 +20,7 @@
         computed: mapState([
             // 映射 this.count 为 store.state.count
             'count'
-        ])
+        ]),
         methods: {
             light(index) {
                 this.changeLight = index;

@@ -1,18 +1,18 @@
 <template>
     <div id="warp">
         <div id="container">
-            <v-nav><v-nav>
+            <v-gallery></v-gallery>
         </div>
     </div>
 </template>
 
 <script>
-    import nav from '@/components/area/nav.vue';
+    import gallery from '@/components/tools/gallery.vue';
 
     export default {
         name: 'App',
         components: {
-            "v-nav": nav,
+            "v-gallery": gallery,
         },
         data() {
             return {
@@ -23,9 +23,14 @@
             }
         },
         mounted(){
-        	console.log('新一轮的阵面对决开始了');
+			console.clear();
+			this.init();
         },
         methods: {
+			init(){
+				console.log(gallery);
+				console.log('新一轮的阵面对决开始了');
+			},
             restart(){
                 console.log('See you again!');
                 location.reload();
@@ -51,7 +56,7 @@
         margin: 0;
         height: 100%;
         font-family: KaiTi; //以1080P做设计稿，用其他的话太麻烦，还得换算
-        font-size: calc(100vw/10.8);
+        font-size: calc(100vw/19.2);
     }
 
      ::-webkit-scrollbar {
@@ -79,13 +84,17 @@
 
     #warp {
         height: 100%;
+		background: url(../static/img/chengdu.jpg) no-repeat center bottom;
+		background-size: cover;
+		// background-position: center center;
+		
         #container {
             display: flex;
             justify-content: space-around;
             align-items: center;
             height: 100%; // transition: all 1s;
             width:60%;
-            
+            margin: 0 auto;
         }
     }
 </style>

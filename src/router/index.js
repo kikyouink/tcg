@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import online from '@/page/online'
 import single from '@/page/single'
-import structure from '@/page/structure'
+import design from '@/page/design'
 
 Vue.use(Router)
 
@@ -19,9 +19,9 @@ export default new Router({
       component: single
     },
     {
-      path: '/structure',
-      name: 'structure',
-      component: structure
+      path: '/design',
+      name: 'design',
+      component: design
     },
   ],
   mode: 'history',
