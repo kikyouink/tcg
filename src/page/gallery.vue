@@ -1,32 +1,37 @@
 <template>
-	<div id="gallery" v-if="show" >
-		<div class="pic" v-for="item in mode" @click="start(item.title)">
-			<div class="banner">
-				{{item.title}}
+	<transition name='gallery' @after-leave="afterLeave">
+		<div id="gallery" v-if="show">
+			<div class="pic" v-for="item in mode" @click="start(item)">
+				<div class="banner">
+					{{item.title}}
+				</div>
 			</div>
 		</div>
-	</div>
+	</transition>
 </template>
 
 <script>
 	export default {
 		name: 'gallery',
-		components: {},
 		data() {
 			return {
-				show:true,
+				show: true,
+				statusMode:null,
 				mode: {
 					single: {
 						title: 'AI对战',
 						img: 'static/img/start/single.png',
+						url:'single',
 					},
 					online: {
 						title: '联机对战',
 						img: 'static/img/start/online.png',
+						url:'online',
 					},
 					design: {
 						title: '构筑卡牌',
 						img: 'static/img/start/design.png',
+						url:'design'
 					},
 				}
 			}
@@ -38,22 +43,30 @@
 			init() {
 
 			},
-			start(mode){
-				this.show=false;
-				console.log('你开始了'+mode);
-			}
+			afterLeave(el) {
+				// ...
+				this.$router.push(this.statusMode.url);
+				console.log('你开始了' + this.statusMode.title);
+			},
+			start(mode) {
+				this.show = false;
+				this.statusMode=mode;
+				
+			},
 		},
 
 	}
 </script>
 
-<style lang="scss" type="text/css">
+<style lang="scss" type="text/css" scoped>
+	$ymred:#952a1d;
 	#gallery {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
-		width: 100%;
+		width: 60%;
 		height: 100%;
+		margin: 0 auto;
 
 		.pic {
 			position: relative;
@@ -62,16 +75,23 @@
 			border-radius: .2rem;
 			box-shadow: 0 0 .2rem black;
 			text-align: center;
-			background: url(../../../static/img/start/single.png) no-repeat;
+			background: url(../../static/img/start/single.png) no-repeat;
 			background-size: cover;
 			background-position: center center;
+			transition: .5s all;
 
+			&:hover {
+				box-shadow: 0 0 .1rem .05rem $ymred;
+				filter:brightness(1.2);
+				height: 5.7rem;
+			}
+			
 			.banner {
 				position: absolute;
 				width: 100%;
 				height: .5rem;
 				bottom: 1rem;
-				background: #952a1d; // background:linear-gradient(to right, #952a1d , blue);
+				background: $ymred; // background:linear-gradient(to right, $ymred , blue);
 				box-shadow: 0 0 .1rem black;
 				color: white;
 				text-shadow: .03rem .03rem .05rem black;
@@ -79,5 +99,14 @@
 				font-size: .4rem; // border-radius: .1rem;
 			}
 		}
+	}
+	.gallery-enter-active,
+	.gallery-leave-active {
+		transition: all .5s;
+	}
+	.gallery-enter,
+	.gallery-leave-to
+	{
+		opacity: 0;
 	}
 </style>
