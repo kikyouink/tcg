@@ -83,7 +83,7 @@
 			&:hover {
 				box-shadow: 0 0 .1rem .05rem $ymred;
 				filter:brightness(1.2);
-				height: 5.7rem;
+				// height: 5.7rem;
 			}
 			
 			.banner {

@@ -2,11 +2,9 @@
 	<transition name='dialog'>
 		<div id="mask" v-if="show">
 			<div id="dialog">
-				<div class="dialog-title">{{info.title}}</div>
+				<div class="dialog-title"><h4>{{info.title}}</h4></div>
 				<div class="dialog-msg">{{info.msg}}</div>
-				<div class="dialog-buttons" v-if="info.buttons">
-					<button type="button" v-for="item in info.buttons" @click="item.callback">{{item.text}}</button>
-				</div>
+				<button type="button" v-if="info.buttons" v-for="item in info.buttons" :class="item.class" @click="item.callback()"></button>
 			</div>
 		</div>
 	</transition>
@@ -14,7 +12,7 @@
 
 <script>
 	export default {
-		name: 'gallery',
+		name: 'dialog',
 		data() {
 			return {
 				show: true,
@@ -22,11 +20,15 @@
 					title:'程序员小哥哥',
 					msg:'相信你已经体验过<<阵面对决>>一段时间了,感觉如何呢？请尽情发表意见吧!',
 					buttons:[{
-						text:'✔',
-						callback:this.yes();
+						class:'sm iconfont icon-ok',
+						callback:()=>{
+							this.yes()
+						}
 					},{
-						text:'✘',
-						callback:this.show=false;
+						class:'sm iconfont icon-error',
+						callback:()=>{
+							this.show=false;
+						}
 					}],
 				}
 			}
@@ -40,6 +42,7 @@
 			},
 			yes(){
 				console.log('ok');
+				this.show=false;
 			},
 		},
 	}
@@ -49,32 +52,48 @@
 	$ymred:#952a1d;
 	#mask{
 		position: absolute;
+		width: 100%;
 		height: 100%;
-		background: rgba(0,0,0.5);
+		top:0;
+		background: rgba(0,0,0,0.5);
+		z-index: 100;
 		
 		#dialog{
 			position: absolute;
-			top:calc(50% - 1rem);
+			top:calc(50% - 2rem);
+			left:calc(50% - 3rem);
 			padding: .1rem;
-			width:3rem;
-			height: 2rem;
-			background: linear-gradient(45deg, $ymred, #333);
-			box-shadow: 0 0 .1rem black;
+			width:6rem;
+			height: 4rem;
+			background: rgba(0,0,0,.5);
 			color: white;
 			text-shadow: .03rem .03rem .05rem black;
 			font-size: .2rem;
+			overflow:visible;
+			font-family: "microsoft yahei";
 			
 			.dialog-title{
-				position: absolute;
-				top:-.1rem;
-				height: .2rem;
-				width: .5rem;
+				font-family: "microsoft yahei";
 			}
 			.dialog-msg{
 				height: 100%;
 			}
-			
-			
+			button{
+				box-sizing: border-box;
+				position: absolute;
+				bottom: - .3rem;
+				border-radius: 50%;
+				background: $ymred;
+				&.icon-ok,&.icon-error{
+					position: absolute;
+				}
+				&.icon-ok{
+					right: - .3rem;
+				}
+				&.icon-error{
+					left: - .3rem;
+				}
+			}
 		}
 	}
 	.dialog-enter-active,
@@ -84,7 +103,7 @@
 	.dialog-enter,
 	.dialog-leave-to
 	{
-		transform: translateY(-1.5rem);
+		transform: translateY(-10.8rem);
 	}
 	
 </style>

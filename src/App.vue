@@ -2,16 +2,19 @@
 	<div id="warp">
 		<button type="button" class="lg iconfont icon-back" @click="back()"></button>
 		<router-view></router-view>
+		<v-dialog></v-dialog>
 		<!-- <v-gallery></v-gallery> -->
 	</div>
 </template>
 
 <script>
-	import gallery from '@/page/gallery.vue';
-
+	import dialog from '@/components/area/dialog.vue';
+	
 	export default {
 		name: 'App',
-		components: {},
+		components: {
+			"v-dialog":dialog,
+		},
 		data() {
 			return {
 				version: '0.1-alpha',
@@ -44,7 +47,7 @@
 
 <style lang="scss" type="text/css">
 	//阿里图标
-	@import url('http://at.alicdn.com/t/font_586765_srq6hpjhrmn.css');
+	@import url('http://at.alicdn.com/t/font_586765_g8nfmtzu3mu.css');
 
 	* {
 		overflow: hidden;
@@ -63,9 +66,6 @@
 		display: none;
 	}
 	button {
-		position: absolute;
-		top: 1rem;
-		right: 1rem;
 		display: block;
 		outline: none;
 		border: none;
@@ -80,10 +80,16 @@
 		&[disabled] {
 			background-color: rgba(255, 255, 255, 0.4);
 		}
-	} //图标
+		&.icon-back{
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+		}
+	} 
+	//图标
 	.iconfont {
-		opacity: 0.6;
-		transition: opacity 0.2s;
+		filter: brightness(0.7);
+		// transition: filter 0.2s;
 		vertical-align: middle;
 		&.lg {
 			font-size: 0.8rem;
@@ -93,7 +99,7 @@
 		}
 		&.lg:hover,
 		&.sm:hover {
-			opacity: 1;
+			filter: brightness(1);
 		}
 		&.margin {
 			margin: 0 .3rem;
@@ -102,9 +108,9 @@
 	/*---------------主容器------------------*/
 
 	#warp {
+		position: relative;
 		height: 100%;
 		background: url(../static/img/chengdu.jpg) no-repeat center bottom;
 		background-size: cover;
-		text-align: center;
 	}
 </style>
