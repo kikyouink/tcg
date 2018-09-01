@@ -4,7 +4,7 @@
 			<div id="dialog">
 				<div class="dialog-title"><h4>{{info.title}}</h4></div>
 				<div class="dialog-msg">{{info.msg}}</div>
-				<button type="button" v-if="info.buttons" v-for="item in info.buttons" :class="item.class" @click="item.callback()"></button>
+				<button type="button" v-if="info.buttons" v-for="item in info.buttons" :key="item.id" :class="item.class" @click="item.callback()"></button>
 			</div>
 		</div>
 	</transition>
@@ -20,12 +20,12 @@
 					title:'程序员小哥哥',
 					msg:'相信你已经体验过<<阵面对决>>一段时间了,感觉如何呢？请尽情发表意见吧!',
 					buttons:[{
-						class:'sm iconfont icon-ok',
+						class:'sm iconfont icon-ok lb',
 						callback:()=>{
 							this.yes()
 						}
 					},{
-						class:'sm iconfont icon-error',
+						class:'sm iconfont icon-error rb',
 						callback:()=>{
 							this.show=false;
 						}
@@ -38,7 +38,7 @@
 		},
 		methods: {
 			init() {
-
+				console.log('新的对话框');
 			},
 			yes(){
 				console.log('ok');
@@ -79,20 +79,7 @@
 				height: 100%;
 			}
 			button{
-				box-sizing: border-box;
-				position: absolute;
-				bottom: - .3rem;
-				border-radius: 50%;
 				background: $ymred;
-				&.icon-ok,&.icon-error{
-					position: absolute;
-				}
-				&.icon-ok{
-					right: - .3rem;
-				}
-				&.icon-error{
-					left: - .3rem;
-				}
 			}
 		}
 	}

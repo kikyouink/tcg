@@ -52,8 +52,10 @@
 		box-shadow: 0 0 .2rem;
 		text-align: center;
 		font-size: .2rem;
-		background: url(../assets/player/player.png);
+		background: url(../../static/img/player/player.png);
 		background-size: cover;
 		background-position: center center;
+		position: absolute;
+		left: calc(50% - 1rem);
 	}
 </style>

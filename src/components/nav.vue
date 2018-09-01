@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import tab from '@/components/tools/tab.vue'
+    import tab from '@/components/tab.vue'
 
     export default {
         name: 'nav',

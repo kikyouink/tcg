@@ -5,11 +5,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        previewCard:null,
         config: {
         },
 
     },
     mutations: {
+        //卡牌预览
+        showPreviewCard(state,params){
+            if(params==null) state.previewCard=null;
+            else state.previewCard=params;
+        },
         damage(state, e) {
             console.log(e);
             var [source, target] = [e.source, e.target];
