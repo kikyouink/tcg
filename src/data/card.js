@@ -1,4 +1,4 @@
-var data={
+export const json={
     card:[
         {
             id: '022',

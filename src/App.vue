@@ -47,6 +47,7 @@
 <style lang="scss" type="text/css">
     //阿里图标
     @import url("http://at.alicdn.com/t/font_586765_g8nfmtzu3mu.css");
+    @import "animation.scss";
 
     * {
         overflow: hidden;

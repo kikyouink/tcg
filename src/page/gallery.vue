@@ -1,5 +1,5 @@
 <template>
-	<transition name='gallery' @after-leave="afterLeave">
+	<transition name='fade' @after-leave="afterLeave">
 		<div id="gallery" v-if="show">
 			<div class="pic" v-for="item in mode" :key="item.id" :style="{backgroundImage:'url('+item.img+')'}"    @click="start(item)">
 				<div class="banner">
@@ -100,13 +100,5 @@
 			}
 		}
 	}
-	.gallery-enter-active,
-	.gallery-leave-active {
-		transition: all .5s;
-	}
-	.gallery-enter,
-	.gallery-leave-to
-	{
-		opacity: 0;
-	}
+	
 </style>

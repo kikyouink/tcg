@@ -1,9 +1,12 @@
 <template>
-    <div id="battleGround">
-        <v-player :side="enemy" :info="enemyInfo"></v-player>
-        <v-battle-field></v-battle-field>
-        <v-player :side="self" :info="selfInfo"></v-player>
-    </div>
+    <transition name='fade'>
+        <div id="battleGround">
+            <v-player :side="'enemy'" :playerInfo="enemyInfo"></v-player>
+            <!-- <v-battle-field></v-battle-field> -->
+            <v-player :side="'self'" :playerInfo="selfInfo"></v-player>
+        </div>
+    </transition>
+    
 </template>
 
 <script>
@@ -21,18 +24,16 @@
         data() {
             return {
                 enemyInfo:{
-                    name: '灵雎',
+                    name: 'lingju',
                     hp: 30,
                     maxHp: 30,
                     maxHandCard: 7,
-                    avatarUrl:'url(../../static/img/player/enemy.png)'
                 },
                 selfInfo:{
-                    name: '夏侯氏',
+                    name: 'xiahoushi',
                     hp: 30,
                     maxHp: 30,
                     maxHandCard: 7,
-                    avatarUrl:'url(../../static/img/player/self.png)'
                 }
             }
         },
@@ -46,7 +47,8 @@
         },
         methods: {
             init() {
-                console.log(this.preview);
+                
+
             },
         }
     }
