@@ -1,6 +1,6 @@
 <template>
-	<transition name='handCard'>
-		<div id="card" :style="{backgroundImage:imgSrc}" @mouseover="showPreviewCard(cardInfo)" @mouseout="showPreviewCard(null)">
+	<transition name='hand'>
+		<div id="handCard" :style="{backgroundImage:imgSrc}" @mouseover="showPreviewCard(cardInfo)" @mouseout="showPreviewCard(null)">
 		</div>
 	</transition>
 	
@@ -27,21 +27,18 @@
 		},
 		computed: {
 			imgSrc(){
-				return 'url(../../static/img/card/01'+this.cardInfo.id+'.jpg)';
+				return 'url(http://tcg.sanguosha.com/upload/cards/01/01'+this.cardInfo.id+'.jpg)';
 			},
-			...mapState({
+			// ...mapState({
 				
-			})
+			// })
 		},
 		methods: {
 			...mapMutations([
 				'showPreviewCard',
 			]),
 			init() {
-				for(var i in this.cardInfo){
-					this[i]=this.cardInfo[i];
-				}
-				console.log(this.cost);
+				
 			}
 		},
 
@@ -50,7 +47,7 @@
 
 <style lang="scss" type="text/css">
 	$ymred:#952a1d;
-	#card{
+	#handCard{
 		width: 1.5rem;
 		height: 2.09rem;
 		border-radius: .2rem;
@@ -60,12 +57,12 @@
 
 		margin: .6rem .04rem 0 .04rem;
 	}
-	.card-enter-active,
-	.card-leave-active {
+	.hand-enter-active,
+	.hand-leave-active {
 		transition: all .5s;
 	}
-	.card-enter,
-	.card-leave-to
+	.hand-enter,
+	.hand-leave-to
 	{
 		transform: translateY(-10.8rem);
 	}

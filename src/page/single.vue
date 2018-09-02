@@ -1,131 +1,55 @@
 <template>
-    <div id="single">
-        <div class="enemy area">
-            <div class="enemy bl">
-            </div>
-            <v-player></v-player>
-        </div>
-        <div class="player area">
-            <v-player></v-player>
-            <!-- 卡牌预览区 -->
-            <v-previewCard v-show="show"></v-previewCard>
-            <div class="player bl">
-                <!-- 手牌区 -->
-                <v-handCard v-for="card in cards" :key="card.id" :cardInfo="card"></v-handCard>
-            </div>
-        </div>
+    <div id="battleGround">
+        <v-player :side="enemy" :info="playerInfo"></v-player>
+        <v-battle-field></v-battle-field>
+        <v-player :side="self" :info="playerInfo"></v-player>
     </div>
 </template>
 
 <script>
+    import {
+        mapState,
+        mapMutations
+    } from 'vuex'
     import player from '@/components/player.vue';
-    import handCard from '@/components/card/hand.vue';
-    import previewCard from '@/components/card/preview.vue';
 
     export default {
         name: 'single',
         components: {
-            "v-player":player,
-            "v-handCard":handCard,
-            "v-previewCard":previewCard,
+            "v-player": player,
         },
         data() {
             return {
-                show:false,
-                cards:[
-                    {
-						id:'024',
-						cost:1,
-						damage:3,
-                        hp:6,
-                        skill:['chongfeng'],
-                    },
-                    {
-						id:'156',
-						cost:1,
-						damage:3,
-                        hp:6,
-                        skill:['chongfeng'],
-                    },
-                    {
-						id:'056',
-						cost:1,
-						damage:3,
-						hp:6,
-                    },
-                    {
-						id:'077',
-						cost:1,
-						damage:3,
-						hp:6,
-                    },
-                    {
-						id:'023',
-						cost:1,
-						damage:3,
-						hp:6,
-                    },
-                    {
-						id:'132',
-						cost:1,
-						damage:3,
-						hp:6,
-                    },
-                    {
-						id:'050',
-						cost:1,
-						damage:3,
-						hp:6,
-                    },
-                    {
-						id:'099',
-						cost:1,
-						damage:3,
-						hp:6,
-                    }
-                ]
+                playerInfo:{
+                    name: '甄姬',
+                    hp: 30,
+                    maxHp: 30,
+                    maxHandCard: 7,
+                    avatarUrl:'url(../../static/img/player/player.png)'
+                }
             }
         },
-        mounted(){
+        mounted() {
             this.init();
         },
         computed: {
-            ...mapState({
-                show:'previewCard',
-            })
+            ...mapState([
+                'preview',
+            ])
         },
         methods: {
-            init(){
-
+            init() {
+                console.log(this.preview);
             },
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    #single{
+    #battleGround {
         width: 100%;
         height: 100%;
 
-        .area{
-            width: 100%;
-            height: 50%;
-            position: relative;
-            
-            .bl{
-                width: 100%;
-                height: 50%;
-                background: rgba(0,0,0,.5);
-                position: absolute;
-
-                &.enemy{
-                    top:0,
-                }
-                &.player{
-                    bottom:0,
-                }
-            }
-        }
+        
     }
-
 </style>

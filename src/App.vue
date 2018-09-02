@@ -60,7 +60,6 @@
         font-family: KaiTi; //以1080P做设计稿，用其他的话太麻烦，还得换算
         font-size: calc(100vw / 19.2);
     }
-
     ::-webkit-scrollbar {
         display: none;
     }
@@ -85,28 +84,37 @@
             right: 1rem;
             z-index: 200;
         }
-        
     }
     //位置
-    .lb,.rb,.rt,.lt{
+    .lb,
+    .rb,
+    .rt,
+    .lt {
         position: absolute;
         border-radius: 50%;
-        width: .2rem;
-        height: .2rem;
-        line-height: .2rem;
+        width: 0.5rem;
+        height: 0.5rem;
+        line-height: 0.5rem;
         text-align: center;
+        font-size: .1rem;
+        color:white;
+
     }
-    .rt,.lt{
-        top: - .3rem;
+    .rt,
+    .lt {
+        top: -0.25rem;
     }
-    .lb,.rb{
-        bottom: - .3rem;
+    .lb,
+    .rb {
+        bottom: -.25rem;
     }
-    .lb,.lt{
-        right: - .3rem;
+    .lb,
+    .lt {
+        left: -0.25rem;
     }
-    .rb,.rt{
-        left: - .3rem;
+    .rb,
+    .rt {
+        right: -0.25rem;
     }
     //图标
     .iconfont {
@@ -124,16 +132,15 @@
             filter: brightness(1);
         }
         &.margin {
-            margin: 0 0.3rem;
+            margin: 0 0.5rem;
         }
     }
-    
+
     /*---------------主容器------------------*/
 
     #warp {
-        position: relative;
         height: 100%;
-        background: url(../static/img/chengdu.jpg) no-repeat center bottom;
+        background: url(../static/img/bg/chengdu.png) no-repeat center bottom;
         background-size: cover;
     }
 </style>

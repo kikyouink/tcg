@@ -1,9 +1,10 @@
 <template>
 	<transition name='preview'>
 		<div id="previewCard" :style="{backgroundImage:imgSrc}">
-			<div class="cost lt">{{ss.cost}}</div>
-			<div class="damage lb">{{ss.damage}}</div>
-			<div class="hp rb">{{ss.hp}}</div>
+			<!-- 这里的显示有待考虑 -->
+			<!-- <div class="cost rt">{{previewCard.cost}}</div>
+			<div v-if="previewCard.damage" class="damage lb">{{previewCard.damage}}</div>
+			<div v-if="previewCard.hp" class="hp rb">{{previewCard.hp}}</div> -->
 		</div>
 	</transition>
 	
@@ -27,13 +28,12 @@
 		},
 		computed: {
 			imgSrc(){
-				console.log(this.ss.id);
-				return 'url(../../static/img/card/01'+this.ss.id+'.jpg)';
+				return 'url(http://tcg.sanguosha.com/upload/cards/01/01'+this.previewCard.id+'.jpg)';
 				// return 'url(../../static/img/card/010'+'99'+'.jpg)'; 
 			},
-			...mapState({
-				
-			})
+			...mapState([
+				'previewCard'
+			])
 		},
 		methods: {
 			...mapMutations([
@@ -47,34 +47,36 @@
 	}
 </script>
 
-<style lang="scss" type="text/css">
+<style lang="scss" scoped>
 	$ymred:#952a1d;
-	#card{
-		width: 2rem;
-		height: 2.8rem;
+	#previewCard{
+		width: 3.6rem;
+		height: 5.05rem;
 		border-radius: .2rem;
-		left: calc(50% - 1rem);
-		top:4rem;
+		left: calc(50% - 1.8rem);
+		bottom: 2.7rem;
 		background-size: cover;
 		position: absolute;
+		z-index:100;
+		overflow: visible;
 
-		.cost{
-			background: purple;
-		}
-		.damage{
-			background: green;
-		}
-		hp{
-			background: $ymred;
-		}
+		// .cost{
+		// 	background: purple;
+		// }
+		// .damage{
+		// 	background: greenyellow;
+		// }
+		// .hp{
+		// 	background: $ymred;
+		// }
 	}
-	.card-enter-active,
-	.card-leave-active {
+	.preview-enter-active,
+	.preview-leave-active {
 		transition: all .5s;
 	}
-	.card-enter,
-	.card-leave-to
+	.preview-enter,
+	.preview-leave-to
 	{
-		transform: translateY(-10.8rem);
+		opacity: 0;
 	}
 </style>

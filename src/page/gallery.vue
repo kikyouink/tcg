@@ -1,7 +1,7 @@
 <template>
 	<transition name='gallery' @after-leave="afterLeave">
 		<div id="gallery" v-if="show">
-			<div class="pic" v-for="item in mode" @click="start(item)">
+			<div class="pic" v-for="item in mode" :key="item.id" :style="{backgroundImage:'url('+item.img+')'}"    @click="start(item)">
 				<div class="banner">
 					{{item.title}}
 				</div>
@@ -20,17 +20,17 @@
 				mode: {
 					single: {
 						title: 'AI对战',
-						img: 'static/img/start/single.png',
+						img: '../../static/img/start/single.png',
 						url:'single',
 					},
 					online: {
 						title: '联机对战',
-						img: 'static/img/start/online.png',
+						img: '../../static/img/start/online.png',
 						url:'online',
 					},
 					design: {
 						title: '构筑卡牌',
-						img: 'static/img/start/design.png',
+						img: '../../static/img/start/design.png',
 						url:'design'
 					},
 				}
