@@ -1,8 +1,8 @@
 <template>
     <div id="battleGround">
-        <v-player :side="enemy" :info="playerInfo"></v-player>
+        <v-player :side="enemy" :info="enemyInfo"></v-player>
         <v-battle-field></v-battle-field>
-        <v-player :side="self" :info="playerInfo"></v-player>
+        <v-player :side="self" :info="selfInfo"></v-player>
     </div>
 </template>
 
@@ -20,12 +20,19 @@
         },
         data() {
             return {
-                playerInfo:{
-                    name: '甄姬',
+                enemyInfo:{
+                    name: '灵雎',
                     hp: 30,
                     maxHp: 30,
                     maxHandCard: 7,
-                    avatarUrl:'url(../../static/img/player/player.png)'
+                    avatarUrl:'url(../../static/img/player/enemy.png)'
+                },
+                selfInfo:{
+                    name: '夏侯氏',
+                    hp: 30,
+                    maxHp: 30,
+                    maxHandCard: 7,
+                    avatarUrl:'url(../../static/img/player/self.png)'
                 }
             }
         },

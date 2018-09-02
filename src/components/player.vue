@@ -3,9 +3,21 @@
 		<div class="avatar" :style="{backgroundImage:avatarUrl}"></div>
 		<!-- 卡牌预览区 -->
 		<v-previewCard v-show="preview"></v-previewCard>
+		<!-- 卡牌区 -->
 		<div class="card-area">
+			<!-- 阵略 -->
+			<div class="buff">
+				
+			</div>
+			<!-- 战器 -->
+			<div class="equip">
+
+			</div>
 			<!-- 手牌区 -->
-			<v-handCard v-for="card in cards" :key="card.id" :cardInfo="card"></v-handCard>
+			<div class="handCard">
+				<v-handCard v-for="card in cards" :key="card.id" :cardInfo="card"></v-handCard>
+			</div>
+			
 		</div>
 	</div>
 </template>
