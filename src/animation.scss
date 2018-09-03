@@ -12,10 +12,10 @@
 //滑动
 .slide-enter-active,
 .slide-leave-active {
-    transition: all .5s;
+    transition: all .75s;
 }
 .slide-enter,
 .slide-leave-to
 {
-    transform: translateX(-10.8rem);
+    transform: translateX(10.8rem);
 }

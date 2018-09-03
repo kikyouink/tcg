@@ -52,10 +52,9 @@
 		},
 		data() {
 			return {
-				name:'12',
 				preview: false,
 				previewCardUrl: null,
-				avatarUrl: 'url(../../static/img/player/' + this.name + '.png)',
+				avatarUrl: 'url(../../static/img/player/' + this.playerInfo.name + '.png)',
 				handCard: [
 					
 				]
