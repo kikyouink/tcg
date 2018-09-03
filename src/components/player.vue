@@ -101,14 +101,9 @@
 				this.haha({
 					target:this,
 					num:num,
-					callback:(cards)=>{
-						console.log(cards);
-						cards=JSON.parse(JSON.stringify(cards));
-						console.log(cards);
-						console.log(this.handCard);
-						console.log(this.handCard.concat(cards));
-						this.handCard=this.handCard.concat(cards);
-					}
+				})
+				.then((cards)=>{
+					this.handCard=this.handCard.concat(cards);
 				})
 			}
 		},

@@ -51,11 +51,15 @@ const player = {
         draw({ commit }, e) {
             console.log(e);
             return new Promise((reslove, reject) => {
-                commit('cardPile/requireCard', e, {root: true});
-
+                commit('cardPile/requireCard', e.num, {root: true});
+                var cards=store.state.cardPile.statusCards;
+                console.log(cards);
+                var [target, num] = [e.target, e.num];
+                console.log(target.name + ' 摸了 ' + num + ' 张牌：');
+                reslove(cards);
                 // store.dispatch('requireCard', num).then((cards) => {
-                //     // var [target, num, cards] = [e.target, e.num, e.cards];
-                //     // console.log(target.name + ' 摸了 ' + num + ' 张牌：');
+                //     var [target, num, cards] = [e.target, e.num, e.cards];
+                //     console.log(target.name + ' 摸了 ' + num + ' 张牌：');
                 //     console.log(cards);
                 //     console.log(JSON.parse(JSON.stringify(cards)));
                 //     reslove(cards);
@@ -78,6 +82,7 @@ const handcard = {
 const cardPile = {
     namespaced: true,
     state: {
+        statusCards:null,
         cardPile: [
             {
                 id: '179',
@@ -161,10 +166,9 @@ const cardPile = {
         ]
     },
     mutations: {
-        requireCard(state, e) {
-            var cards = state.cardPile.splice(0, e.num);
-            console.log(cards);
-            e.callback(cards);
+        requireCard(state, num) {
+            var cards = state.cardPile.splice(0, num);
+            state.statusCards=cards;
         },
         damage(state, e) {
             console.log(e);
