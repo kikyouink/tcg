@@ -9,9 +9,10 @@
 <script>
 	import {
 		mapState,
-		mapMutations
-	} from 'vuex'
-	import bus from '@/components/bus';
+		mapMutations,
+		mapActions
+	} from 'vuex';
+	// import bus from '@/components/bus';
 
 	export default {
 		name: 'handCard',
@@ -42,7 +43,7 @@
 			},
 			showPreviewCard(s){
 				if(this.side=='enemy') return ;
-				bus.$emit('preview',s);
+				// bus.$emit('preview',s);
 			}
 		},
 

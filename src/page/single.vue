@@ -11,9 +11,10 @@
 
 <script>
     import {
-        mapState,
-        mapMutations
-    } from 'vuex'
+		mapState,
+		mapMutations,
+		mapActions
+	} from 'vuex';
     import player from '@/components/player.vue';
 
     export default {
@@ -47,7 +48,7 @@
         },
         methods: {
             ...mapMutations('game',[
-				'initPlayers','gameDraw'
+				'initPlayers'
 			]),
             start(){
                 console.log('游戏开始');
@@ -57,7 +58,7 @@
                     self:this.$refs.self,
                 });
                 // 游戏开始摸牌
-                this.gameDraw();
+                // this.gameDraw();
             },
            
         }

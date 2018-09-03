@@ -23,9 +23,9 @@
 				<v-handCard :side="side" v-for="card in handCard" :key="card.id" :cardInfo="card"></v-handCard>
 			</div>
 			<!-- 牌堆与弃牌堆 -->
-			<div class="cardPile">
+			<!-- <div class="cardPile">
 				<v-cardPile ></v-cardPile>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </template>
@@ -33,17 +33,18 @@
 <script>
 	import {
 		mapState,
-		mapMutations
+		mapMutations,
+		mapActions
 	} from 'vuex';
 	import bus from '@/components/bus';
 	import handCard from '@/components/card/handCard.vue';
-	import cardPile from '@/components/card/cardPile.vue';
+	// import cardPile from '@/components/card/cardPile.vue';
 
 	export default {
 		name: 'player',
 		components: {
 			"v-handCard": handCard,
-			"v-cardPile":cardPile,
+			// "v-cardPile":cardPile,
 		},
 		props: {
 			side: String,
@@ -60,7 +61,7 @@
 				]
 			}
 		},
-		created() {
+		mounted() {
 			this.init();
 		},
 		computed: {
@@ -69,14 +70,18 @@
 			// })
 		},
 		methods: {
-			...mapMutations('player',[
-				'draw','damage', 'recover',
-			]),
+			// ...mapMutations('player',[
+			// 	'damage','recover',
+			// ]),
+			...mapActions('player',{
+				haha:'draw',
+			}),
 			init() {
 				console.log('一位新的勇士诞生了');
-				for(var i in this.playerInfo){
-					this[i]=this.playerInfo[i];
-				}
+				// for(var i in this.playerInfo){
+				// 	this[i]=this.playerInfo[i];
+				// }
+				this.draw(4);
 				//预览卡牌
 				// bus.$on('preview', (cardUrl) => {
 				// 	if (cardUrl == null) this.preview = false;
@@ -91,18 +96,21 @@
 				// })
 
 			},
-			// draw(num){
-			// 	bus.$emit('draw',num);
-			// 	bus.$on('draw-end',(cards)=>{
-			// 		this.handCard.push(cards);
-			// 		//提交事件
-			// 		this.$store.commit('draw',{
-			// 			target:this,
-			// 			num:num,
-			// 			cards:cards
-			// 		});
-			// 	})
-			// }
+			draw(num){
+				//提交异步操作
+				this.haha({
+					target:this,
+					num:num,
+					callback:(cards)=>{
+						console.log(cards);
+						cards=JSON.parse(JSON.stringify(cards));
+						console.log(cards);
+						console.log(this.handCard);
+						console.log(this.handCard.concat(cards));
+						this.handCard=this.handCard.concat(cards);
+					}
+				})
+			}
 		},
 
 	}
