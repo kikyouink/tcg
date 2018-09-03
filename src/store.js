@@ -5,11 +5,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        players: {},
         config: {
         },
 
     },
     mutations: {
+        initPlayers(state, players) {
+            state.players.enemy = players.enemy;
+            state.players.slef = players.self;
+        },
+        gameDraw(getters) {
+            getters.enemy.draw(4);
+            getters.self.draw(4);
+        },
+        draw(state, e) {
+            var [target, num] = [e.target, e.num];
+            console.log(target.name + ' 摸了 ' + e.num + ' 张牌');
+        },
         damage(state, e) {
             console.log(e);
             var [source, target] = [e.source, e.target];
@@ -25,6 +38,9 @@ export default new Vuex.Store({
         },
     },
     getters: {
+        enemy: (state) => state.players.enemy,
+        self: (state) => state.players.self,
+
         getApp: (state) => state.platform,
         doneTodos: state => {
             return state.xxxxxx;

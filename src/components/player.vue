@@ -1,7 +1,9 @@
 <template>
 	<div class="player" :class="side">
 		<!-- 玩家头像 -->
-		<div class="avatar" :class="side" :style="{backgroundImage:avatarUrl}"></div>
+		<div class="avatar" :class="side" :style="{backgroundImage:avatarUrl}">
+			<div class="rb">{{playerInfo.hp}}</div>
+		</div>
 		<!-- 卡牌区 -->
 		<div class="card-area">
 			<!-- 卡牌预览区 -->
@@ -18,9 +20,12 @@
 			</div>
 			<!-- 手牌区 -->
 			<div class="handCard-area">
-				<v-handCard :class="side" v-for="card in handCard" :key="card.id" :cardInfo="card"></v-handCard>
+				<v-handCard :side="side" v-for="card in handCard" :key="card.id" :cardInfo="card"></v-handCard>
 			</div>
-
+			<!-- 牌堆与弃牌堆 -->
+			<div class="cardPile">
+				<v-cardPile ></v-cardPile>
+			</div>
 		</div>
 	</div>
 </template>
@@ -31,7 +36,8 @@
 		mapMutations
 	} from 'vuex';
 	import bus from './bus';
-	import handCard from '@/components/card.vue';
+	import handCard from '@/components/card/handCard.vue';
+
 
 	export default {
 		name: 'player',
@@ -44,59 +50,12 @@
 		},
 		data() {
 			return {
+				name:'12',
 				preview: false,
 				previewCardUrl: null,
-				avatarUrl: 'url(../../static/img/player/' + this.playerInfo.name + '.png)',
+				avatarUrl: 'url(../../static/img/player/' + this.name + '.png)',
 				handCard: [
-					{
-						id: '022',
-						name: '青州探马',
-						type: 'person-chihou',
-						country: 'wei-1',
-						data: '1-2-2',
-					}, {
-						id: '156',
-						name: '亡国哀民',
-						type: 'person-baixing',
-						country: 'qun-1',
-						data: '3-1-4',
-						skill: ['chongfeng'],
-					}, {
-						id: '056',
-						name: '猛将一击',
-						type: 'magic-basic',
-						country: 'shu-1',
-						cost: 5,
-					}, {
-						id: '077',
-						name: '英勇无畏',
-						type: 'buff',
-						country: 'shu-1',
-						cost: 2,
-					}, {
-						id: '023',
-						name: '司隶步兵',
-						type: 'person-bubing',
-						country: 'wei',
-						data: '3-3-3',
-					}, {
-						id: '086',
-						name: '大雾',
-						type: 'magic-instant',
-						country: 'wu-1',
-						cost: 1,
-					}, {
-						id: '050',
-						name: '归隐杰女•黄月英',
-						type: 'ws-famale:person-yinshi',
-						country: 'shu-1',
-						data: '2-1-3',
-					}, {
-						id: '178',
-						name: '倚天剑',
-						type: 'ws:equip-weapon',
-						cost: 4,
-					}
+					
 				]
 			}
 		},
@@ -109,12 +68,16 @@
 			})
 		},
 		methods: {
-			...mapMutations([
-				'damage', 'recover',
-			]),
+			// ...mapMutations([
+			// 	'draw','damage', 'recover',
+			// ]),
 			init() {
 				// console.clear();
 				console.log('一位新的勇士诞生了');
+				for(var i in this.playerInfo){
+					this[i]=this.playerInfo[i];
+				}
+				console.log(this.hp);
 				bus.$on('preview', (cardUrl) => {
 					if (cardUrl == null) this.preview = false;
 					else {
@@ -123,6 +86,13 @@
 					}
 				})
 
+			},
+			draw(num){
+
+				this.$store.commit('draw',{
+					target:this,
+					num:num,
+				});
 			}
 		},
 

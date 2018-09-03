@@ -1,9 +1,9 @@
 <template>
     <transition name='fade'>
         <div id="battleGround">
-            <v-player :side="'enemy'" :playerInfo="enemyInfo"></v-player>
+            <v-player :side="'enemy'" :playerInfo="JSON.parse(JSON.stringify(enemyInfo))" ref="enemy"></v-player>
             <!-- <v-battle-field></v-battle-field> -->
-            <v-player :side="'self'" :playerInfo="selfInfo"></v-player>
+            <v-player :side="'self'" :playerInfo="JSON.parse(JSON.stringify(selfInfo))" ref="self"></v-player>
         </div>
     </transition>
     
@@ -38,7 +38,7 @@
             }
         },
         mounted() {
-            this.init();
+            this.start();
         },
         computed: {
             ...mapState([
@@ -46,10 +46,20 @@
             ])
         },
         methods: {
-            init() {
-                
-
-            },
+            ...mapMutations([
+				'initPlayers','gameDraw'
+			]),
+            start(){
+                console.log('游戏开始');
+                //定义玩家
+                this.initPlayers({
+                    enemy:this.$refs.enemy,
+                    self:this.$refs.self,
+                });
+                //游戏开始摸牌
+                this.gameDraw();
+            }
+           
         }
     }
 </script>

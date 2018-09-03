@@ -11,11 +11,12 @@
 		mapState,
 		mapMutations
 	} from 'vuex'
-	import bus from './bus';
+	import bus from '../bus';
 
 	export default {
 		name: 'handCard',
 		props:{
+			side:String,
 			cardInfo:Object,
 		},
 		data() {
@@ -40,6 +41,7 @@
 				
 			},
 			showPreviewCard(s){
+				if(this.side=='enemy') return ;
 				bus.$emit('preview',s);
 			}
 		},
