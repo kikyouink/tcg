@@ -7,10 +7,10 @@
         mapState,
         mapMutations
     } from 'vuex'
-    import bus from '../bus';
+    import bus from '@/components/bus';
 
     export default {
-        name: 'handCard',
+        name: 'cardPile',
         props: {
             designCardPile: Array,
         },
@@ -112,9 +112,7 @@
 
             // ]),
             init() {
-                bus.$on('draw',(num)=>{
-                    // this.cardPile.
-                })
+                
             },
             
         },

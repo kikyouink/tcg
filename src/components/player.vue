@@ -35,14 +35,15 @@
 		mapState,
 		mapMutations
 	} from 'vuex';
-	import bus from './bus';
+	import bus from '@/components/bus';
 	import handCard from '@/components/card/handCard.vue';
-
+	import cardPile from '@/components/card/cardPile.vue';
 
 	export default {
 		name: 'player',
 		components: {
 			"v-handCard": handCard,
+			"v-cardPile":cardPile,
 		},
 		props: {
 			side: String,
@@ -59,41 +60,49 @@
 				]
 			}
 		},
-		mounted() {
+		created() {
 			this.init();
 		},
 		computed: {
-			...mapState({
-				count: state => state.count,
-			})
+			// ...mapState({
+			// 	count: state => state.count,
+			// })
 		},
 		methods: {
-			// ...mapMutations([
-			// 	'draw','damage', 'recover',
-			// ]),
+			...mapMutations('player',[
+				'draw','damage', 'recover',
+			]),
 			init() {
-				// console.clear();
 				console.log('一位新的勇士诞生了');
 				for(var i in this.playerInfo){
 					this[i]=this.playerInfo[i];
 				}
-				console.log(this.hp);
-				bus.$on('preview', (cardUrl) => {
-					if (cardUrl == null) this.preview = false;
-					else {
-						this.preview = true;
-						this.previewCardUrl = cardUrl;
-					}
-				})
+				//预览卡牌
+				// bus.$on('preview', (cardUrl) => {
+				// 	if (cardUrl == null) this.preview = false;
+				// 	else {
+				// 		this.preview = true;
+				// 		this.previewCardUrl = cardUrl;
+				// 	}
+				// })
+				//游戏初始摸牌
+				// bus.$on('gameDraw', () => {
+				// 	this.draw(4);
+				// })
 
 			},
-			draw(num){
-
-				this.$store.commit('draw',{
-					target:this,
-					num:num,
-				});
-			}
+			// draw(num){
+			// 	bus.$emit('draw',num);
+			// 	bus.$on('draw-end',(cards)=>{
+			// 		this.handCard.push(cards);
+			// 		//提交事件
+			// 		this.$store.commit('draw',{
+			// 			target:this,
+			// 			num:num,
+			// 			cards:cards
+			// 		});
+			// 	})
+			// }
 		},
 
 	}

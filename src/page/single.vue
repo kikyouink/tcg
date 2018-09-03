@@ -41,12 +41,12 @@
             this.start();
         },
         computed: {
-            ...mapState([
-                'preview',
-            ])
+            // ...mapState('',[
+            //     'preview',
+            // ])
         },
         methods: {
-            ...mapMutations([
+            ...mapMutations('game',[
 				'initPlayers','gameDraw'
 			]),
             start(){
@@ -56,9 +56,9 @@
                     enemy:this.$refs.enemy,
                     self:this.$refs.self,
                 });
-                //游戏开始摸牌
+                // 游戏开始摸牌
                 this.gameDraw();
-            }
+            },
            
         }
     }

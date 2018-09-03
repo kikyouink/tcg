@@ -11,7 +11,7 @@
 		mapState,
 		mapMutations
 	} from 'vuex'
-	import bus from '../bus';
+	import bus from '@/components/bus';
 
 	export default {
 		name: 'handCard',
