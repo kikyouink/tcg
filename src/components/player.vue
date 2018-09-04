@@ -1,7 +1,7 @@
 <template>
 	<div class="player" :class="side">
 		<!-- 玩家头像 -->
-		<div class="avatar" :class="side" :style="{backgroundImage:avatarUrl}">
+		<div class="avatar" :class="side" :style="{backgroundImage:avatarUrl}" @click="dosth()">
 			<div class="rb">{{playerInfo.hp}}</div>
 		</div>
 		<!-- 卡牌区 -->
@@ -56,7 +56,7 @@
 				previewCardUrl: null,
 				avatarUrl: 'url(../../static/img/player/' + this.playerInfo.name + '.png)',
 				handCard: [
-					
+
 				]
 			}
 		},
@@ -69,17 +69,20 @@
 			// })
 		},
 		methods: {
-			// ...mapMutations('player',[
-			// 	'damage','recover',
-			// ]),
-			...mapActions('player',{
-				haha:'draw',
+			...mapMutations('player',{
+				Damage:'damage',
+				Recover:'recover',
+			}),
+			...mapActions('player', {
+				Draw: 'draw',
 			}),
 			init() {
 				console.log('一位新的勇士诞生了');
-				// for(var i in this.playerInfo){
-				// 	this[i]=this.playerInfo[i];
-				// }
+				for(var i in this.playerInfo){
+					this.$set(this.$data,i,this.playerInfo[i]);
+					// this[i]=this.playerInfo[i];
+				}
+				console.log(this.name);
 				this.draw(4);
 				//预览卡牌
 				// bus.$on('preview', (cardUrl) => {
@@ -95,14 +98,26 @@
 				// })
 
 			},
-			draw(num){
+			dosth(){
+				// player.draw();
+				// this.draw();
+				this.$socket.emit('ca','caocao');this.$socket
+			},
+			draw(num=1) {
 				//提交异步操作
-				this.haha({
-					target:this,
-					num:num,
+				this.Draw({
+					target: this,
+					num: num,
 				})
-				.then((cards)=>{
-					this.handCard=this.handCard.concat(cards);
+					.then((cards) => {
+						this.handCard = this.handCard.concat(cards);
+					})
+			},
+			damage(num=1){
+				this.Damage({
+					source:this,
+					target: this,
+					num: num,
 				})
 			}
 		},
@@ -116,8 +131,8 @@
 	    position: absolute;
 	    width: 100%;
 	    height: 2.09rem;
-		overflow: visible;
-		cursor: pointer;
+	    overflow: visible;
+	    cursor: pointer;
 
 	    &.self {
 	        bottom: 0;
@@ -133,8 +148,8 @@
 	        background-size: cover;
 	        background-position: center center;
 	        position: absolute;
-			left: calc(50% - 1rem);
-			z-index: 10;
+	        left: calc(50% - 1rem);
+	        z-index: 10;
 
 	        &.self {
 	            bottom: 1.3rem;
@@ -158,10 +173,11 @@
 	            position: absolute;
 	            z-index: 100;
 	        }
-	        .buff,.equip {
+	        .buff,
+	        .equip {
 	            float: left;
-				width: 1.5rem;
-				height: 100%;
+	            width: 1.5rem;
+	            height: 100%;
 	        }
 	    }
 	}

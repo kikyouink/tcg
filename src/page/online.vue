@@ -1,5 +1,7 @@
 <template>
-    <p>found</p>
+    <div id='online'>
+        
+    </div>
 </template>
 
 <script>
@@ -7,7 +9,8 @@
         name: 'found',
         data() {
             return {
-
+                id:this.$socket.id,
+                onlinePlayer:null,
             }
         },
         components: {
@@ -19,13 +22,16 @@
             }
         },
         methods: {
-            sa() {
-                alert('sd');
+            searchOnlinePlayer(){
+
             }
         }
     }
 </script>
 
 <style lang="scss" scoped>
-
+    #online{
+        width: 100%;
+        height: 100%;
+    }
 </style>

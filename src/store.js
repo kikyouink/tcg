@@ -1,26 +1,42 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const game = {
     namespaced: true,
     state: {
-        players: {},
+        players: {
+
+        },
+        eventStack: {
+
+        },
+        // statusEvent: null,
+        connect: false,
         config: {
         },
     },
     mutations: {
+        SOCKET_CONNECT: (state, status) => {
+            console.log('已连接');
+            state.connect = true;
+        },
+        SOCKET_DISCONNECT: (state, status) => {
+            console.log('已断开');
+            state.connect = false;
+        },
+        SOCKET_ERROR: (state, status) => {
+            console.log('发生错误'+status);
+            state.connect = false;
+        },
+        SOCKET_LOG: (state, status) => {
+            console.log('服务端日志：'+status);
+        },
         initPlayers(state, players) {
             state.players.enemy = players.enemy;
             state.players.slef = players.self;
         },
-        // gameDraw(state) {
-        //     console.log(getters);
-        //     console.log(getters.enemy);
-        //     getters.enemy.draw(4);
-        //     getters.self.draw(4);
-        // },
     },
     actions: {},
     getters: {
@@ -34,40 +50,35 @@ const game = {
 const player = {
     namespaced: true,
     state: {
-        a:1,
+        a: 1,
     },
     mutations: {
-        draw(state, e) {
-            // var [target, num, cards] = [e.target, e.num, e.cards];
-            console.log(target.name + ' 摸了 ' + num + ' 张牌：');
-        },
-        damage(state, e) {
-            console.log(e);
-            var [source, target] = [e.source, e.target];
-            console.log(source.name + '对' + target.name + '造成了' + 'e.num' + '点伤害');
+        // draw(state, e) {
+        //     var [target, num, cards] = [e.target, e.num, e.cards];
+        //     console.log(target.name + ' 摸了 ' + num + ' 张牌：');
+        // },
+        SOCKET_CC: (state, msg) => {
+            console.log(msg);
         },
     },
     actions: {
-        draw({ commit }, e) {
-            console.log(e);
-            return new Promise((reslove, reject) => {
-                commit('cardPile/requireCard', e.num, {root: true});
-                var cards=store.state.cardPile.statusCards;
-                console.log(cards);
-                var [target, num] = [e.target, e.num];
-                console.log(target.name + ' 摸了 ' + num + ' 张牌：');
-                reslove(cards);
-                // store.dispatch('requireCard', num).then((cards) => {
-                //     var [target, num, cards] = [e.target, e.num, e.cards];
-                //     console.log(target.name + ' 摸了 ' + num + ' 张牌：');
-                //     console.log(cards);
-                //     console.log(JSON.parse(JSON.stringify(cards)));
-                //     reslove(cards);
-                // });
-            })
+        draw: async function ({ commit }, e) {
+            commit('cardPile/requireCard', e.num, { root: true });
+            var cards = store.state.cardPile.statusCards;
+            console.log(cards);
+            var [target, num] = [e.target, e.num];
+            console.log(target.name + ' 摸了 ' + num + ' 张牌');
+            return cards;
         },
-        bb(context){
-            console.log('1');
+        damage(state, e) {
+            console.log(e);
+            var [source, target, num] = [e.source, e.target, e.num];
+            console.log(source.name + '对' + target.name + '造成了' + num + '点伤害');
+        },
+        recover(state, e) {
+            console.log(e);
+            var [target, num] = [e.target, e.num];
+            console.log(target.name + '回复了' + num + '点体力');
         }
     }
 }
@@ -82,7 +93,7 @@ const handcard = {
 const cardPile = {
     namespaced: true,
     state: {
-        statusCards:null,
+        statusCards: null,
         cardPile: [
             {
                 id: '179',
@@ -168,7 +179,7 @@ const cardPile = {
     mutations: {
         requireCard(state, num) {
             var cards = state.cardPile.splice(0, num);
-            state.statusCards=cards;
+            state.statusCards = cards;
         },
         damage(state, e) {
             console.log(e);
@@ -179,12 +190,22 @@ const cardPile = {
     actions: {}
 }
 
+const eventHander = store => {
+    // 当 store 初始化后调用
+    store.subscribe((mutation, state) => {
+        console.log(mutation);
+        // 每次 mutation 之后调用
+        // mutation 的格式为 { type, payload }
+    })
+}
+
 const store = new Vuex.Store({
     modules: {
         game: game,
         player: player,
         handCard: handcard,
-        cardPile: cardPile
+        cardPile: cardPile,
+        plugins: [eventHander]
     }
 })
 
