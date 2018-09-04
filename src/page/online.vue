@@ -9,7 +9,7 @@
         name: 'found',
         data() {
             return {
-                onlinePlayer:'',
+                onlinePlayer:[],
             }
         },
         mounted(){

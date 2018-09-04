@@ -36,7 +36,7 @@
 		mapMutations,
 		mapActions
 	} from 'vuex';
-	import bus from '@/components/bus';
+	// import bus from '@/components/bus';
 	import handCard from '@/components/card/handCard.vue';
 	// import cardPile from '@/components/card/cardPile.vue';
 

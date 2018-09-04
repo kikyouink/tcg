@@ -41,10 +41,9 @@
 		},
 		methods: {
 			init() {
-
+				// this.start()
 			},
 			afterLeave(el) {
-				// ...
 				this.$router.push(this.statusMode.url);
 				console.log('你开始了' + this.statusMode.title);
 			},

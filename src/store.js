@@ -47,6 +47,23 @@ const game = {
     }
 }
 
+const user = {
+    namespaced: true,
+    state: {
+       nickname:'阵面fans',
+       
+    },
+    mutations: {
+        changeNickName(state,val){
+            state.nickname=val;
+        }
+    },
+    actions: {},
+    getters: {
+        
+    }
+}
+
 const player = {
     namespaced: true,
     state: {
