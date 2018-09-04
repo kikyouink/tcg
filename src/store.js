@@ -31,7 +31,7 @@ const game = {
             state.connect = false;
         },
         SOCKET_LOG: (state, status) => {
-            console.log('服务端日志：'+status);
+            console.log(status);
         },
         initPlayers(state, players) {
             state.players.enemy = players.enemy;

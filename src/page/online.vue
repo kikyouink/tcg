@@ -9,19 +9,33 @@
         name: 'found',
         data() {
             return {
-                id:this.$socket.id,
-                onlinePlayer:null,
+                onlinePlayer:'',
             }
+        },
+        mounted(){
+            this.init();
         },
         components: {
 
         },
         computed: {
+            id(){
+                return this.$socket.id;
+            },
+            name(){
+                return parseInt(Math.random()*100)
+            },
             list() {
                 return [];
             }
         },
         methods: {
+            init(){
+                // this.$set(this.name,name,);
+                console.log(this.id);
+                console.log(this.name);
+                // console.log(this.$socket);
+            },
             searchOnlinePlayer(){
 
             }
