@@ -10,8 +10,7 @@
     export default {
         name: 'alert',
         props:{
-            data:Object,
-            search:Boolean,
+            alert:Object,
         },
         data() {
             return {
@@ -20,13 +19,13 @@
         },
         computed:{
             text(){
-                return this.data.text;
+                return this.alert.text;
             },
             icon(){
-                return 'lg iconfont icon-'+this.data.icon;
+                return 'lg iconfont icon-'+this.alert.icon;
             },
             animation(){
-                if(this.search) return 'rotating 1.5s linear infinite';
+                if(this.alert.type=='match') return 'rotating 1.5s linear infinite';
                 else return '';
             }
         },
@@ -58,7 +57,7 @@
             line-height: 1.2rem;
             // line-height: 1.2rem;
         
-            animation: rotating 1.5s linear infinite;
+            // animation: rotating 1.5s linear infinite;
             .iconfont{
                 // font-size: .3rem;
                 // vertical-align: middle;

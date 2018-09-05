@@ -45,7 +45,6 @@ function api() {
 	Array.prototype.matchPlayer = function (id) {
 		var list=this.slice();
 		list.removeObj(id);
-		console.log('ss');
 		if(list.length==0) return false;
 		else{
 			var player=list.randomGet();

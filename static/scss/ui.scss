@@ -10,7 +10,7 @@ body {
     font-family: KaiTi; //以1080P做设计稿，用其他的话太麻烦，还得换算
     font-size: calc(100vw / 19.2);
     color:white;
-    // user-select: none;
+    user-select: none;
 }
 ::-webkit-scrollbar {
     display: none;

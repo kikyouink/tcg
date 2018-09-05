@@ -1,75 +1,114 @@
 <template>
     <transition name='fade'>
         <div id='online'>
-            <v-alert :data="prompt" :match="match"></v-alert>
+
         </div>
     </transition>
 </template>
 
 <script>
     import {
-		mapState,
-		mapMutations,
-		mapActions
-	} from 'vuex';
+        mapState,
+        mapMutations,
+        mapActions
+    } from 'vuex';
     import alert from '@/components/tools/alert.vue';
     import storage from '@/components/storage.js';
     export default {
         name: 'found',
         data() {
             return {
-                match: true,
                 onlinePlayer: [],
-                prompt: {
+                alert: {
                     icon: 'loading',
                     text: '正在搜索中',
+                    type: 'match',
+                },
+                alertErr:{
+                    icon: 'error',
+                    text: '错误 网络未连接',
+                    type: 'error',
+                },
+                alertSucc:{
+                    icon: 'ok',
+                    text: '匹配成功',
+                    type: 'ok',
                 }
             }
         },
         mounted() {
-            this.init();
+            this.check();
         },
-        beforeDestroy(){
+        beforeDestroy() {
             console.log('即将离开');
-            this.$socket.emit('leave',{
-                "id":this.id,
-                "nickname":this.nickname,
-            });
+            this.leave();
         },
         components: {
-            "v-alert": alert,
+
         },
         computed: {
+            ...mapState('game', [
+                'connect',
+            ]),
             id() {
                 return this.$socket.id;
             },
             nickname() {
-                return storage.get('nickname')
+                return storage.get('nickname');
             },
             list() {
                 return [];
             }
         },
+        sockets:{
+            matchSucc: function(player){
+                console.log('匹配成功! 你的对手是：'+player.nickname);
+                this.showAlert(this.alertSucc);
+                setTimeout(()=>{
+                        this.$router.replace('single');
+                        return ;
+                },2000);
+            },
+        },
         methods: {
-            ...mapMutations('game', {
-                _searchOnlinePlayers: 'searchOnlinePlayers',
-            }),
+            ...mapMutations('ui', [
+                'showAlert','hideAlert'
+            ]),
+            check() {
+                console.log(this.connect);
+                if (!this.connect){
+                    this.showAlert(this.alertErr);
+                    setTimeout(()=>{
+                        this.$router.back();
+                        return ;
+                    },2000);
+                }
+                else if (!this.nickname){
+                    this.$router.replace('user');
+                    return ;
+                }
+                else this.init();
+            },
             init() {
                 console.log(this.id);
                 console.log(this.nickname);
-                // this._searchOnlinePlayers(this.info);
-                console.log()
-                this.$socket.emit('match',{
-                    "id":this.id,
-                    "nickname":this.nickname,
-                });
+                this.match();
             },
-            _searchOnlinePlayers(info) {
-                this.$socket.emit('match',info);
-                // this.searchOnlinePlayers(info)
-                //     .then((msg) => {
-                //         console.log(msg);
-                //     })
+            match(){
+                this.showAlert(this.alert);
+                this.$socket.emit('match', {
+                    "id": this.id,
+                    "nickname": this.nickname,
+                });
+
+            },
+            leave(){
+                this.hideAlert();
+                if(!this.nickname) return;
+                this.$socket.emit('leave', {
+                    "id": this.id,
+                    "nickname": this.nickname,
+                });
             }
         }
     }
