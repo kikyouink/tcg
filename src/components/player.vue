@@ -1,14 +1,14 @@
 <template>
 	<div class="player" :class="side">
 		<!-- 玩家头像 -->
-		<div class="avatar" :class="side" :style="{backgroundImage:avatarUrl}" @click="dosth()">
-			<div class="rb">{{playerInfo.hp}}</div>
+		<div class="avatar" :class="side" :style="{backgroundImage:player.avatarUrl}" @click="dosth()">
+			<div class="rb">{{player.hp}}</div>
 		</div>
 		<!-- 卡牌区 -->
 		<div class="card-area">
 			<!-- 卡牌预览区 -->
 			<transition name='fade'>
-				<div class="previewCard" v-show="preview" :style="{backgroundImage:previewCardUrl}"></div>
+				<div class="previewCard" v-show="preview" :style="{backgroundImage:bgUrl}"></div>
 			</transition>
 			<!-- 阵略 -->
 			<div class="buff">
@@ -19,8 +19,8 @@
 
 			</div>
 			<!-- 手牌区 -->
-			<div class="handCard-area">
-				<v-handCard :side="side" v-for="card in handCard" :key="card.id" :cardInfo="card"></v-handCard>
+			<div class="handCard-area" :side="side">
+				<v-handCard v-for="card in player.handCard" :key="card.id" :cardInfo="card"></v-handCard>
 			</div>
 			<!-- 牌堆与弃牌堆 -->
 			<!-- <div class="cardPile">
@@ -52,21 +52,29 @@
 		},
 		data() {
 			return {
-				preview: false,
-				previewCardUrl: null,
-				avatarUrl: 'url(../../static/img/player/' + this.playerInfo.name + '.png)',
-				handCard: [
+				player:{
+					name:String,
+					hp: 30,
+					maxHp: 30,
+					maxHandCard: 7,
+					avatarUrl: 'url(../../static/img/player/' + this.playerInfo.name + '.png)',
+					handCard: [
 
-				]
+					]
+				}
 			}
 		},
 		mounted() {
 			this.init();
 		},
 		computed: {
-			// ...mapState({
-			// 	count: state => state.count,
-			// })
+			...mapState('player/handCard',[
+				'previewCard','preview'
+			]),
+			bgUrl(){
+				if(!this.previewCard) return '';
+				else return 'url(http://tcg.sanguosha.com/upload/cards/01/01' + this.previewCard.id + '.jpg)';
+			},
 		},
 		methods: {
 			...mapMutations('player',{
@@ -77,40 +85,28 @@
 				Draw: 'draw',
 			}),
 			init() {
-				console.log('一位新的勇士诞生了');
 				for(var i in this.playerInfo){
-					this.$set(this.$data,i,this.playerInfo[i]);
-					// this[i]=this.playerInfo[i];
+					this.$set(this.player,i,this.playerInfo[i]);
 				}
-				console.log(this.name);
+				console.log('玩家的名称是:'+this.player.name);
 				this.draw(4);
-				//预览卡牌
-				// bus.$on('preview', (cardUrl) => {
-				// 	if (cardUrl == null) this.preview = false;
-				// 	else {
-				// 		this.preview = true;
-				// 		this.previewCardUrl = cardUrl;
-				// 	}
-				// })
-				//游戏初始摸牌
-				// bus.$on('gameDraw', () => {
-				// 	this.draw(4);
-				// })
-
 			},
 			dosth(){
-				// player.draw();
+				this.draw();
 				// this.draw();
-				this.$socket.emit('ca','caocao');this.$socket
+				// this.$socket.emit('ca','caocao');
 			},
 			draw(num=1) {
 				//提交异步操作
 				this.Draw({
-					target: this,
+					target: this.player,
 					num: num,
 				})
 					.then((cards) => {
-						this.handCard = this.handCard.concat(cards);
+						// console.log(cards);
+						game.log();
+						console.log(JSON.parse(JSON.stringify(cards)));
+						this.player.handCard = this.player.handCard.concat(cards);
 					})
 			},
 			damage(num=1){

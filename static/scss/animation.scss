@@ -20,3 +20,14 @@
     opacity: 0;
     transform: translateY(.1rem);
 }
+
+//旋转
+@keyframes rotating {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

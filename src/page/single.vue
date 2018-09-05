@@ -26,15 +26,9 @@
             return {
                 enemyInfo:{
                     name: 'lingju',
-                    hp: 30,
-                    maxHp: 30,
-                    maxHandCard: 7,
                 },
                 selfInfo:{
                     name: 'xiahoushi',
-                    hp: 30,
-                    maxHp: 30,
-                    maxHandCard: 7,
                 }
             }
         },

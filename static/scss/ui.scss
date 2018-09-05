@@ -102,7 +102,7 @@ input,textarea{
         filter: brightness(1);
     }
     &.margin {
-        margin: 0 0.2rem;
+        // margin: 0 0;
     }
     &.icon-back {
         position: absolute;
@@ -116,4 +116,9 @@ input,textarea{
         left: 1rem;
         z-index: 200;
     }
+}
+@mixin flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }

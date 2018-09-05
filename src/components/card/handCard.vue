@@ -1,6 +1,6 @@
 <template>
 	<transition :name='animation'>
-		<div class="handCard" :style="{backgroundImage:cardUrl}" @mouseover="showPreviewCard(cardUrl)" @mouseout="showPreviewCard(null)">
+		<div class="handCard" :style="{backgroundImage:cardUrl}" @mouseover="setPreviewCard(cardInfo)" @mouseout="hidePreviewCard()">
 		</div>
 	</transition>
 	
@@ -17,7 +17,6 @@
 	export default {
 		name: 'handCard',
 		props:{
-			side:String,
 			cardInfo:Object,
 		},
 		data() {
@@ -35,16 +34,12 @@
 			// })
 		},
 		methods: {
-			// ...mapMutations([
-				
-			// ]),
+			...mapMutations('player/handCard',[
+				'setPreviewCard','hidePreviewCard'
+			]),
 			init() {
 				
 			},
-			showPreviewCard(s){
-				if(this.side=='enemy') return ;
-				// bus.$emit('preview',s);
-			}
 		},
 
 	}

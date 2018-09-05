@@ -1,7 +1,9 @@
 <template>
     <ul>
-        <li v-for="item in list" :key="item.id" >
-            <i :class="'sm margin iconfont icon-'+item.icon"></i>{{item.name}}<input />
+        <li v-for="item in data" :key="item.id" >
+            <i v-if="item.icon" :class="'sm margin iconfont icon-'+item.icon"></i>
+                {{item.name}}
+            <input v-if="item.input" />
         </li>
     </ul>
 </template>
@@ -11,11 +13,30 @@
         name:'list',
         data(){
             return{
+                list:{
 
+                }
             }
         },
+        computed:{
+
+        },
         props:{
-            list:Array,
+            data:Array,
+        },
+        mounted(){
+            this.init();
+        },
+         methods: {
+            init() {
+                var 
+                for(var i in this.list){
+                    console.log(i);
+                    console.log(list[i]);
+                    this.$set(this.list,i.icon)
+
+                }
+            }
         }
     }
 </script>

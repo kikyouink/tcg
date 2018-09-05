@@ -17,23 +17,28 @@
         },
         data() {
             return {
-                version: '0.1-alpha',
+                version: '0.2-alpha',
                 author: 'SAI',
                 date: '2018-08-31',
                 location: 'Nan Jing',
             }
         },
         mounted() {
-            console.clear();
+            // console.clear();
+            window.game=this;
             this.init();
         },
         methods: {
             init() {
-                console.log('新一轮的阵面对决开始了');
-                //禁止右键
-                document.oncontextmenu = function(){
-                    return false;
-                }
+                this.log();
+            },
+            source(val){
+                return JSON.parse(JSON.stringify(val));
+            },
+            log(){
+                console.log('版本:'+this.version);
+                console.log('作者:'+this.author);
+                console.log('日期:'+this.date+' '+this.location);
             },
             back() {
                 this.$router.back();
@@ -54,7 +59,7 @@
 
 <style lang="scss">
     //阿里图标
-    @import url("http://at.alicdn.com/t/font_818705_8vroqffmxah.css");
+    @import url("http://at.alicdn.com/t/font_818705_gn1suc59ah.css");
     @import "../static/scss/animation.scss";
     @import "../static/scss/ui.scss";
 

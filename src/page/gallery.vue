@@ -44,8 +44,10 @@
 				// this.start()
 			},
 			afterLeave(el) {
-				this.$router.push(this.statusMode.url);
-				console.log('你开始了' + this.statusMode.title);
+				if(this.statusMode){
+					this.$router.push(this.statusMode.url);
+					console.log('你开始了' + this.statusMode.title);
+				}
 			},
 			start(mode) {
 				this.show = false;

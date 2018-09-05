@@ -1,10 +1,21 @@
 <template>
     <transition name='slide'>
         <div id="user">
-            <div class="user-container">
+            <div class="user-container" :style="{backgroundImage:avatarUrl}" @click="changeBg()">
                 <div class="user-info">
-                    <v-list :list=dataList></v-list>
-                    <button class="save" type='button'>保存</button>
+                    <ul>
+                        <li>
+                            <i class='sm margin iconfont icon-nickname'></i>
+                            <span>昵称</span>
+                            <input v-model="user.nickname" :placeholder="nickname"/>
+                        </li>
+                        <li>
+                            <i class='sm margin iconfont icon-sign'></i>
+                            <span>签名</span>
+                            <input v-model="user.sign" :placeholder="sign"/>
+                        </li>
+                    </ul>
+                    <button class="save" type='button' @click="sumbit()">保存</button>
                 </div>
             </div>
         </div>
@@ -12,36 +23,40 @@
 </template>
 
 <script>
-    import list from '@/components/tools/list.vue';
+    import storage from '@/components/storage.js';
     export default {
         name: 'user',
         data() {
             return {
-                dataList:[
-                    {
-                        name:'ID',
-                        icon:'user',
-                    },{
-                        name:'昵称',
-                        icon:'nickname',
-                    },{
-                        name:'签名',
-                        icon:'sign',
-                    }
-                ]
+                user:{
+                    avatar:'zhenji',
+                    nickname:'',
+                    sign:'',
+                }
             }
         },
         components: {
-            "v-list":list,
         },
         computed: {
-            list() {
-                return [];
+            nickname(){
+                return storage.get('nickname');
+            },
+            sign(){
+                return storage.get('sign');
+            },
+            avatarUrl(){
+                return 'url(../../static/img/player/'+this.user.avatar+'.png)';
             }
         },
         methods: {
-            sa() {
-                alert('sd');
+            changeBg(){
+                var list=['zhenji','lingju','xiahoushi'];
+                var item=list.findNext(this.user.avatar);
+                this.$set(this.user,'avatar',item);
+            },
+            sumbit(){
+                storage.set(['nickname','sign'],[this.user.nickname,this.user.sign]);
+                this.$router.back();
             }
         }
     }
@@ -52,7 +67,7 @@
         width: 100%;
         height: 100%;
         position: relative;
-        // background: red;
+
         .user-container{
             width: 4.2rem;
             height: 6rem;
@@ -61,16 +76,38 @@
             left: calc(50% - 2.1rem);
             box-shadow:.04rem .08rem .3rem .02rem rgba(0,0,0,.4);
             border-radius: .2rem;
-            background-image: url('../../static/img/player/zhenji.png');
             background-size: cover;
-
+            transition: all .75s;
 
             .user-info{
                 background: rgba(0,0,0,0.5);
                 position: absolute;
                 width: 100%;
                 bottom: 0;
+                ul{
+                    margin: 0 0 .8rem 0;
+                    li {
+                        font-size: .36rem;
+                        height: .8rem;
+                        line-height: .8rem;
+                        transition: all 0.3s ease-out;
+                        transform: translateX(0);
+                        color: rgba(255,255,255,0.8);
 
+                        &.active,&:hover{
+                            transform: translateX(.06rem);
+                            background: rgba(0,0,0,0.3);
+                        }
+                        i{
+                            color: rgba(255,255,255,0.6);
+                        }
+                        input{
+                            // outline: none;
+                            width:2.5rem;
+                            float: right;
+                        }
+                    }
+                }
                 .save{
                     position: absolute;
                     width: 100%;
