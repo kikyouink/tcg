@@ -57,7 +57,7 @@
 					hp: 30,
 					maxHp: 30,
 					maxHandCard: 7,
-					avatarUrl: 'url(../../static/img/player/' + this.playerInfo.name + '.png)',
+					avatarUrl: 'url(/static/img/player/' + this.playerInfo.name + '.png)',
 					handCard: [
 
 					]
@@ -126,7 +126,6 @@
 	    width: 100%;
 	    height: 2.09rem;
 	    overflow: visible;
-	    cursor: pointer;
 
 	    &.self {
 	        bottom: 0;

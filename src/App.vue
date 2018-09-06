@@ -73,7 +73,7 @@
     /*---------------主容器------------------*/
     #warp {
         height: 100%;
-        background: url(../static/img/bg/chengdu.png) no-repeat center bottom;
+        background: url(/static/img/bg/chengdu.png) no-repeat center bottom;
         background-size: cover;
     }
 </style>

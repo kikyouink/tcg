@@ -24,9 +24,8 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 
 const vConsole = new VConsole()
-console.log(vConsole.version)
 
-document.addEventListener('deviceready', function() {
+// document.addEventListener('deviceready', function() {
     new Vue({
         el: '#app',
         router,
@@ -34,6 +33,7 @@ document.addEventListener('deviceready', function() {
         components: { App },
         template: '<App/>'
     })
-    window.navigator.splashscreen.hide();
-    StatusBar.hide();
-}, false);
+//     window.navigator.splashscreen.hide();
+//     console.log(StatusBar);
+//     StatusBar.hide();
+// }, false);
