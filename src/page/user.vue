@@ -1,18 +1,18 @@
 <template>
     <transition name='slide'>
         <div id="user">
-            <div class="user-container" :style="{backgroundImage:avatarUrl}" @click="changeBg()">
+            <div class="user-container" :style="{backgroundImage:avatarUrl}" @dblclick="changeBg()">
                 <div class="user-info">
                     <ul>
                         <li>
                             <i class='sm margin iconfont icon-nickname'></i>
                             <span>昵称</span>
-                            <input v-model="user.nickname" :placeholder="nickname"/>
+                            <input type="text" spellcheck="false" v-model="user.nickname" :placeholder="nickname"/>
                         </li>
                         <li>
                             <i class='sm margin iconfont icon-sign'></i>
                             <span>签名</span>
-                            <input v-model="user.sign" :placeholder="sign"/>
+                            <input type="text" spellcheck="false" v-model="user.sign" :placeholder="sign"/>
                         </li>
                     </ul>
                     <button class="save" type='button' @click="sumbit()">保存</button>
@@ -105,6 +105,7 @@
                             // outline: none;
                             width:2.5rem;
                             float: right;
+                            color: rgba(255,255,255,0.8);
                         }
                     }
                 }

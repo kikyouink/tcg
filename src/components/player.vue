@@ -104,8 +104,6 @@
 				})
 					.then((cards) => {
 						// console.log(cards);
-						game.log();
-						console.log(JSON.parse(JSON.stringify(cards)));
 						this.player.handCard = this.player.handCard.concat(cards);
 					})
 			},

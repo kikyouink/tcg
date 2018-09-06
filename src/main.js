@@ -5,9 +5,10 @@ import App from './App'
 import router from './router'
 import store from './store'
 import VueSocketio from 'vue-socket.io';
+import socketio from 'socket.io-client';
 import './api.js';
 
-Vue.use(VueSocketio, 'http://localhost:3000', store);
+Vue.use(VueSocketio, socketio('http://localhost:3000'), store);
 Vue.config.productionTip = false
 // var game={
 //     log(val){

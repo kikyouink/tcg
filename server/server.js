@@ -1,25 +1,31 @@
 class Server {
     constructor() {
-        this.count=0;
+        this.pnum=0;
+        this.wnum=0;
         this.playerList=[];
         this.waittingList=[];
         this.playingList=[];
     }
     log() {
-        console.log('当前玩家数:' + this.count);
+        console.log('当前玩家数:' + this.pnum);
         console.log('当前玩家列表：');
         console.log(this.playerList);
         console.log('当前等待列表：');
         console.log(this.waittingList);
     }
-    addPlayer(info) {
-        this.count++;
-        this.playerList.push(info);
-        this.waittingList.push(info);
+    addPlayer(player) {
+        this.pnum++;
+        this.playerList.push(player);
+        this.waittingList.push(player);
     }
-    removePlayer(info) {
-        this.count--;
-        this.playerList.removeObj(info);
+    removePlayer(player) {
+        this.wnum--;
+        this.waittingList.removeObj(player);
+    }
+    clearPlayer(player){
+        this.pnum--;
+        this.playerList.removeObj(player);
+        this.waittingList.removeObj(player);
     }
     findPlayer(id){
         var player=this.playerList.findPlayer(id);

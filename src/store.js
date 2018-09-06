@@ -3,6 +3,31 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
+const ui = {
+    namespaced: true,
+    state: {
+        alert: {
+            show:false,
+            text: String,
+            icon: String,
+            type: String,
+        }
+    },
+    mutations: {
+        showAlert(state, status){
+            console.log(status);
+            for(var i in status){
+                Vue.set(state.alert,i,status[i]);
+            }
+            console.log(state.alert.icon)
+            Vue.set(state.alert,'show',true);
+        },
+        hideAlert(state, status){
+            Vue.set(state.alert,'show',false);
+        }
+    },
+}
+
 const game = {
     namespaced: true,
     state: {
@@ -34,32 +59,19 @@ const game = {
             console.log('发生错误' + status);
             state.connect = false;
         },
-        SOCKET_LIST: (state, status) => {
-            console.log(status);
-        },
-        SOCKET_MATCHSUCC: (state, player) => {
-            console.log('匹配成功');
-            console.log(player);
-        },
-        SOCKET_TEST: (state, status) => {
-            console.log('测试成功');
-        },
-        initPlayers(state, players) {
-            state.players.enemy = players.enemy;
-            state.players.slef = players.self;
-        },
+        // initPlayers(state, players) {
+        //     state.players.enemy = players.enemy;
+        //     state.players.slef = players.self;
+        // },
     },
     actions: {
-        socket_list: ({ commit, state }, status) => {
-            console.log('玩家列表');
-            console.log(status);
-        },
+        // socket_list: ({ commit, state }, status) => {
+        //     console.log('玩家列表');
+        //     console.log(status);
+        // },
     },
     getters: {
-        // enemy(state, getters, rootState){
-        //     return state.players.enemy
-        // },
-        // self: (state) => state.players.self,
+
     }
 }
 
@@ -212,21 +224,11 @@ const player = {
     }
 }
 
-const eventHander = store => {
-    // 当 store 初始化后调用
-    store.subscribe((mutation, state) => {
-        console.log('插件');
-        console.log(mutation);
-        // 每次 mutation 之后调用
-        // mutation 的格式为 { type, payload }
-    })
-}
-
 const store = new Vuex.Store({
     modules: {
+        ui:ui,
         game: game,
         player: player,
-        plugins: [eventHander]
     }
 })
 
