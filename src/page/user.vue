@@ -23,7 +23,6 @@
 </template>
 
 <script>
-    import storage from '@/components/storage.js';
     export default {
         name: 'user',
         data() {
@@ -39,10 +38,10 @@
         },
         computed: {
             nickname(){
-                return storage.get('nickname');
+                return this.$storage.get('nickname');
             },
             sign(){
-                return storage.get('sign');
+                return this.$storage.get('sign');
             },
             avatarUrl(){
                 return 'url(../../static/img/player/'+this.user.avatar+'.png)';
@@ -55,7 +54,7 @@
                 this.$set(this.user,'avatar',item);
             },
             sumbit(){
-                storage.set(['nickname','sign'],[this.user.nickname,this.user.sign]);
+                this.$storage.set(['nickname','sign'],[this.user.nickname,this.user.sign]);
                 this.$router.back();
             }
         }

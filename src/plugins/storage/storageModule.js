@@ -1,4 +1,4 @@
-class storageModule {
+export default class storageModule {
     constructor(){
 
     }
@@ -23,6 +23,3 @@ class storageModule {
         localStorage.clear();
     }
 }
-
-const storage = new storageModule();
-export default storage

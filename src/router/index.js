@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import online from '@/page/online'
-import single from '@/page/single'
+import game from '@/page/game'
 import design from '@/page/design'
 import gallery from '@/page/gallery'
 import user from '@/page/user'
@@ -18,9 +18,9 @@ export default new Router({
 			name: 'online',
 			component: online
 		},{
-			path: '/single',
-			name: 'single',
-			component: single
+			path: '/game',
+			name: 'game',
+			component: game
 		},{
 			path: '/design',
 			name: 'design',

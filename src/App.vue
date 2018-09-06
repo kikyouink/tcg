@@ -2,7 +2,6 @@
     <div id="warp">
         <i class="lg iconfont icon-smile" @click="smile()"></i>
         <i class="lg iconfont icon-back" @click="back()"></i>
-        <v-alert :alert="alert" v-show="alert.show"></v-alert>
         <router-view></router-view>
         <!-- <v-dialog></v-dialog> -->
     </div>
@@ -10,7 +9,6 @@
 
 <script>
     import dialog from '@/components/dialog.vue';
-    import alert from '@/components/tools/alert.vue';
     import {
         mapState,
         mapMutations,
@@ -36,9 +34,6 @@
             this.init();
         },
         computed: {
-            ...mapState('ui', [
-                'alert'
-            ]),
         },
         methods: {
             init() {

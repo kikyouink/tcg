@@ -3,31 +3,6 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
-const ui = {
-    namespaced: true,
-    state: {
-        alert: {
-            show:false,
-            text: String,
-            icon: String,
-            type: String,
-        }
-    },
-    mutations: {
-        showAlert(state, status){
-            console.log(status);
-            for(var i in status){
-                Vue.set(state.alert,i,status[i]);
-            }
-            console.log(state.alert.icon)
-            Vue.set(state.alert,'show',true);
-        },
-        hideAlert(state, status){
-            Vue.set(state.alert,'show',false);
-        }
-    },
-}
-
 const game = {
     namespaced: true,
     state: {
@@ -50,6 +25,7 @@ const game = {
         SOCKET_CONNECT: (state, status) => {
             console.log('已连接');
             state.connect = true;
+            state.reconnecting = false;
         },
         SOCKET_DISCONNECT: (state, status) => {
             console.log('已断开');
@@ -59,10 +35,6 @@ const game = {
             console.log('发生错误' + status);
             state.connect = false;
         },
-        // initPlayers(state, players) {
-        //     state.players.enemy = players.enemy;
-        //     state.players.slef = players.self;
-        // },
     },
     actions: {
         // socket_list: ({ commit, state }, status) => {
@@ -226,7 +198,6 @@ const player = {
 
 const store = new Vuex.Store({
     modules: {
-        ui:ui,
         game: game,
         player: player,
     }

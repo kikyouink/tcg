@@ -18,10 +18,10 @@
 				show: true,
 				statusMode:null,
 				mode: {
-					single: {
+					game: {
 						title: 'AI对战',
-						img: '../../static/img/start/single.png',
-						url:'single',
+						img: '../../static/img/start/game.png',
+						url:'game',
 					},
 					online: {
 						title: '联机对战',
@@ -76,7 +76,7 @@
 			border-radius: .2rem;
 			box-shadow: 0 0 .2rem black;
 			text-align: center;
-			background: url(../../static/img/start/single.png) no-repeat;
+			background: url(../../static/img/start/game.png) no-repeat;
 			background-size: cover;
 			background-position: center center;
 			transition: .5s all;

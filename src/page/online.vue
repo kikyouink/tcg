@@ -12,8 +12,6 @@
         mapMutations,
         mapActions
     } from 'vuex';
-    import alert from '@/components/tools/alert.vue';
-    import storage from '@/components/storage.js';
     export default {
         name: 'found',
         data() {
@@ -21,10 +19,7 @@
                 onlinePlayer: [],
                 alert: {
                     icon: 'loading',
-<<<<<<< HEAD
                     text: '正在搜索中...',
-=======
-                    text: '正在搜索中',
                     type: 'match',
                 },
                 alertErr:{
@@ -36,7 +31,6 @@
                     icon: 'ok',
                     text: '匹配成功',
                     type: 'ok',
->>>>>>> 66749789c7ae48d88b86598319136b347f0983e0
                 }
             }
         },
@@ -58,7 +52,7 @@
                 return this.$socket.id;
             },
             nickname() {
-                return storage.get('nickname');
+                return this.$storage.get('nickname');
             },
             list() {
                 return [];
@@ -67,25 +61,20 @@
         sockets:{
             matchSucc: function(player){
                 console.log('匹配成功! 你的对手是：'+player.nickname);
-                this.showAlert(this.alertSucc);
-                setTimeout(()=>{
-                        this.$router.replace('single');
-                        return ;
-                },2000);
+                this.$alert.show(this.alertSucc).then(()=>{
+                    this.$router.replace('game');
+                    return ;
+                });
             },
         },
         methods: {
-            ...mapMutations('ui', [
-                'showAlert','hideAlert'
-            ]),
             check() {
                 console.log(this.connect);
                 if (!this.connect){
-                    this.showAlert(this.alertErr);
-                    setTimeout(()=>{
+                    this.$alert.show(this.alertErr).then(()=>{
                         this.$router.back();
                         return ;
-                    },2000);
+                    });
                 }
                 else if (!this.nickname){
                     this.$router.replace('user');
@@ -99,15 +88,24 @@
                 this.match();
             },
             match(){
-                this.showAlert(this.alert);
+                this.$alert.show(this.alert,'infinite');
                 this.$socket.emit('match', {
                     "id": this.id,
                     "nickname": this.nickname,
                 });
-
+                this.timing();
+            },
+            timing(){
+                //5分钟后如果搜索不到则取消
+                setTimeout(()=>{
+                    this.$alert.show('error','等待时间过长')
+                    .then(()=>{
+                        this.$router.back();
+                    })
+                },2000);
             },
             leave(){
-                this.hideAlert();
+                this.$alert.hide();
                 if(!this.nickname) return;
                 this.$socket.emit('leave', {
                     "id": this.id,

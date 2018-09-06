@@ -6,9 +6,14 @@ import router from './router'
 import store from './store'
 import VueSocketio from 'vue-socket.io';
 import socketio from 'socket.io-client';
+import VueAlert from './plugins/alert/index'
+import storage from './plugins/storage/storage'
 import './api.js';
 
 Vue.use(VueSocketio, socketio('http://localhost:3000'), store);
+Vue.use(VueAlert);
+Vue.use(storage)
+
 Vue.config.productionTip = false
 // var game={
 //     log(val){
