@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 import VueSocketio from 'vue-socket.io';
 import socketio from 'socket.io-client';
+import VConsole from 'vconsole'
 import VueAlert from './plugins/alert/index'
 import storage from './plugins/storage/storage'
 import './api.js';
@@ -21,10 +22,18 @@ Vue.config.productionTip = false
 //     }
 // }
 /* eslint-disable no-new */
-new Vue({
-    el: '#app',
-    router,
-    store,
-	components: { App },
-    template: '<App/>'
-})
+
+const vConsole = new VConsole()
+console.log(vConsole.version)
+
+document.addEventListener('deviceready', function() {
+    new Vue({
+        el: '#app',
+        router,
+        store,
+        components: { App },
+        template: '<App/>'
+    })
+    window.navigator.splashscreen.hide();
+    StatusBar.hide();
+}, false);

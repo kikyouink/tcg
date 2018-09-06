@@ -9,7 +9,6 @@ import user from '@/page/user'
 Vue.use(Router)
 
 export default new Router({
-	linkActiveClass:'active',
 	routes: [{
 			path: '/', 
 			redirect: 'gallery',
@@ -35,5 +34,4 @@ export default new Router({
 			component: user
 		}
 	],
-	mode: 'history',
 })
