@@ -22,7 +22,7 @@
                 onlinePlayer: [],
                 prompt: {
                     icon: 'loading',
-                    text: '正在搜索中',
+                    text: '正在搜索中...',
                 }
             }
         },
