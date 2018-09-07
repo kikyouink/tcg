@@ -11,7 +11,7 @@ import VueAlert from './plugins/alert/index'
 import storage from './plugins/storage/storage'
 import './api.js';
 
-Vue.use(VueSocketio, socketio('http://localhost:3000'), store);
+Vue.use(VueSocketio, socketio('http://172.81.224.195:3000'), store);
 Vue.use(VueAlert);
 Vue.use(storage)
 

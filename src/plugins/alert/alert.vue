@@ -36,9 +36,9 @@
                 // console.log(this.$data);
                 return new Promise(reslove =>{
                     if(typeof time=='string'&&time!='infinite'){
-                        time=2000;
                         this.$set(this.alert,'icon',data);
                         this.$set(this.alert,'text',time);
+                        time=2000;
                     }
                     else if(typeof data=='string'){
                         this.$set(this.alert,'text',data);
