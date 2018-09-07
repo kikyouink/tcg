@@ -1,7 +1,7 @@
 <template>
 	<transition name='fade' @after-leave="afterLeave">
 		<div id="gallery" v-if="show">
-			<div class="pic" v-for="item in mode" :key="item.id" :style="{backgroundImage:'url('+item.img+')'}"    @click="start(item)">
+			<div class="pic" v-for="item in mode" :key="item.id" :style="{backgroundImage:'url(/static/img/start/'+ item.img+'.png)'}"    @click="start(item)">
 				<div class="banner">
 					{{item.title}}
 				</div>
@@ -17,20 +17,21 @@
 			return {
 				show: true,
 				statusMode:null,
+				basicUrl:'/static/img/start/',
 				mode: {
 					game: {
 						title: 'AI对战',
-						img: '../../static/img/start/game.png',
+						img: 'game',
 						url:'game',
 					},
 					online: {
 						title: '联机对战',
-						img: '../../static/img/start/online.png',
+						img: 'online',
 						url:'online',
 					},
 					design: {
 						title: '构筑卡牌',
-						img: '../../static/img/start/design.png',
+						img: 'design',
 						url:'design'
 					},
 				}
@@ -76,7 +77,6 @@
 			border-radius: .2rem;
 			box-shadow: 0 0 .2rem black;
 			text-align: center;
-			background: url(../../static/img/start/game.png) no-repeat;
 			background-size: cover;
 			background-position: center center;
 			transition: .5s all;

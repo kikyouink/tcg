@@ -55,7 +55,6 @@
 		background-size: cover;
 		position: relative;
 		margin: 0 .04rem 0 .04rem;
-		cursor: pointer;
 
 	}
 </style>
