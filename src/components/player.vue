@@ -57,7 +57,7 @@
 					hp: 30,
 					maxHp: 30,
 					maxHandCard: 7,
-					avatarUrl: 'url(/static/img/player/' + this.playerInfo.name + '.png)',
+					avatarUrl: 'url('+require('../assets/img/player/' + this.playerInfo.name + '.png')+')',
 					handCard: [
 
 					]

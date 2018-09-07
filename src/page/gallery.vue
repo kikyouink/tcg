@@ -1,7 +1,7 @@
 <template>
 	<transition name='fade' @after-leave="afterLeave">
 		<div id="gallery" v-if="show">
-			<div class="pic" v-for="item in mode" :key="item.id" :style="{backgroundImage:'url(/static/img/start/'+ item.img+'.png)'}"    @click="start(item)">
+			<div class="pic" v-for="item in mode" :key="item.id" :style="{backgroundImage:'url('+require('../assets/img/start/'+ item.img+'.png')+')'}"    @click="start(item)">
 				<div class="banner">
 					{{item.title}}
 				</div>
@@ -17,7 +17,7 @@
 			return {
 				show: true,
 				statusMode:null,
-				basicUrl:'/static/img/start/',
+				basicUrl:'/assets/img/start/',
 				mode: {
 					game: {
 						title: 'AI对战',
@@ -46,6 +46,7 @@
 			},
 			afterLeave(el) {
 				if(this.statusMode){
+
 					this.$router.push(this.statusMode.url);
 					console.log('你开始了' + this.statusMode.title);
 				}

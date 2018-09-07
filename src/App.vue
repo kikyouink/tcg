@@ -67,13 +67,13 @@
 <style lang="scss">
     //阿里图标
     @import url("http://at.alicdn.com/t/font_818705_gn1suc59ah.css");
-    @import "../static/scss/animation.scss";
-    @import "../static/scss/ui.scss";
+    @import "assets/scss/animation.scss";
+    @import "assets/scss/ui.scss";
 
     /*---------------主容器------------------*/
     #warp {
         height: 100%;
-        background: url(/static/img/bg/chengdu.png) no-repeat center bottom;
+        background: url('./assets/img/bg/chengdu.png') no-repeat center bottom;
         background-size: cover;
     }
 </style>

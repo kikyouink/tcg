@@ -23,9 +23,7 @@ Vue.config.productionTip = false
 // }
 /* eslint-disable no-new */
 
-const vConsole = new VConsole()
-
-// document.addEventListener('deviceready', function() {
+document.addEventListener('deviceready', function() {
     new Vue({
         el: '#app',
         router,
@@ -33,7 +31,17 @@ const vConsole = new VConsole()
         components: { App },
         template: '<App/>'
     })
-//     window.navigator.splashscreen.hide();
-//     console.log(StatusBar);
-//     StatusBar.hide();
-// }, false);
+    //打开控制台
+	const vConsole = new VConsole();
+	//强制横屏
+	// screen.orientation.lock('landscape');
+	//隐藏启动图
+	window.navigator.splashscreen.hide();
+	//隐藏状态栏
+	console.log(StatusBar)
+	StatusBar.hide();
+	//开始同步代码
+    codePush.sync(null, { 
+        updateDialog: true, 
+    });
+}, false);
