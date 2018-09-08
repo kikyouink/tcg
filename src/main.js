@@ -16,32 +16,39 @@ Vue.use(VueAlert);
 Vue.use(storage)
 
 Vue.config.productionTip = false
-// var game={
-//     log(val){
-//         console.log(JSON.parse(JSON.stringify(val)));
-//     }
-// }
-/* eslint-disable no-new */
 
-document.addEventListener('deviceready', function() {
-    new Vue({
-        el: '#app',
-        router,
-        store,
-        components: { App },
-        template: '<App/>'
-    })
-    //打开控制台
-	const vConsole = new VConsole();
-	//强制横屏
-	// screen.orientation.lock('landscape');
-	//隐藏启动图
-	window.navigator.splashscreen.hide();
-	//隐藏状态栏
-	console.log(StatusBar)
-	StatusBar.hide();
-	//开始同步代码
-    codePush.sync(null, { 
-        updateDialog: true, 
-    });
-}, false);
+//判断是否是移动端
+if(/Android|iPhone|iPod/i.test(navigator.userAgent)){
+	document.addEventListener('deviceready', function() {
+		//打开控制台
+		 const vConsole = new VConsole();
+	 
+		 //开始同步代码
+		 codePush.notifyApplicationReady();
+		 codePush.sync(null, null,function(downloadProgress){
+			 if (downloadProgress) {
+				 var precent=downloadProgress.receivedBytes/downloadProgress.totalBytes;
+				 document.querySelector('.inner').style.width=(12*precent)+'rem';
+				 if(precent>=0.95) document.querySelector('span').innerHTML='下载完成，请重新启动...';
+			 }
+		 });
+	 
+		 //隐藏状态栏
+		 setTimeout(function(){
+			 try{
+				 if (StatusBar.isVisible) {
+					 StatusBar.hide();
+				 }
+			 }catch(e){}
+		 },750);
+		 
+	 }, false);
+}
+
+new Vue({
+	el: '#app',
+	router,
+	store,
+	components: { App },
+	template: '<App/>'
+})
