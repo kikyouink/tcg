@@ -17,18 +17,18 @@
         data() {
             return {
                 onlinePlayer: [],
-                alert:{
-                    search:{
+                alert: {
+                    search: {
                         icon: 'loading',
                         text: '正在搜索中...',
                         type: 'match',
                     },
-                    err:{
+                    err: {
                         icon: 'error',
                         text: '错误 网络未连接',
                         type: 'error',
                     },
-                    succ:{
+                    succ: {
                         icon: 'ok',
                         text: '匹配成功',
                         type: 'ok',
@@ -56,7 +56,7 @@
             nickname() {
                 return this.$storage.get('nickname');
             },
-            avatar(){
+            avatar() {
                 return this.$storage.get('avatar');
             },
             list() {
@@ -64,23 +64,23 @@
             }
         },
         sockets: {
-            matchSucc: function (oppo) {
+            matchSucc(oppo) {
                 console.log('匹配成功! 你的对手是：' + oppo.nickname);
                 this.$alert.show(this.alert.succ).then(() => {
                     // this.registerPlayers(oppo);
                     this.$router.replace({
-                        name:'game',
+                        name: 'game',
                         params: {
-                            players:{
-                                self:{
-                                    id:this.id,
-                                    nickname:this.nickname,
-                                    avatar:this.avatar,
+                            players: {
+                                self: {
+                                    id: this.id,
+                                    nickname: this.nickname,
+                                    avatar: this.avatar,
                                 },
-                                oppo:{
-                                    id:oppo.id,
-                                    nickname:oppo.nickname,
-                                    avatar:oppo.avatar,
+                                oppo: {
+                                    id: oppo.id,
+                                    nickname: oppo.nickname,
+                                    avatar: oppo.avatar,
                                 }
                             }
                         }
@@ -110,7 +110,7 @@
                 this.$socket.emit('match', {
                     "id": this.id,
                     "nickname": this.nickname,
-                    "avatar":this.avatar,
+                    "avatar": this.avatar,
                 });
                 //开始计时
                 this.timing();
@@ -129,7 +129,7 @@
                 this.$socket.emit('leave', {
                     "id": this.id,
                     "nickname": this.nickname,
-                    "avatar":this.avatar,
+                    "avatar": this.avatar,
                 });
             },
         }

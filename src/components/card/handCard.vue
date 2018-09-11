@@ -22,7 +22,7 @@
 		data() {
 			return {
 				animation:'slide',
-				cardUrl:'url(http://tcg.sanguosha.com/upload/cards/01/01'+this.cardInfo.id+'.jpg)',
+				cardUrl:'url(http://tcg.sanguosha.com/upload/cards/13/13'+this.cardInfo.id+'.jpg)',
 			}
 		},
 		mounted() {

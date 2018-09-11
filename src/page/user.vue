@@ -27,8 +27,9 @@
         name: 'user',
         data() {
             return {
+                change:false,
                 user:{
-                    avatar:'',
+                    avatar:'zhenji',
                     nickname:'',
                     sign:'',
                 }
@@ -47,7 +48,7 @@
                 return this.$storage.get('avatar');
             },
             avatarUrl(){
-                if(this.user.avatar=='') return 'url('+require('../assets/img/player/'+this.avatar+'.png')+')';
+                if(this.avatar&&!this.change) return 'url('+require('../assets/img/player/'+this.avatar+'.png')+')';
                 else return 'url('+require('../assets/img/player/'+this.user.avatar+'.png')+')';
             }
         },
@@ -55,6 +56,7 @@
             changeBg(){
                 var list=['zhenji','lingju','xiahoushi'];
                 var item=list.findNext(this.user.avatar);
+                this.change=true;
                 this.$set(this.user,'avatar',item);
             },
             sumbit(){

@@ -6,15 +6,15 @@
             <v-player :side="'self'" :playerInfo="self" ref="self"></v-player>
         </div>
     </transition>
-    
+
 </template>
 
 <script>
     import {
-		mapState,
-		mapMutations,
-		mapActions
-	} from 'vuex';
+        mapState,
+        mapMutations,
+        mapActions
+    } from 'vuex';
     import player from '@/components/player.vue';
 
     export default {
@@ -24,38 +24,48 @@
         },
         data() {
             return {
-                
+
             }
         },
         created() {
+            this.init();
+        },
+        mounted() {
             this.start();
-            console.log(this.oppo);
         },
         computed: {
             //直接从vuex中读取对手和自己的信息
-            ...mapState('game',[
-                'self','oppo'
+            ...mapState('game', [
+                'self', 'oppo'
             ])
         },
+        sockets: {
+            echo(event) {
+                
+            }
+        },
         methods: {
-            ...mapMutations('game',[
-				'setSelf','setOppo'
-			]),
-            start(){
+            ...mapMutations('game', [
+                'setSelf', 'setOppo'
+            ]),
+            init() {
                 console.log('游戏开始');
                 this.registerPlayers(this.$route.params.players);
-                this.gameDraw();
             },
-            registerPlayers(players){
+            start() {
+                // this.gameDraw();
+            },
+            registerPlayers(players) {
                 this.setSelf(players.self);
                 this.setOppo(players.oppo);
             },
             //游戏开始各摸4张牌
-            gameDraw(){
-                this.$refs.oppo.draw(4);
-                console.log(this.$refs.oppo);
+            gameDraw() {
                 // this.$refs.oppo.draw(4);
                 // this.$refs.self.draw(4);
+            },
+            commit(player, event) {
+
             }
         }
     }
@@ -65,7 +75,5 @@
     #battleGround {
         width: 100%;
         height: 100%;
-
-        
     }
 </style>

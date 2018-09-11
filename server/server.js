@@ -7,10 +7,12 @@ class Server {
     log() {
         console.log('当前玩家数:' + this.playerList.length);
         console.log('当前等待玩家数:' + this.waittingList.length);
-        console.log('当前玩家列表：');
-        console.log(this.playerList);
+        // console.log('当前玩家列表：');
+        // console.log(this.playerList);
         console.log('当前等待列表：');
         console.log(this.waittingList);
+        console.log('当前游戏列表：');
+        console.log(this.playingList);
     }
     matchPlayers(){
         return new Promise((reslove,reject)=>{
@@ -37,5 +39,12 @@ class Server {
         var player = this.playerList.findPlayer(id);
         return player;
     }
+    findOppo(id,list){
+        var oppo;
+        for(var i in list){
+            if(i!=id) return i;
+        }
+    }
+    
 }
 module.exports = Server;

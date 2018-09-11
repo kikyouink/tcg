@@ -37,12 +37,13 @@
 		mapActions
 	} from 'vuex';
 	import handCard from '@/components/card/handCard.vue';
+	import cardPile from '@/components/card/cardPile.vue';
 
 	export default {
 		name: 'player',
 		components: {
 			"v-handCard": handCard,
-			// "v-cardPile":cardPile,
+			"v-cardPile":cardPile,
 		},
 		props: {
 			side: String,
@@ -70,7 +71,7 @@
 			]),
 			bgUrl(){
 				if(!this.previewCard) return '';
-				else return 'url(http://tcg.sanguosha.com/upload/cards/01/01' + this.previewCard.id + '.jpg)';
+				else return 'url(http://tcg.sanguosha.com/upload/cards/13/13' + this.previewCard.id + '.jpg)';
 			},
 		},
 		methods: {
@@ -89,13 +90,19 @@
 				// this.$socket.emit('ca','caocao');
 			},
 			draw(num=1) {
-				var resultCards=this.$refs.cardPile.requireCard(num);
-				this.player.handCard = this.player.handCard.concat(cards);
-				this.Draw({
-					target: this.player,
-					num: num,
-					cards:resultCards,
-				})
+				console.log('draw');
+				this.$socket.emit('gameEvent',{
+                    player:this.player.id,
+					type:'draw',
+					num:num,
+                })
+				// var cards=this.$refs.cardPile.requireCard(num);
+				// this.player.handCard = this.player.handCard.concat(cards);
+				// this.Draw({
+				// 	target: this.player,
+				// 	num: num,
+				// 	cards:cards,
+				// })
 			},
 			// damage(num=1){
 			// 	this.Damage({

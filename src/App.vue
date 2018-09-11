@@ -1,6 +1,6 @@
 <template>
     <div id="warp">
-        <i class="lg iconfont icon-smile" @click="smile()"></i>
+        <i class="lg iconfont icon-user" @click="smile()"></i>
         <i class="lg iconfont icon-back" @click="back()"></i>
         <router-view></router-view>
         <!-- <v-dialog></v-dialog> -->

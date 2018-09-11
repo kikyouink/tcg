@@ -83,14 +83,6 @@
             height: 1.2rem;
             text-align: center;
             line-height: 1.2rem;
-            // line-height: 1.2rem;
-        
-            // animation: rotating 1.5s linear infinite;
-            .iconfont{
-                // font-size: .3rem;
-                // vertical-align: middle;
-                // transition: all 1s;
-            }
         }
 }
 </style>
