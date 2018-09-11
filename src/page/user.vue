@@ -44,7 +44,7 @@
                 return this.$storage.get('sign');
             },
             avatarUrl(){
-                return 'url(/static/img/player/'+this.user.avatar+'.png)';
+                return 'url(../../static/img/player/'+this.user.avatar+'.png)';
             }
         },
         methods: {
