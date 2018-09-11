@@ -23,9 +23,9 @@
 				<v-handCard v-for="card in player.handCard" :key="card.id" :cardInfo="card"></v-handCard>
 			</div>
 			<!-- 牌堆与弃牌堆 -->
-			<!-- <div class="cardPile">
-				<v-cardPile ></v-cardPile>
-			</div> -->
+			<div class="cardPile">
+				<v-cardPile ref="cardPile"></v-cardPile>
+			</div>
 		</div>
 	</div>
 </template>
@@ -36,9 +36,7 @@
 		mapMutations,
 		mapActions
 	} from 'vuex';
-	// import bus from '@/components/bus';
 	import handCard from '@/components/card/handCard.vue';
-	// import cardPile from '@/components/card/cardPile.vue';
 
 	export default {
 		name: 'player',
@@ -53,14 +51,13 @@
 		data() {
 			return {
 				player:{
-					name:String,
+					id:'',
+					nickname:'',
 					hp: 30,
 					maxHp: 30,
 					maxHandCard: 7,
-					avatarUrl: 'url('+require('../assets/img/player/' + this.playerInfo.name + '.png')+')',
-					handCard: [
-
-					]
+					avatarUrl: 'url('+require('../assets/img/player/' + this.playerInfo.avatar + '.png')+')',
+					handCard: []
 				}
 			}
 		},
@@ -77,19 +74,14 @@
 			},
 		},
 		methods: {
-			...mapMutations('player',{
-				Damage:'damage',
-				Recover:'recover',
-			}),
-			...mapActions('player', {
-				Draw: 'draw',
-			}),
+			...mapMutations('player',[
+				'Draw','Damage','Recover'
+			]),
 			init() {
 				for(var i in this.playerInfo){
 					this.$set(this.player,i,this.playerInfo[i]);
 				}
-				console.log('玩家的名称是:'+this.player.name);
-				this.draw(4);
+				console.log('玩家的名称是:'+this.player.nickname);
 			},
 			dosth(){
 				this.draw();
@@ -97,23 +89,21 @@
 				// this.$socket.emit('ca','caocao');
 			},
 			draw(num=1) {
-				//提交异步操作
+				var resultCards=this.$refs.cardPile.requireCard(num);
+				this.player.handCard = this.player.handCard.concat(cards);
 				this.Draw({
 					target: this.player,
 					num: num,
+					cards:resultCards,
 				})
-					.then((cards) => {
-						// console.log(cards);
-						this.player.handCard = this.player.handCard.concat(cards);
-					})
 			},
-			damage(num=1){
-				this.Damage({
-					source:this,
-					target: this,
-					num: num,
-				})
-			}
+			// damage(num=1){
+			// 	this.Damage({
+			// 		source:this,
+			// 		target: this,
+			// 		num: num,
+			// 	})
+			// }
 		},
 
 	}
@@ -130,7 +120,7 @@
 	    &.self {
 	        bottom: 0;
 	    }
-	    &.enemy {
+	    &.oppo {
 	        top: 0;
 	    }
 	    .avatar {
@@ -148,7 +138,7 @@
 	        &.self {
 	            bottom: 0;
 	        }
-	        &.enemy {
+	        &.oppo {
 	            top: 0;
 	        }
 	    }

@@ -13,7 +13,6 @@ async function work() {
 		var players = await server.matchPlayers();
 		console.log('系统已匹配完成：')
 		console.log(players);
-		// socket.emit('matchSucc', players);
 		var room='room'+(++num);
 		var player0=io.sockets.connected[players[0].id];
 		var player1=io.sockets.connected[players[1].id];
@@ -42,17 +41,9 @@ io.on('connection', (socket) => {
 				work();
 			}, 500)
 		}
-		let rooms = Object.keys(socket.rooms);
-    	console.log(rooms)
 		//将正在搜寻比赛的玩家加入玩家列表
 		server.addPlayer(player);
 		server.log();
-		// server.startMatch(player.id).then((player)=>{
-		// 	console.log(player);
-		// 	socket.emit('matchSucc',player);
-		// }).catch((e)=>{
-		// 	console.log(e);
-		// })
 	})
 	socket.on('leave', (player) => {
 		console.log(player.nickname + '取消了搜索');

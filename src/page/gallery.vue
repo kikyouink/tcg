@@ -1,7 +1,7 @@
 <template>
-	<transition name='fade' @after-leave="afterLeave">
-		<div id="gallery" v-if="show">
-			<div class="pic" v-for="item in mode" :key="item.id" :style="{backgroundImage:'url('+require('../assets/img/start/'+ item.img+'.png')+')'}"    @click="start(item)">
+	<transition name='fade'>
+		<div id="gallery">
+			<div class="pic" v-for="item in mode" :key="item.id" :style="{backgroundImage:'url('+require('../assets/img/start/' + item.img + '.png')+')'}" @click="start(item)">
 				<div class="banner">
 					{{item.title}}
 				</div>
@@ -11,50 +11,63 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations,
+		mapActions
+	} from 'vuex';
 	export default {
 		name: 'gallery',
 		data() {
 			return {
-				show: true,
-				statusMode:null,
-				basicUrl:'/assets/img/start/',
+				// basicUrl: '../assets/img/start/',
 				mode: {
 					game: {
 						title: 'AI对战',
 						img: 'game',
-						url:'game',
+						url: 'game',
 					},
 					online: {
 						title: '联机对战',
 						img: 'online',
-						url:'online',
+						url: 'online',
 					},
 					design: {
 						title: '构筑卡牌',
 						img: 'design',
-						url:'design'
+						url: 'design'
 					},
 				}
 			}
 		},
 		mounted() {
-			//这里需要使用箭头函数，否则this错误
+			this.check();
+		},
+		computed: {
+			id() {
+				return this.$socket.id;
+			},
+			nickname() {
+				return this.$storage.get('nickname');
+			},
 		},
 		methods: {
-			init() {
-				// this.start()
-			},
-			afterLeave(el) {
-				if(this.statusMode){
-
-					this.$router.push(this.statusMode.url);
-					console.log('你开始了' + this.statusMode.title);
+			...mapMutations('game',[
+				'setMode'
+			]),
+			//检测是否已经有昵称
+			check() {
+				if (this.nickname) return ;
+				else {
+					this.$router.push('user');
+					this.$alert.show('smile', '请先设定昵称 ~');
 				}
 			},
 			start(mode) {
-				this.show = false;
-				this.statusMode=mode;
-				
+				if(mode.url=='game'||mode.url=='design') return;
+				this.$router.push(mode.url);
+				console.log('你开始了' + mode.title);
+				this.setMode(mode.title);
 			},
 		},
 
@@ -62,45 +75,44 @@
 </script>
 
 <style lang="scss" type="text/css" scoped>
-	$ymred:#952a1d;
+	$ymred: #952a1d;
 	#gallery {
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
-		width: 60%;
-		height: 100%;
-		margin: 0 auto;
+	    display: flex;
+	    justify-content: space-around;
+	    align-items: center;
+	    width: 60%;
+	    height: 100%;
+	    margin: 0 auto;
 
-		.pic {
-			position: relative;
-			width: 2.2rem;
-			height: 5.5rem;
-			border-radius: .2rem;
-			box-shadow: 0 0 .2rem black;
-			text-align: center;
-			background-size: cover;
-			background-position: center center;
-			transition: .5s all;
+	    .pic {
+	        position: relative;
+	        width: 2.2rem;
+	        height: 5.5rem;
+	        border-radius: 0.2rem;
+	        box-shadow: 0 0 0.2rem black;
+	        text-align: center;
+	        background-size: cover;
+	        background-position: center center;
+	        transition: 0.5s all;
 
-			&:hover {
-				box-shadow: 0 0 .1rem .05rem $ymred;
-				filter:brightness(1.2);
-				// height: 5.7rem;
-			}
-			
-			.banner {
-				position: absolute;
-				width: 100%;
-				height: .5rem;
-				bottom: 1rem;
-				background: $ymred; // background:linear-gradient(to right, $ymred , blue);
-				box-shadow: 0 0 .1rem black;
-				color: white;
-				text-shadow: .03rem .03rem .05rem black;
-				line-height: .5rem;
-				font-size: .4rem; // border-radius: .1rem;
-			}
-		}
+	        &:hover {
+	            box-shadow: 0 0 0.1rem 0.05rem $ymred;
+	            filter: brightness(1.2);
+	            // height: 5.7rem;
+	        }
+
+	        .banner {
+	            position: absolute;
+	            width: 100%;
+	            height: 0.5rem;
+	            bottom: 1rem;
+	            background: $ymred; // background:linear-gradient(to right, $ymred , blue);
+	            box-shadow: 0 0 0.1rem black;
+	            color: white;
+	            text-shadow: 0.03rem 0.03rem 0.05rem black;
+	            line-height: 0.5rem;
+	            font-size: 0.4rem; // border-radius: .1rem;
+	        }
+	    }
 	}
-	
 </style>

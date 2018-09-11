@@ -1,9 +1,9 @@
 <template>
     <transition name='fade'>
         <div id="battleGround">
-            <v-player :side="'enemy'" :playerInfo="JSON.parse(JSON.stringify(enemyInfo))" ref="enemy"></v-player>
+            <v-player :side="'oppo'" :playerInfo="oppo" ref="oppo"></v-player>
             <!-- <v-battle-field></v-battle-field> -->
-            <v-player :side="'self'" :playerInfo="JSON.parse(JSON.stringify(selfInfo))" ref="self"></v-player>
+            <v-player :side="'self'" :playerInfo="self" ref="self"></v-player>
         </div>
     </transition>
     
@@ -24,37 +24,39 @@
         },
         data() {
             return {
-                enemyInfo:{
-                    name: 'lingju',
-                },
-                selfInfo:{
-                    name: 'xiahoushi',
-                }
+                
             }
         },
-        mounted() {
+        created() {
             this.start();
+            console.log(this.oppo);
         },
         computed: {
-            // ...mapState('',[
-            //     'preview',
-            // ])
+            //直接从vuex中读取对手和自己的信息
+            ...mapState('game',[
+                'self','oppo'
+            ])
         },
         methods: {
             ...mapMutations('game',[
-				'initPlayers'
+				'setSelf','setOppo'
 			]),
             start(){
                 console.log('游戏开始');
-                //定义玩家
-                this.initPlayers({
-                    enemy:this.$refs.enemy,
-                    self:this.$refs.self,
-                });
-                // 游戏开始摸牌
-                // this.gameDraw();
+                this.registerPlayers(this.$route.params.players);
+                this.gameDraw();
             },
-           
+            registerPlayers(players){
+                this.setSelf(players.self);
+                this.setOppo(players.oppo);
+            },
+            //游戏开始各摸4张牌
+            gameDraw(){
+                this.$refs.oppo.draw(4);
+                console.log(this.$refs.oppo);
+                // this.$refs.oppo.draw(4);
+                // this.$refs.self.draw(4);
+            }
         }
     }
 </script>

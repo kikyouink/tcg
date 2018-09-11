@@ -8,7 +8,6 @@
 </template>
 
 <script>
-    import dialog from '@/components/dialog.vue';
     import {
         mapState,
         mapMutations,
@@ -17,12 +16,10 @@
     export default {
         name: 'App',
         components: {
-            "v-dialog": dialog,
-            "v-alert": alert,
         },
         data() {
             return {
-                version: '0.2-alpha',
+                version: '0.3-alpha',
                 author: 'SAI',
                 date: '2018-08-31',
                 location: 'Nan Jing',

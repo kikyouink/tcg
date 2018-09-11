@@ -17,21 +17,23 @@
         data() {
             return {
                 onlinePlayer: [],
-                alert: {
-                    icon: 'loading',
-                    text: '正在搜索中...',
-                    type: 'match',
+                alert:{
+                    search:{
+                        icon: 'loading',
+                        text: '正在搜索中...',
+                        type: 'match',
+                    },
+                    err:{
+                        icon: 'error',
+                        text: '错误 网络未连接',
+                        type: 'error',
+                    },
+                    succ:{
+                        icon: 'ok',
+                        text: '匹配成功',
+                        type: 'ok',
+                    },
                 },
-                alertErr:{
-                    icon: 'error',
-                    text: '错误 网络未连接',
-                    type: 'error',
-                },
-                alertSucc:{
-                    icon: 'ok',
-                    text: '匹配成功',
-                    type: 'ok',
-                }
             }
         },
         mounted() {
@@ -54,64 +56,82 @@
             nickname() {
                 return this.$storage.get('nickname');
             },
+            avatar(){
+                return this.$storage.get('avatar');
+            },
             list() {
                 return [];
             }
         },
-        sockets:{
-            matchSucc: function(player){
-                console.log('匹配成功! 你的对手是：'+player.nickname);
-                this.$alert.show(this.alertSucc).then(()=>{
-                    this.$router.replace('game');
-                    return ;
+        sockets: {
+            matchSucc: function (oppo) {
+                console.log('匹配成功! 你的对手是：' + oppo.nickname);
+                this.$alert.show(this.alert.succ).then(() => {
+                    // this.registerPlayers(oppo);
+                    this.$router.replace({
+                        name:'game',
+                        params: {
+                            players:{
+                                self:{
+                                    id:this.id,
+                                    nickname:this.nickname,
+                                    avatar:this.avatar,
+                                },
+                                oppo:{
+                                    id:oppo.id,
+                                    nickname:oppo.nickname,
+                                    avatar:oppo.avatar,
+                                }
+                            }
+                        }
+                    });
+                    return;
                 });
             },
         },
         methods: {
             check() {
-                console.log(this.connect);
-                if (!this.connect){
-                    this.$alert.show(this.alertErr).then(()=>{
+                //检测连接
+                if (!this.connect) {
+                    this.$alert.show(this.alert.err).then(() => {
                         this.$router.back();
-                        return ;
+                        return;
                     });
                 }
-                else if (!this.nickname){
-                    this.$router.replace('user');
-                    return ;
-                }
-                else this.init();
+                else this.start();
             },
-            init() {
+            start() {
                 console.log(this.id);
                 console.log(this.nickname);
                 this.match();
             },
-            match(){
-                this.$alert.show(this.alert,'infinite');
+            match() {
+                this.$alert.show(this.alert.search, 'infinite');
                 this.$socket.emit('match', {
                     "id": this.id,
                     "nickname": this.nickname,
+                    "avatar":this.avatar,
                 });
+                //开始计时
                 this.timing();
             },
-            timing(){
+            timing() {
                 //5分钟后如果搜索不到则取消
-                setTimeout(()=>{
-                    this.$alert.show('error','等待时间过长')
-                    .then(()=>{
-                        this.$router.back();
-                    })
-                },50000);
+                setTimeout(() => {
+                    this.$alert.show('error', '等待时间过长')
+                        .then(() => {
+                            this.$router.back();
+                        })
+                }, 300000);
             },
-            leave(){
+            leave() {
                 this.$alert.hide();
-                if(!this.nickname) return;
                 this.$socket.emit('leave', {
                     "id": this.id,
                     "nickname": this.nickname,
+                    "avatar":this.avatar,
                 });
-            }
+            },
         }
     }
 </script>

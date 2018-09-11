@@ -5,6 +5,7 @@ export default class storageModule {
     set(key, value) {
         if (Array.isArray(key)) {
             for (var i = 0; i < key.length; i++) {
+                if(value[i]=='') continue;
                 localStorage.setItem(key[i], value[i]);
             }
             console.log('save succ');

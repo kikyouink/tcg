@@ -28,7 +28,7 @@
         data() {
             return {
                 user:{
-                    avatar:'zhenji',
+                    avatar:'',
                     nickname:'',
                     sign:'',
                 }
@@ -43,8 +43,12 @@
             sign(){
                 return this.$storage.get('sign');
             },
+            avatar(){
+                return this.$storage.get('avatar');
+            },
             avatarUrl(){
-                return 'url('+require('../assets/img/player/'+this.user.avatar+'.png')+')';
+                if(this.user.avatar=='') return 'url('+require('../assets/img/player/'+this.avatar+'.png')+')';
+                else return 'url('+require('../assets/img/player/'+this.user.avatar+'.png')+')';
             }
         },
         methods: {
@@ -54,7 +58,7 @@
                 this.$set(this.user,'avatar',item);
             },
             sumbit(){
-                this.$storage.set(['nickname','sign'],[this.user.nickname,this.user.sign]);
+                this.$storage.set(['nickname','sign','avatar'],[this.user.nickname,this.user.sign,this.user.avatar]);
                 this.$router.back();
             }
         }
@@ -66,7 +70,6 @@
         width: 100%;
         height: 100%;
         position: relative;
-
         .user-container{
             width: 4.2rem;
             height: 6rem;
@@ -77,7 +80,6 @@
             border-radius: .2rem;
             background-size: cover;
             transition: all .75s;
-
             .user-info{
                 background: rgba(0,0,0,0.5);
                 position: absolute;
@@ -92,7 +94,6 @@
                         transition: all 0.3s ease-out;
                         transform: translateX(0);
                         color: rgba(255,255,255,0.8);
-
                         &.active,&:hover{
                             transform: translateX(.06rem);
                             background: rgba(0,0,0,0.3);
