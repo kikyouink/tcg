@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import VueSocketio from 'vue-socket.io';
-import socketio from 'socket.io-client';
+import io from 'socket.io-client';
 import VConsole from 'vconsole'
 import VueAlert from './plugins/alert/index'
 import storage from './plugins/storage/storage'
@@ -13,7 +13,7 @@ import './api.js';
 
 // const URL='http://172.81.224.195:3000';
 const URL = 'http://localhost:3000';
-Vue.use(VueSocketio, socketio(URL), store);
+Vue.use(VueSocketio, io(URL), store);
 Vue.use(VueAlert);
 Vue.use(storage)
 

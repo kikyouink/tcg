@@ -41,7 +41,10 @@
         },
         sockets: {
             echo(event) {
-                
+                console.log('revive');
+                console.log(event);
+                var player = (event.targetId == this.self.id) ? this.$refs.self : this.$refs.oppo;
+                player[event.type](event.num);
             }
         },
         methods: {
@@ -53,7 +56,7 @@
                 this.registerPlayers(this.$route.params.players);
             },
             start() {
-                // this.gameDraw();
+                this.gameDraw();
             },
             registerPlayers(players) {
                 this.setSelf(players.self);
@@ -61,11 +64,17 @@
             },
             //游戏开始各摸4张牌
             gameDraw() {
+                this.commit({
+                    targetId: this.self.id,
+                    type: 'draw',
+                    num: 4,
+                })
                 // this.$refs.oppo.draw(4);
                 // this.$refs.self.draw(4);
+                // this.commit.call(this.$refs.oppo.draw(4))
             },
-            commit(player, event) {
-
+            commit(event) {
+                this.$socket.emit('gameEvent', event)
             }
         }
     }

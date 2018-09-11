@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+// import io from 'socket.io-client';
 
 Vue.use(Vuex);
 
@@ -106,20 +107,18 @@ const player = {
                 cardPile: [],
             },
             mutations: {
-                // requireCard(state, num) {
-                //     var cards = state.cardPile.splice(0, num);
-                //     state.resultCards = cards;
-                // },
+                
             },
             actions: {}
         }
     }
 }
 
-const ss = (store) => {
-    // 当 store 初始化后调用
+const event = store => {
     store.subscribe((mutation, state) => {
-        console.log(mutation);
+        // var socket=socketio('http://localhost:3000');
+        // console.log(io);
+
     })
 }
 
@@ -127,8 +126,8 @@ const store = new Vuex.Store({
     modules: {
         game: game,
         player: player,
-        plugins: [ss]
-    }
+    },
+    plugins: [event]
 })
 
 export default store

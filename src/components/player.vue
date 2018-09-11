@@ -91,11 +91,6 @@
 			},
 			draw(num=1) {
 				console.log('draw');
-				this.$socket.emit('gameEvent',{
-                    player:this.player.id,
-					type:'draw',
-					num:num,
-                })
 				// var cards=this.$refs.cardPile.requireCard(num);
 				// this.player.handCard = this.player.handCard.concat(cards);
 				// this.Draw({
