@@ -38,12 +38,12 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../../sgs/www/index.html'),
+    index: path.resolve(__dirname, '../../tcg-app/www/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../../sgs/www'),
+    assetsRoot: path.resolve(__dirname, '../../tcg-app/www'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps

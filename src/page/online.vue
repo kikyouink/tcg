@@ -102,7 +102,7 @@
                     .then(()=>{
                         this.$router.back();
                     })
-                },2000);
+                },50000);
             },
             leave(){
                 this.$alert.hide();

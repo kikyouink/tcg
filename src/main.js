@@ -11,29 +11,44 @@ import VueAlert from './plugins/alert/index'
 import storage from './plugins/storage/storage'
 import './api.js';
 
-Vue.use(VueSocketio, socketio('http://localhost:3000'), store);
+Vue.use(VueSocketio, socketio('http://172.81.224.195:3000'), store);
 Vue.use(VueAlert);
 Vue.use(storage)
 
 Vue.config.productionTip = false
-// var game={
-//     log(val){
-//         console.log(JSON.parse(JSON.stringify(val)));
-//     }
-// }
-/* eslint-disable no-new */
 
-const vConsole = new VConsole()
+//判断是否是移动端
+if(/Android|iPhone|iPod/i.test(navigator.userAgent)){
+	document.addEventListener('deviceready', function() {
+		//打开控制台
+		 const vConsole = new VConsole();
+	 
+		 //开始同步代码
+		 codePush.notifyApplicationReady();
+		 codePush.sync(null, null,function(downloadProgress){
+			 if (downloadProgress) {
+				 var precent=downloadProgress.receivedBytes/downloadProgress.totalBytes;
+				 document.querySelector('.inner').style.width=(12*precent)+'rem';
+				 if(precent>=0.95) document.querySelector('span').innerHTML='下载完成，请重新启动...';
+			 }
+		 });
+	 
+		 //隐藏状态栏
+		 setTimeout(function(){
+			 try{
+				 if (StatusBar.isVisible) {
+					 StatusBar.hide();
+				 }
+			 }catch(e){}
+		 },750);
+		 
+	 }, false);
+}
 
-// document.addEventListener('deviceready', function() {
-    new Vue({
-        el: '#app',
-        router,
-        store,
-        components: { App },
-        template: '<App/>'
-    })
-//     window.navigator.splashscreen.hide();
-//     console.log(StatusBar);
-//     StatusBar.hide();
-// }, false);
+new Vue({
+	el: '#app',
+	router,
+	store,
+	components: { App },
+	template: '<App/>'
+})

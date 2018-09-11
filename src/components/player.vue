@@ -57,7 +57,7 @@
 					hp: 30,
 					maxHp: 30,
 					maxHandCard: 7,
-					avatarUrl: 'url(/static/img/player/' + this.playerInfo.name + '.png)',
+					avatarUrl: 'url('+require('../assets/img/player/' + this.playerInfo.name + '.png')+')',
 					handCard: [
 
 					]
@@ -137,18 +137,19 @@
 	        width: 2rem;
 	        height: 2.7rem;
 	        border-radius: 0.1rem;
-	        box-shadow: 0 0 0.2rem;
+	        box-shadow: 0 0 0.2rem black;
 	        background-size: cover;
 	        background-position: center center;
 	        position: absolute;
-	        left: calc(50% - 1rem);
+	        // left: calc(50% - 1rem);
+			right: 0rem;
 	        z-index: 10;
 
 	        &.self {
-	            bottom: 1.3rem;
+	            bottom: 0;
 	        }
 	        &.enemy {
-	            top: 1.3rem;
+	            top: 0;
 	        }
 	    }
 	    .card-area {
@@ -157,11 +158,11 @@
 	        overflow: visible;
 
 	        .previewCard {
-	            width: 2.98rem;
-	            height: 4.16rem;
+	            width: 3.2rem;
+	            height: 4.46rem;
 	            border-radius: 0.2rem;
-	            left: calc(50% - 1.48rem);
-	            bottom: 2.7rem;
+	            left: calc(50% - 1.6rem);
+	            bottom: 2.2rem;
 	            background-size: cover;
 	            position: absolute;
 	            z-index: 100;
@@ -172,6 +173,11 @@
 	            width: 1.5rem;
 	            height: 100%;
 	        }
+			.handCard-area{
+				float: left;
+	            margin-left: 1.5rem;
+	            height: 100%;
+			}
 	    }
 	}
 </style>

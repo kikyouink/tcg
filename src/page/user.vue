@@ -44,7 +44,11 @@
                 return this.$storage.get('sign');
             },
             avatarUrl(){
+<<<<<<< HEAD
                 return 'url(../../static/img/player/'+this.user.avatar+'.png)';
+=======
+                return 'url('+require('../assets/img/player/'+this.user.avatar+'.png')+')';
+>>>>>>> 19d68ddd162261ac94f15c6a1802011ea3990ff4
             }
         },
         methods: {
