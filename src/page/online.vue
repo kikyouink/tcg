@@ -59,9 +59,6 @@
             avatar() {
                 return this.$storage.get('avatar');
             },
-            list() {
-                return [];
-            }
         },
         sockets: {
             matchSucc(oppo) {
@@ -117,7 +114,7 @@
             },
             timing() {
                 //5分钟后如果搜索不到则取消
-                setTimeout(() => {
+                window.timing=setTimeout(() => {
                     this.$alert.show('error', '等待时间过长')
                         .then(() => {
                             this.$router.back();
@@ -126,6 +123,7 @@
             },
             leave() {
                 this.$alert.hide();
+                clearTimeout(window.timing);
                 this.$socket.emit('leave', {
                     "id": this.id,
                     "nickname": this.nickname,

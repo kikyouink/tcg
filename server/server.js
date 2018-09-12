@@ -45,6 +45,11 @@ class Server {
             if(i!=id) return i;
         }
     }
+    findRoom(id,list){
+        for(var i in list){
+            if(i.indexOf("room")!=-1) return i;
+        }
+    }
     
 }
 module.exports = Server;

@@ -46,10 +46,8 @@ io.on('connection', (socket) => {
 	})
 	socket.on('gameEvent', (e) => {
 		console.log(e.playerId + '发布了一条新事件:' + e.type);
-		var oppoId=server.findOppo(e.playerId,socket.adapter.rooms);
-		console.log(oppoId);
-		var oppo = io.sockets.connected[oppoId];
-		oppo.emit('echo',e);
+		var room =server.findRoom(e.playerId,socket.adapter.rooms);
+		io.to(room).emit('echo',e);
 		
 	})
 	socket.on('leave', (player) => {
