@@ -13,7 +13,7 @@
         mapActions
     } from 'vuex';
     export default {
-        name: 'found',
+        name: 'online',
         data() {
             return {
                 onlinePlayer: [],
