@@ -10,15 +10,27 @@
 }
 
 //滑动
-.slide-enter-active,
-.slide-leave-active {
+.slideLeft-enter-active,
+.slideLeft-leave-active {
     transition: all .75s;
 }
-.slide-enter,
-.slide-leave-to
+.slideLeft-enter,
+.slideLeft-leave-to
 {
     opacity: 0;
     transform: translateY(.1rem);
+}
+
+//下滑
+.slideDown-enter-active,
+.slideDown-leave-active {
+    transition: all .5s;
+}
+.slideDown-enter,
+.slideDown-leave-to
+{
+    opacity: 0;
+    transform: translateY(-1rem);
 }
 
 //旋转

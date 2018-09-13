@@ -1,5 +1,5 @@
 <template>
-    <transition name='fade'>
+    <transition name='slideDown'>
         <div class="alert" v-show="alert.show">
             <div :class="icon" :style="{animation:animation}"></div>
             <span>{{text}}</span>
@@ -63,20 +63,21 @@
 </script>
 <style lang="scss">
     .alert{
+        position: absolute;
+        top: .15rem;
+        left: calc(50% - 2.5rem);
+        z-index: 200;
         display: flex;
+        width: 5rem;
+        height: 1.7rem;
+        border:.02rem inset white;
+        border-radius: .3rem;
+        background: rgba(0,0,0,.8);
+        box-shadow: 0 0 0.5rem black;
+        color: white;
+        font-size: .4rem;
         align-items: center;
         justify-content: space-around;
-        width: 5rem;
-        height: 2.2rem;
-        background: rgba(0,0,0,.8);
-        color: white;
-        position: absolute;
-        left: calc(50% - 2.5rem);
-        top: 3rem;
-        border-radius: .3rem;
-        z-index: 200;
-        font-size: .4rem;
-        // animation: rotating 1.5s linear infinite;
 
         div{
             width: 1.2rem;
@@ -84,5 +85,5 @@
             text-align: center;
             line-height: 1.2rem;
         }
-}
+    }
 </style>

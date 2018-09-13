@@ -21,7 +21,7 @@
 		},
 		data() {
 			return {
-				animation:'slide',
+				animation:'slideLeft',
 				cardUrl:'url(http://tcg.sanguosha.com/upload/cards/13/13'+this.cardInfo.id+'.jpg)',
 			}
 		},
@@ -48,13 +48,13 @@
 <style lang="scss" type="text/css" scoped>
 	$ymred:#952a1d;
 	.handCard{
+		position: relative;
+		float: left;
+		margin: 0 .04rem 0 .04rem;
 		width: 1.5rem;
 		height: 2.09rem;
 		border-radius: .2rem;
-		float: left;
 		background-size: cover;
-		position: relative;
-		margin: 0 .04rem 0 .04rem;
 
 	}
 </style>

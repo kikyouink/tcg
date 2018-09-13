@@ -1,5 +1,5 @@
 <template>
-    <transition name='slide'>
+    <transition name='fade'>
         <div id="user">
             <div class="user-container" :style="{backgroundImage:avatarUrl}" @dblclick="changeBg()">
                 <div class="user-info">
@@ -73,29 +73,29 @@
         height: 100%;
         position: relative;
         .user-container{
-            width: 4.2rem;
-            height: 6rem;
             position: absolute;
             top:calc(50% - 3rem);
             left: calc(50% - 2.1rem);
-            box-shadow:.04rem .08rem .3rem .02rem rgba(0,0,0,.4);
+            width: 4.2rem;
+            height: 6rem;
             border-radius: .2rem;
             background-size: cover;
+            box-shadow:.04rem .08rem .3rem .02rem rgba(0,0,0,.4);
             transition: all .75s;
             .user-info{
-                background: rgba(0,0,0,0.5);
                 position: absolute;
-                width: 100%;
                 bottom: 0;
+                width: 100%;
+                background: rgba(0,0,0,0.5);
                 ul{
                     margin: 0 0 .8rem 0;
                     li {
-                        font-size: .36rem;
                         height: .8rem;
+                        color: rgba(255,255,255,0.8);
+                        font-size: .36rem;
                         line-height: .8rem;
                         transition: all 0.3s ease-out;
                         transform: translateX(0);
-                        color: rgba(255,255,255,0.8);
                         &.active,&:hover{
                             transform: translateX(.06rem);
                             background: rgba(0,0,0,0.3);

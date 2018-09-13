@@ -1,7 +1,7 @@
 <template>
     <transition name='fade'>
         <div id='online'>
-
+            <div class="bt"></div>
         </div>
     </transition>
 </template>
@@ -20,7 +20,7 @@
                 alert: {
                     search: {
                         icon: 'loading',
-                        text: '正在搜索中...',
+                        text: '正在寻找对局...',
                         type: 'match',
                     },
                     err: {
@@ -138,5 +138,13 @@
     #online {
         width: 100%;
         height: 100%;
+
+        .bt{
+            width: 10rem;
+            height: 5.69rem;
+            margin: 1.4rem auto 0 auto;
+            background-image: url('./../assets/img/bg/online.png');
+            background-size: cover;
+        }
     }
 </style>

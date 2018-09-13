@@ -126,16 +126,15 @@
 	        top: 0;
 	    }
 	    .avatar {
+	        position: absolute;
+			right: 0rem;
+	        z-index: 10;
 	        width: 2rem;
 	        height: 2.7rem;
 	        border-radius: 0.1rem;
-	        box-shadow: 0 0 0.2rem black;
-	        background-size: cover;
 	        background-position: center center;
-	        position: absolute;
-	        // left: calc(50% - 1rem);
-			right: 0rem;
-	        z-index: 10;
+	        background-size: cover;
+	        box-shadow: 0 0 0.2rem black;
 
 	        &.self {
 	            bottom: 0;
@@ -150,14 +149,14 @@
 	        overflow: visible;
 
 	        .previewCard {
+	            position: absolute;
+	            bottom: 2.2rem;
+	            left: calc(50% - 1.6rem);
+	            z-index: 100;
 	            width: 3.2rem;
 	            height: 4.46rem;
 	            border-radius: 0.2rem;
-	            left: calc(50% - 1.6rem);
-	            bottom: 2.2rem;
 	            background-size: cover;
-	            position: absolute;
-	            z-index: 100;
 	        }
 	        .buff,
 	        .equip {
