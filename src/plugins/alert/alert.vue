@@ -43,9 +43,6 @@
                     else if(typeof data=='string'){
                         this.$set(this.alert,'text',data);
                     }
-                    else {
-                        this.$set(this.$data,'alert',data);
-                    }
                     this.$set(this.alert,'show',true);
                     if(time!='infinite'){
                         setTimeout(()=>{

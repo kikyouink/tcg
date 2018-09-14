@@ -64,7 +64,7 @@
 				}
 			},
 			start(mode) {
-				if(mode.url=='game'||mode.url=='design') return;
+				if(mode.url=='game') return;
 				this.$router.push(mode.url);
 				console.log('你开始了' + mode.title);
 				this.setMode(mode.title);

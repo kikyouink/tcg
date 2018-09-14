@@ -1,4 +1,4 @@
-import storageModule from './storageModule'
+import storageModule from './storage'
 
 export default{
     install:function(Vue){

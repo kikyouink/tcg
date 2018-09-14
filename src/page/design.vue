@@ -1,7 +1,12 @@
 <template>
     <transition name='fade'>
-        <div id='design'>
+        <div id='design' v-cloak>
+            <div class="left">
+                <div v-for="card in cardStatus" :key="card.id" :style="{backgroundImage:'url('+require('../assets/img/card/' + card.id + '.jpg')+')'}"></div>
+            </div>
+            <div class="right">
 
+            </div>
         </div>
     </transition>
 </template>
@@ -16,11 +21,14 @@
         name: 'design',
         data() {
             return {
-
+                index: 0,
+                card:{
+                    all:[],
+                }
             }
         },
-        mounted() {
-            this.check();
+        created() {
+            this.init();
         },
         components: {
 
@@ -29,60 +37,27 @@
             ...mapState('game', [
                 'connect',
             ]),
-            id() {
-                return this.$socket.id;
-            },
-            nickname() {
-                return this.$storage.get('nickname');
-            },
-            avatar() {
-                return this.$storage.get('avatar');
-            },
+            cardStatus() {
+                var start = this.index * 8;
+                var end = start + 8;
+                var clone = this.card.all.slice(start, end);
+                console.log(clone);
+                return clone;
+            }
         },
         methods: {
-            check() {
-                //检测连接
-                if (!this.connect) {
-                    this.$alert.show(this.alert.err).then(() => {
-                        this.$router.back();
-                        return;
-                    });
-                }
-                else this.start();
+            init(){
+                this.getJson();
             },
-            start() {
-                console.log(this.id);
-                console.log(this.nickname);
-                this.match();
-            },
-            match() {
-                this.$alert.show(this.alert.search, 'infinite');
-                this.$socket.emit('match', {
-                    "id": this.id,
-                    "nickname": this.nickname,
-                    "avatar": this.avatar,
-                });
-                //开始计时
-                this.timing();
-            },
-            timing() {
-                //5分钟后如果搜索不到则取消
-                window.timing=setTimeout(() => {
-                    this.$alert.show('error', '等待时间过长')
-                        .then(() => {
-                            this.$router.back();
-                        })
-                }, 300000);
-            },
-            leave() {
-                this.$alert.hide();
-                clearTimeout(window.timing);
-                this.$socket.emit('leave', {
-                    "id": this.id,
-                    "nickname": this.nickname,
-                    "avatar": this.avatar,
-                });
-            },
+            getJson(){
+                var url = '/static/card/card.json';
+                this.axios.get(url).then((res) => {
+                    console.log(res);
+                    this.$set(this.card,'all',res.data);
+                }).catch((e) => {
+                    console.log(e);
+                })
+            }
         }
     }
 </script>
@@ -91,5 +66,29 @@
     #design {
         width: 100%;
         height: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .left {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 12rem;
+            height: 8rem;
+        }
+        .right {
+            width: 4rem;
+            height: 8rem;
+        }
+        .left,
+        .right {
+            border: 0.02rem solid white;
+            border-radius: 0.3rem;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 0.5rem black;
+            color: white;
+            font-size: 0.4rem;
+        }
     }
 </style>

@@ -5,6 +5,7 @@ import game from '@/page/game'
 import design from '@/page/design'
 import gallery from '@/page/gallery'
 import user from '@/page/user'
+// import update from '@/page/update'
 
 Vue.use(Router)
 
@@ -32,6 +33,6 @@ export default new Router({
 			path: '/user',
 			name: 'user',
 			component: user
-		}
+		},
 	],
 })

@@ -6,16 +6,19 @@ import router from './router'
 import store from './store'
 import VueSocketio from 'vue-socket.io';
 import io from 'socket.io-client';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import VConsole from 'vconsole'
-import VueAlert from './plugins/alert/index'
+import alert from './plugins/alert/index'
 import storage from './plugins/storage/index'
 import './api.js';
 
 const URL='http://loly.club:3000';
 // const URL = 'http://localhost:3000';
 Vue.use(VueSocketio, io(URL), store);
-Vue.use(VueAlert);
-Vue.use(storage)
+Vue.use(VueAxios, axios);
+Vue.use(alert);
+Vue.use(storage);
 
 Vue.config.productionTip = false
 
