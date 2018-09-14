@@ -146,18 +146,19 @@
 	    .card-area {
 	        height: 100%;
 	        background: rgba(0, 0, 0, 0.5);
-	        overflow: visible;
+			overflow: visible;
+			
+			.previewCard {
+				position: absolute;
+				bottom: 2.2rem;
+				left: calc(50% - 1.6rem);
+				z-index: 100;
+				width: 3.2rem;
+				height: 4.46rem;
+				border-radius: 0.2rem;
+				background-size: cover;
+			}
 
-	        .previewCard {
-	            position: absolute;
-	            bottom: 2.2rem;
-	            left: calc(50% - 1.6rem);
-	            z-index: 100;
-	            width: 3.2rem;
-	            height: 4.46rem;
-	            border-radius: 0.2rem;
-	            background-size: cover;
-	        }
 	        .buff,
 	        .equip {
 	            float: left;

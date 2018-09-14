@@ -70,6 +70,7 @@
     /*---------------主容器------------------*/
     #warp {
         height: 100%;
+        // background: url('./assets/img/bg/meizi.jpg') no-repeat center bottom;
         background: url('./assets/img/bg/chengdu.png') no-repeat center bottom;
         background-size: cover;
     }

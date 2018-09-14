@@ -4,7 +4,13 @@ var fs = require('fs');
 
 var num=0;
 var json = [];
-//定义常量
+
+//id格式化
+function format(num,n=3){
+    return (Array(n).join('0') + num).slice(-n);
+}
+
+//处理数据
 async function read() {
     // 2207 - 2475
     for (let i = 2207; i <= 2475; i++) {
@@ -12,6 +18,9 @@ async function read() {
         await dataRequest(url);
     }
     console.log('完毕! 共获得'+num+'条数据');
+    json.sort(function(a,b){
+        return parseInt(a.id)-parseInt(b.id);
+    })
     fs.writeFileSync('./tcg.json', JSON.stringify(json));
 }
 
@@ -69,7 +78,7 @@ function loadBody(body) {
 	// 类别
     var type = tr1.find('.value').eq(1).text();
 	// 卡牌编号
-    var id = parseInt(tr2.find('.value').eq(2).text());
+    var id = format(tr2.find('.value').eq(2).text());
 	// 描述
     var des = attributes.find('p').eq(0).text();
 	// 单个对象

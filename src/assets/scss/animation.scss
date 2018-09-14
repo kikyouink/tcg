@@ -18,7 +18,7 @@
 .slideLeft-leave-to
 {
     opacity: 0;
-    transform: translateY(.1rem);
+    transform: translateX(.1rem);
 }
 
 //下滑
@@ -42,4 +42,25 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+//列表动画
+.card{
+    transition: all 1s;
+}
+.left-enter, .left-leave-to {
+    opacity: 0;
+    transform: translateX(1rem);
+}
+.left-leave-active {
+    // position: absolute;
+    display: none;
+}
+.right-enter, .right-leave-to {
+    opacity: 0;
+    transform: translateX(-1rem);
+}
+.right-leave-active {
+    // position: absolute;
+    display: none;
 }

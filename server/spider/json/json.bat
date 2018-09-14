@@ -1,3 +1,3 @@
 @echo off
-node read.js
+node json.js
 pause
