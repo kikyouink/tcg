@@ -140,8 +140,8 @@
         height: 100%;
 
         .bt{
-            width: 10rem;
-            height: 5.69rem;
+            width: 8rem;
+            height: 4.55rem;
             margin: 1.4rem auto 0 auto;
             background-image: url('./../assets/img/bg/online.png');
             background-size: cover;

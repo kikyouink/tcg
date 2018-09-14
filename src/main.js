@@ -8,10 +8,10 @@ import VueSocketio from 'vue-socket.io';
 import io from 'socket.io-client';
 import VConsole from 'vconsole'
 import VueAlert from './plugins/alert/index'
-import storage from './plugins/storage/storage'
+import storage from './plugins/storage/index'
 import './api.js';
 
-const URL='http://172.81.224.195:3000';
+const URL='http://loly.club:3000';
 // const URL = 'http://localhost:3000';
 Vue.use(VueSocketio, io(URL), store);
 Vue.use(VueAlert);
@@ -27,22 +27,38 @@ if (/Android|iPhone|iPod/i.test(navigator.userAgent)) {
 
 		//开始同步代码
 		codePush.notifyApplicationReady();
-		codePush.sync(null, null, function (downloadProgress) {
+		var text;
+		codePush.sync(function (status) {
+			switch (status) {
+				case SyncStatus.CHECKING_FOR_UPDATE:
+					text = '正在搜寻可用更新...';
+					break;
+				case SyncStatus.DOWNLOADING_PACKAGE:
+					text = '正在努力下载更新，请稍等...';
+					break;
+				case SyncStatus.INSTALLING_UPDATE:
+					text = '下载完毕，安装中...';
+					break;
+				case SyncStatus.UPDATE_INSTALLED:
+					text = '安装完毕，请重新启动靴靴QAQ...';
+					break;
+			}
+			document.querySelector('span').innerHTML=text;
+		}, null, function (downloadProgress) {
 			if (downloadProgress) {
 				var precent = downloadProgress.receivedBytes / downloadProgress.totalBytes;
 				document.querySelector('.inner').style.width = (12 * precent) + 'rem';
-				if (precent >= 0.95) document.querySelector('span').innerHTML = '下载完成，请重新启动...';
 			}
 		});
 
-		//隐藏状态栏
+		// 隐藏状态栏
 		setTimeout(function () {
 			try {
 				if (StatusBar.isVisible) {
 					StatusBar.hide();
 				}
 			} catch (e) { }
-		}, 750);
+		}, 500);
 
 	}, false);
 }

@@ -64,13 +64,13 @@
 <style lang="scss">
     .alert{
         position: absolute;
-        top: .15rem;
+        top: .1rem;
         left: calc(50% - 2.5rem);
         z-index: 200;
         display: flex;
         width: 5rem;
         height: 1.7rem;
-        border:.02rem inset white;
+        border:.02rem solid white;
         border-radius: .3rem;
         background: rgba(0,0,0,.8);
         box-shadow: 0 0 0.5rem black;

@@ -23,7 +23,6 @@ const game = {
         SOCKET_CONNECT: (state, status) => {
             console.log('已连接');
             state.connect = true;
-            state.reconnecting = false;
         },
         SOCKET_DISCONNECT: (state, status) => {
             console.log('已断开');
