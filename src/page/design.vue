@@ -8,8 +8,8 @@
                 </transition-group>
                 <div class="next" @click="next()">☲</div>
             </div>
-            <transition-group name="right" class="right" mode='in-out' tag="div">
-                <div class="cardMini" v-for="card in card.selected" :key="card.id" @click="remove(card)">
+            <transition-group name="right" class="right" mode='in-out' tag="div" ref="board">
+                <div class="cardMini" v-for="card in card.selected" :key="card.name" @click="remove(card)">
                     {{card.name}}
                 </div>
             </transition-group>
@@ -73,6 +73,8 @@
             },
             push(card) {
                 this.card.selected.push(JSON.parse(JSON.stringify(card)));
+                var scrollDom = document.querySelector('.right');
+                scrollDom.scrollTop = scrollDom.scrollHeight;
             },
             remove(card) {
 
@@ -130,6 +132,7 @@
         .right {
             @include rect(4rem, 8rem);
             overflow: auto;
+            transition: all 0.5s;
             .cardMini{
                 height: .7rem;
                 line-height: .7rem;
