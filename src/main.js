@@ -12,6 +12,7 @@ import VConsole from 'vconsole'
 import alert from './plugins/alert/index'
 import storage from './plugins/storage/index'
 import './api.js';
+// import './assets/scss/mixin.scss';
 
 const URL='http://loly.club:3000';
 // const URL = 'http://localhost:3000';

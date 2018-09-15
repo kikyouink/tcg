@@ -75,11 +75,8 @@
 </script>
 
 <style lang="scss" type="text/css" scoped>
-	$ymred: #952a1d;
 	#gallery {
-	    display: flex;
-	    justify-content: space-around;
-	    align-items: center;
+	   @include flex;
 	    width: 60%;
 	    height: 100%;
 	    margin: 0 auto;
@@ -89,11 +86,11 @@
 	        width: 2.2rem;
 	        height: 5.5rem;
 	        border-radius: 0.2rem;
-	        box-shadow: 0 0 0.2rem black;
+	        box-shadow: 0 0 .2rem black;
 	        text-align: center;
 	        background-size: cover;
 	        background-position: center center;
-	        transition: 0.5s all;
+	        transition: 0.2s all;
 
 	        &:hover {
 	            box-shadow: 0 0 0.1rem 0.05rem $ymred;
@@ -106,12 +103,13 @@
 	            width: 100%;
 	            height: 0.5rem;
 	            bottom: 1rem;
-	            background: $ymred; // background:linear-gradient(to right, $ymred , blue);
+				background: $darkBg;
+				// border-radius: .05rem;
 	            box-shadow: 0 0 0.1rem black;
-	            color: white;
-	            text-shadow: 0.03rem 0.03rem 0.05rem black;
+	            color: $lightText;
+	            // text-shadow: 0.03rem 0.03rem 0.05rem black;
 	            line-height: 0.5rem;
-	            font-size: 0.4rem; // border-radius: .1rem;
+				font-size: 0.4rem; 
 	        }
 	    }
 	}

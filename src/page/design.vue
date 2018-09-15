@@ -79,11 +79,9 @@
     #design {
         width: 100%;
         height: 100%;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
+        @include flex;
         // background-image: url('../assets/img/bg/yangpi1.png');
-        background-image: url('../assets/img/bg/1.jpg');
+        // background-image: url('../assets/img/bg/1.jpg');
         background-size:100% 100%;
 
         .left {
@@ -97,19 +95,12 @@
 
             .prev,.next{
                 position: absolute;
-                width: 1rem;
-                height: 1rem;
                 top:calc(50% - .5rem);
-                background: #a85339;
-                border:.08rem solid white;
-                box-shadow: 0 0 .3rem black;
-                border-radius: 50%;
-                line-height: 1rem;
-                text-align: center;
+                @include round(1rem);
                 transition: all 0.5s;
             }
             .prev:hover,.next:hover{
-                background: #820606;
+                background: rgb(88,76,39);
             }
             .prev{
                 left: -.5rem;
@@ -119,11 +110,7 @@
             }
             .cl{
                 height: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                align-content: center;
-                flex-wrap: wrap;
+                @include flex;
 
                 .card {
                     // position: absolute;
@@ -137,14 +124,7 @@
             }
         }
         .right {
-            width: 4rem;
-            height: 8rem;
-            // background: url('../assets/img/bg/alert.png');
-            // background-size: 100% 100%;
-            background: rgba(0, 0, 0, 0.5);
-            border:.03rem solid #544141;
-            // background: #f4dc60;
-            box-shadow: 0 0 0.5rem black inset;
+            @include rect(4rem,8rem);
         }
         .left,
         .right {

@@ -28,11 +28,13 @@ button,input {
     line-height: .8rem;
 }
 button {
-    color: white;
+    color: rgb(141, 132, 100);
     cursor: pointer;
 
     &:hover {
-        background: rgba(0,0,0,0.3);
+        // background: rgb(88,76,39);
+        background:rgb(141, 132, 100);
+        color: white;
     }
     &[disabled] {
         background-color: rgba(255, 255, 255, 0.4);
@@ -42,18 +44,15 @@ input,textarea{
     text-indent: .25rem; 
     box-sizing: border-box;
     // background:rgba(255,255,255,0.2);
-    color:white;
+    color: rgb(141, 132, 100);
 
     &::-webkit-input-placeholder {
-        color:rgba(255,255,255,0.5);
+        color:rgba(141, 132, 100,.5);
     }
     &.search{
         background: #e4e9ec;
         text-indent: .15rem; 
         color:gray;
-        &::-webkit-input-placeholder {
-            color:gray;
-        }
     }
 }
 //位置
@@ -88,8 +87,8 @@ input,textarea{
 }
 //图标
 .iconfont {
-    filter: brightness(0.7);
-    transition: filter 0.2s;
+    opacity: 0.7;
+    transition: opacity 0.2s;
     vertical-align: sub;
     &.lg {
         font-size: 0.8rem;
@@ -99,10 +98,7 @@ input,textarea{
     }
     &.lg:hover,
     &.sm:hover {
-        filter: brightness(1);
-    }
-    &.margin {
-        // margin: 0 0;
+        opacity: 1;
     }
     &.icon-back {
         position: absolute;
@@ -116,9 +112,4 @@ input,textarea{
         left: 1rem;
         z-index: 200;
     }
-}
-@mixin flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
 }

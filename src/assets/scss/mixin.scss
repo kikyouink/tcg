@@ -1,0 +1,66 @@
+$ymred: #952a1d;
+$lightBg:#eee8d5;
+$lightText:#8d8464;
+$lightBorder:#ddd6c1;
+$darkBg:#3e3727;
+@mixin flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+}
+@mixin round-m($val) {
+    width: $val;
+    height: $val;
+    text-align: center;
+    line-height: $val;
+}
+@mixin round($val) {
+    width: $val;
+    height: $val;
+    text-align: center;
+    line-height: $val;
+    // box-sizing: border-box;
+    border:.1rem solid $lightBorder;
+    border-radius: 50%;
+    background: $lightBg;
+    box-shadow: 0 0 0.3rem black;
+    color: $lightText;
+    font-size: .6rem;
+}
+@mixin rect-m ($width,$height){
+    width: $width;
+    height:$height;
+    background: $lightBg;
+    color: $lightText;
+    font-size: 0.4rem;
+}
+@mixin rect ($width,$height){
+    width: $width;
+    height:$height;
+    box-sizing: border-box;
+    border:.1rem solid $lightBorder;
+    border-radius: 0.3rem;
+    background: $lightBg;
+    box-shadow: 0 0 0.5rem black;
+    color: $lightText;
+    font-size: 0.4rem;
+}
+@mixin cc($width,$height) {
+    width: $width;
+    height: $height;
+    position: absolute;
+    left:50%;
+    top: 50%;
+    margin-left: -$width/2;
+    margin-top: -$height/2;
+}
+@mixin ct($width,$height,$top) {
+    width: $width;
+    height: $height;
+    position: absolute;
+    left:50%;
+    margin-left: -$width/2;
+    margin-top: $top;
+}

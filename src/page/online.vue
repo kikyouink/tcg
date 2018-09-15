@@ -140,9 +140,7 @@
         height: 100%;
 
         .bt{
-            width: 8rem;
-            height: 4.55rem;
-            margin: 1.4rem auto 0 auto;
+            @include ct(8rem,4.55rem,1.8rem);
             background-image: url('./../assets/img/bg/online.png');
             background-size: cover;
         }
