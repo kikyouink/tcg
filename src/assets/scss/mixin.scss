@@ -1,8 +1,18 @@
-$ymred: #952a1d;
-$lightBg:#eee8d5;
-$lightText:#8d8464;
-$lightBorder:#ddd6c1;
-$darkBg:#3e3727;
+// $ymred: #952a1d;
+// $lightBg:#eee8d5;
+// $lightBg:#3e3727;
+// $color:#8d8464;
+// $lightHover:rgb(227,221,204);
+// $lightBorder:#ddd6c1;
+// $bg:#380707;
+// $hover:#420005;
+// $border:#3a4833;
+// $bg:#29291d;
+$bg:linear-gradient(45deg, #29291d , #480016);
+$color:#a58a62;
+$hover:#420005;
+$border:#3a4833;
+
 @mixin flex {
     display: flex;
     align-items: center;
@@ -22,29 +32,31 @@ $darkBg:#3e3727;
     text-align: center;
     line-height: $val;
     // box-sizing: border-box;
-    border:.1rem solid $lightBorder;
+    border:.1rem solid $border;
     border-radius: 50%;
-    background: $lightBg;
+    background: $bg;
     box-shadow: 0 0 0.3rem black;
-    color: $lightText;
+    color: $color;
     font-size: .6rem;
 }
 @mixin rect-m ($width,$height){
     width: $width;
     height:$height;
-    background: $lightBg;
-    color: $lightText;
+    background: $bg;
+    color: $color;
     font-size: 0.4rem;
 }
 @mixin rect ($width,$height){
     width: $width;
     height:$height;
     box-sizing: border-box;
-    border:.1rem solid $lightBorder;
+    // border:.1rem solid $lightBorder;
+    border:.1rem solid $border;
     border-radius: 0.3rem;
-    background: $lightBg;
+    background: $bg;
+    // background: $color;
     box-shadow: 0 0 0.5rem black;
-    color: $lightText;
+    color: $color;
     font-size: 0.4rem;
 }
 @mixin cc($width,$height) {

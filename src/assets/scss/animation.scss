@@ -46,7 +46,7 @@
 
 //列表动画
 .card{
-    transition: all 1s;
+    transition: all .75s;
 }
 .left-enter, .left-leave-to {
     opacity: 0;

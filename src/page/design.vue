@@ -2,13 +2,13 @@
     <transition name='fade'>
         <div id='design' v-cloak>
             <div class="left">
-                <div class="prev" @click="prev()">‹</div>
+                <div class="prev" @click="prev()">☵</div>
                 <transition-group name="left" class="cl" mode='in-out' tag="div">
                     <div class="card" v-for="card in cardStatus" :key="card.id" 
                     :style="{backgroundImage:'url('+require('../assets/img/card/' + card.id + '.jpg')+')'}"
                     ></div>
                 </transition-group>
-                <div class="next" @click="next()">›</div>
+                <div class="next" @click="next()">☲</div>
             </div>
             <div class="right">
 
@@ -86,12 +86,10 @@
 
         .left {
             position: relative;
-            width: 13rem;
-            height: 8rem;
+            // width: 13rem;
+            // height: 8rem;
             overflow: visible;
-            background: url('../assets/img/bg/dialog.png');
-            // background-position: center center;
-            // box-shadow: 0 0 0.5rem black inset;
+            @include rect(11rem,8rem);
 
             .prev,.next{
                 position: absolute;
@@ -100,13 +98,13 @@
                 transition: all 0.5s;
             }
             .prev:hover,.next:hover{
-                background: rgb(88,76,39);
+                background: $hover;
             }
             .prev{
-                left: -.5rem;
+                left: -.7rem;
             }
             .next{
-                right: -.5rem;
+                right: -.7rem;
             }
             .cl{
                 height: 100%;
@@ -117,9 +115,9 @@
                     width: 2.3rem;
                     height: 3.20rem;
                     background-size: cover;
-                    margin: .15rem .2rem;
+                    margin: .1rem .2rem;
                     border-radius: .1rem;
-                    box-shadow: 0 0 .3rem black;
+                    box-shadow: 0 0 .7rem black;
                 }
             }
         }

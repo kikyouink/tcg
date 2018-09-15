@@ -84,16 +84,17 @@
 	    .pic {
 	        position: relative;
 	        width: 2.2rem;
-	        height: 5.5rem;
+			height: 5.5rem;
+			border:.1rem solid $bg;
 	        border-radius: 0.2rem;
 	        box-shadow: 0 0 .2rem black;
 	        text-align: center;
 	        background-size: cover;
 	        background-position: center center;
-	        transition: 0.2s all;
+	        transition: 0.5s all;
 
 	        &:hover {
-	            box-shadow: 0 0 0.1rem 0.05rem $ymred;
+	            box-shadow: 0 0 .4rem black;
 	            filter: brightness(1.2);
 	            // height: 5.7rem;
 	        }
@@ -103,10 +104,10 @@
 	            width: 100%;
 	            height: 0.5rem;
 	            bottom: 1rem;
-				background: $darkBg;
+				background: $bg;
 				// border-radius: .05rem;
 	            box-shadow: 0 0 0.1rem black;
-	            color: $lightText;
+	            color: $color;
 	            // text-shadow: 0.03rem 0.03rem 0.05rem black;
 	            line-height: 0.5rem;
 				font-size: 0.4rem; 

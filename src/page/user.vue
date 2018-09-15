@@ -76,14 +76,16 @@
             @include cc(4.2rem,6rem);
             border-radius: .3rem;
             background-size: cover;
-            // box-shadow:.04rem .08rem .3rem .02rem rgba(0,0,0,.4);
+            box-shadow:.04rem .08rem .3rem .02rem rgba(0,0,0,.4);
+            border:.1rem solid $border;
             transition: all .75s;
             .user-info{
                 position: absolute;
                 bottom: 0;
                 // width: 100%;
                 // background: rgba(0,0,0,0.5);
-                @include rect(100%,auto);
+                @include rect-m(100%,auto);
+                // border: none
                 ul{
                     margin: 0 0 .8rem 0;
                     li {
@@ -93,16 +95,15 @@
                         line-height: .8rem;
                         transition: all 0.3s ease-out;
                         transform: translateX(0);
-                        &.active,&:hover{
-                            transform: translateX(.06rem);
-                            // background: rgba(0,0,0,0.3);
-                        }
-                        i{
-                            // color: rgba(255,255,255,0.6);
+                        // background:$darkHover;
+                        &.active,&:hover\{
+                            // transform: translateX(.06rem);
+                            // background:$darkHover;
                         }
                         input{
                             // outline: none;
-                            width:2.5rem;
+                            // width:2.5rem;
+                            width: 60%;
                             float: right;
                             // color: rgba(255,255,255,0.8);
                         }
