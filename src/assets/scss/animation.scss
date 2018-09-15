@@ -64,3 +64,24 @@
     // position: absolute;
     display: none;
 }
+
+//列表动画
+.cardMini{
+    transition: all .75s;
+}
+.right-enter, .right-leave-to {
+    opacity: 0;
+    transform: translateX(1rem);
+}
+.right-leave-active {
+    // position: absolute;
+    display: none;
+}
+.right-enter, .right-leave-to {
+    opacity: 0;
+    transform: translateX(-1rem);
+}
+.right-leave-active {
+    // position: absolute;
+    display: none;
+}
