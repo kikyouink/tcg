@@ -9,8 +9,9 @@
                 <div class="next" @click="next()">☲</div>
             </div>
             <transition-group name="right" class="right" mode='in-out' tag="div" ref="board">
-                <div class="cardMini" v-for="card in card.selected" :key="card.name" @click="remove(card)">
-                    {{card.name}}
+                <div class="cardMini" v-for="(card,index) in card.selected" :key="card.id" @click="remove(card,index)">
+                   {{card.data.split('-')[0]}} {{card.name}}
+                   <span class="dh" v-if="card.data.split('-')[1]!=0">{{card.data.split('-')[1]}}/{{card.data.split('-')[2]}}</span>
                 </div>
             </transition-group>
         </div>
@@ -37,6 +38,10 @@
         created() {
             this.init();
         },
+        beforeDestroy() {
+            console.log('即将离开');
+            this.leave();
+        },
         components: {
 
         },
@@ -55,15 +60,19 @@
         methods: {
             init() {
                 this.getJson();
+                this.loadCardPile();
             },
             getJson() {
                 var url = '/static/card/card.min.json';
                 this.axios.get(url).then((res) => {
-                    console.log(res);
                     this.$set(this.card, 'all', res.data);
+                    this.sort(this.card.all);
                 }).catch((e) => {
                     console.log(e);
                 })
+            },
+            loadCardPile(){
+                this.card.selected=this.$storage.get('cardPile');
             },
             next() {
                 this.index++;
@@ -72,12 +81,34 @@
                 this.index--;
             },
             push(card) {
-                this.card.selected.push(JSON.parse(JSON.stringify(card)));
-                var scrollDom = document.querySelector('.right');
-                scrollDom.scrollTop = scrollDom.scrollHeight;
+                if(this.card.selected.length>=50) {
+                    this.$alert.show('prompt','套牌已满50张牌');
+                    return ;
+                }
+                var c=JSON.parse(JSON.stringify(card));
+                this.card.selected.push(c);
+                this.sort(this.card.selected);
+                // this.$nextTick(function(){
+                //     var div = document.querySelector('.right');
+                //     div.scrollTop = div.scrollHeight;
+                // })
+                
             },
-            remove(card) {
+            sort(list){
+                list.sort(function(a,b){
+                    var costa=a.data.split('-')[0];
+                    var costb=b.data.split('-')[0];
+                    return costa-costb;
+                })
+            },
+            remove(card,index) {
+                this.card.selected.splice(index,1);
+            },
 
+            leave(){
+                var s=this.card.selected;
+                if(s.length<50) this.$alert.show('prompt','你的套牌需要50张牌');
+                this.$storage.set('cardPile',s);
             }
         }
     }
@@ -102,7 +133,6 @@
                 position: absolute;
                 top: calc(50% - 0.5rem);
                 @include round(1rem);
-                // transition: background 0.5s;
             }
             .prev:hover,
             .next:hover {
@@ -126,20 +156,34 @@
                     border-radius: 0.1rem;
                     box-shadow: 0 0 0.5rem black;
                     cursor: pointer;
+
+                    &:hover{
+                        box-shadow: 0 0 0.1rem .07rem $ymred;
+                        filter:brightness(1.2);
+                    }
                 }
             }
         }
         .right {
             @include rect(4rem, 8rem);
             overflow: auto;
-            transition: all 0.5s;
+            padding: .1rem 0 .1rem 0;
             .cardMini{
-                height: .7rem;
-                line-height: .7rem;
+                width: 90%;
+                height: .6rem;
+                line-height: .6rem;
+                border-radius: .1rem;
                 border-top: .02rem solid $border;
                 border-bottom: .02rem solid $border;
                 margin: .01rem auto;
+                padding: 0 .15rem 0 .15rem;
                 box-shadow: 0 0 .2rem black inset;
+                font-size: .3rem;
+
+                .dh{
+                    // display: block;
+                    float: right;
+                }
             }
         }
         .left,

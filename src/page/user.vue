@@ -1,7 +1,7 @@
 <template>
     <transition name='fade'>
         <div id="user">
-            <div class="user-container" :style="{backgroundImage:avatarUrl}" @dblclick="changeBg()">
+            <div class="user-container" :style="{backgroundImage:avatarUrl}" @dblclick.prevent.self="changeBg()">
                 <div class="user-info">
                     <ul>
                         <li>
@@ -76,7 +76,8 @@
             @include cc(4.2rem,6rem);
             border-radius: .3rem;
             background-size: cover;
-            box-shadow:.04rem .08rem .3rem .02rem rgba(0,0,0,.4);
+            box-shadow:.04rem .08rem .3rem .02rem rgba(0,0,0,.4),
+             0 0 3rem black inset;
             border:.1rem solid $border;
             transition: all .75s;
             .user-info{

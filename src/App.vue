@@ -63,7 +63,7 @@
 
 <style lang="scss">
     //阿里图标
-    @import url("http://at.alicdn.com/t/font_818705_gn1suc59ah.css");
+    @import url("http://at.alicdn.com/t/font_818705_jrnscykzups.css");
     @import "assets/scss/animation.scss";
     @import "assets/scss/ui.scss";
 

@@ -64,7 +64,10 @@
 				}
 			},
 			start(mode) {
-				if(mode.url=='game') return;
+				if(mode.url=='game'){
+					this.$alert.show('cry', '暂未开放~');
+					return ;
+				}
 				this.$router.push(mode.url);
 				console.log('你开始了' + mode.title);
 				this.setMode(mode.title);
@@ -85,7 +88,7 @@
 	        position: relative;
 	        width: 2.2rem;
 			height: 5.5rem;
-			border:.1rem solid $bg;
+			border:.08rem solid $border1;
 	        border-radius: 0.2rem;
 	        box-shadow: 0 0 .2rem black;
 	        text-align: center;

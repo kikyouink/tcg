@@ -21,7 +21,7 @@
 		},
 		data() {
 			return {
-				animation:'slideLeft',
+				animation:'slide-left',
 				cardUrl:'url(http://tcg.sanguosha.com/upload/cards/13/13'+this.cardInfo.id+'.jpg)',
 			}
 		},

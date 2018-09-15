@@ -113,20 +113,20 @@ const player = {
     }
 }
 
-const event = store => {
-    store.subscribe((mutation, state) => {
-        // var socket=socketio('http://localhost:3000');
-        // console.log(io);
+// const event = store => {
+//     store.subscribe((mutation, state) => {
+//         // var socket=socketio('http://localhost:3000');
+//         // console.log(io);
 
-    })
-}
+//     })
+// }
 
 const store = new Vuex.Store({
     modules: {
         game: game,
         player: player,
     },
-    plugins: [event]
+    // plugins: [event]
 })
 
 export default store

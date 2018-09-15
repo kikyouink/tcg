@@ -10,12 +10,12 @@
 }
 
 //滑动
-.slideLeft-enter-active,
-.slideLeft-leave-active {
+.slide-left-enter-active,
+.slide-left-leave-active {
     transition: all .75s;
 }
-.slideLeft-enter,
-.slideLeft-leave-to
+.slide-left-enter,
+.slide-left-leave-to
 {
     opacity: 0;
     transform: translateX(.1rem);
@@ -44,20 +44,20 @@
     }
 }
 
-//列表动画
+//design left
 .card{
     transition: all .75s;
 }
 .left-enter, .left-leave-to {
     opacity: 0;
-    transform: translateX(1rem);
+    transform: translateX(.5rem);
 }
 .left-leave-active {
     // position: absolute;
     display: none;
 }
 
-//列表动画
+//design right
 .cardMini{
     transition: all .25s;
 }

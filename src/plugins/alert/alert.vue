@@ -67,6 +67,7 @@
         top: 0.1rem;
         left: calc(50% - 2.5rem);
         z-index: 200;
+        // padding: 0 .5rem 0 .5rem;
         @include flex;
         @include rect(5rem,1.7rem);
 
