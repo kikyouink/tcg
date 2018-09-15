@@ -86,8 +86,6 @@
 
         .left {
             position: relative;
-            // width: 13rem;
-            // height: 8rem;
             overflow: visible;
             @include rect(11rem,8rem);
 
@@ -95,7 +93,7 @@
                 position: absolute;
                 top:calc(50% - .5rem);
                 @include round(1rem);
-                transition: all 0.5s;
+                // transition: background 0.5s;
             }
             .prev:hover,.next:hover{
                 background: $hover;
@@ -111,13 +109,12 @@
                 @include flex;
 
                 .card {
-                    // position: absolute;
                     width: 2.3rem;
                     height: 3.20rem;
                     background-size: cover;
                     margin: .1rem .2rem;
                     border-radius: .1rem;
-                    box-shadow: 0 0 .7rem black;
+                    box-shadow: 0 0 .5rem black;
                 }
             }
         }

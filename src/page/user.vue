@@ -96,7 +96,7 @@
                         transition: all 0.3s ease-out;
                         transform: translateX(0);
                         // background:$darkHover;
-                        &.active,&:hover\{
+                        &.active,&:hover{
                             // transform: translateX(.06rem);
                             // background:$darkHover;
                         }
