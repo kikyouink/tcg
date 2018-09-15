@@ -1,27 +1,27 @@
 <template>
-	<div class="player" :class="side">
+	<div class="player" :class="side" @click="dosth()">
 		<!-- 玩家头像 -->
-		<div class="avatar" :class="side" :style="{backgroundImage:player.avatarUrl}" @click="dosth()">
+		<!-- <div class="avatar" :class="side" :style="{backgroundImage:player.avatarUrl}">
 			<div class="rb">{{player.hp}}</div>
-		</div>
+		</div> -->
+		<!-- 卡牌预览区 -->
+		<transition name='fade'>
+			<div class="previewCard" v-show="preview" :style="{backgroundImage:bgUrl}"></div>
+		</transition>
 		<!-- 卡牌区 -->
-		<div class="card-area">
-			<!-- 卡牌预览区 -->
-			<transition name='fade'>
-				<div class="previewCard" v-show="preview" :style="{backgroundImage:bgUrl}"></div>
-			</transition>
+		<div class="card-area" :class="side">
 			<!-- 阵略 -->
-			<div class="buff">
+			<!-- <div class="buff">
 
-			</div>
+			</div> -->
 			<!-- 战器 -->
-			<div class="equip">
+			<!-- <div class="equip">
 
-			</div>
+			</div> -->
 			<!-- 手牌区 -->
-			<div class="handCard-area" :side="side">
-				<v-handCard v-for="card in player.handCard" :key="card.id" :cardInfo="card"></v-handCard>
-			</div>
+			<transition-group name='handCard-area' class="handCard-area" :class="side"  mode='in-out' tag="div">
+				<v-handCard class="handCard" v-for="card in player.handCard" :key="card.id"  :cardInfo="card"></v-handCard>
+			</transition-group>
 			<!-- 牌堆与弃牌堆 -->
 			<div class="cardPile">
 				<v-cardPile ref="cardPile"></v-cardPile>
@@ -64,6 +64,7 @@
 		},
 		mounted() {
 			this.init();
+			window.draw=this.draw;
 		},
 		computed: {
 			...mapState('player/handCard',[
@@ -71,7 +72,7 @@
 			]),
 			bgUrl(){
 				if(!this.previewCard) return '';
-				else return 'url(http://tcg.sanguosha.com/upload/cards/13/13' + this.previewCard.id + '.jpg)';
+				else return '../assets/img/card/' + this.previewCard.id + '.jpg)';
 			},
 		},
 		methods: {
@@ -86,13 +87,15 @@
 			},
 			dosth(){
 				this.draw();
-				// this.draw();
-				// this.$socket.emit('ca','caocao');
 			},
 			draw(num=1) {
-				console.log('draw');
-				// var cards=this.$refs.cardPile.requireCard(num);
-				// this.player.handCard = this.player.handCard.concat(cards);
+				var cards=this.$refs.cardPile.requireCard(num);
+				console.log(cards);
+				for(var i=0;i<cards.length;i++){
+					console.log(cards[i]);
+					this.player.handCard.push(cards[i]);
+				}
+				console.log(this.player.handCard);
 				// this.Draw({
 				// 	target: this.player,
 				// 	num: num,
@@ -113,18 +116,18 @@
 
 <style lang="scss">
 	$ymred: #952a1d;
+	.self {
+		bottom: 0;
+	}
+	.oppo {
+		top: 0;
+	}
 	.player {
 	    position: absolute;
 	    width: 100%;
-	    height: 2.09rem;
-	    overflow: visible;
+	    height: 50%;
+		overflow: visible;
 
-	    &.self {
-	        bottom: 0;
-	    }
-	    &.oppo {
-	        top: 0;
-	    }
 	    .avatar {
 	        position: absolute;
 			right: 0rem;
@@ -134,18 +137,12 @@
 	        border-radius: 0.1rem;
 	        background-position: center center;
 	        background-size: cover;
-	        box-shadow: 0 0 0.2rem black;
-
-	        &.self {
-	            bottom: 0;
-	        }
-	        &.oppo {
-	            top: 0;
-	        }
+			box-shadow: 0 0 0.2rem black;
 	    }
 	    .card-area {
+			position: absolute;
+			width: 100%;
 	        height: 100%;
-	        background: rgba(0, 0, 0, 0.5);
 			overflow: visible;
 			
 			.previewCard {
@@ -159,16 +156,14 @@
 				background-size: cover;
 			}
 
-	        .buff,
-	        .equip {
-	            float: left;
-	            width: 1.5rem;
-	            height: 100%;
-	        }
 			.handCard-area{
-				float: left;
-	            margin-left: 1.5rem;
-	            height: 100%;
+				position: absolute;
+				width: 100%;
+				@include flex;
+				justify-content: center;
+				flex-wrap: nowrap;
+				height: 50%;
+				background: rgba(0, 0, 0, 0.5);
 			}
 	    }
 	}

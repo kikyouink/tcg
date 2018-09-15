@@ -9,18 +9,6 @@
     transform: translateY(.1rem);
 }
 
-//滑动
-.slide-left-enter-active,
-.slide-left-leave-active {
-    transition: all .75s;
-}
-.slide-left-enter,
-.slide-left-leave-to
-{
-    opacity: 0;
-    transform: translateX(.1rem);
-}
-
 //下滑
 .slideDown-enter-active,
 .slideDown-leave-active {
@@ -68,4 +56,16 @@
 .right-leave-active {
     // position: absolute;
     display: none;
+}
+
+.handCard{
+    transition: all .75s;
+}
+.handCard-area-enter, .handCard-area-leave-to {
+    opacity: 0;
+    transform: translateX(.5rem);
+}
+.handCard-area-leave-active {
+    position: absolute;
+    // display: none;
 }

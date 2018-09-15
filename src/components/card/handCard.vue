@@ -1,8 +1,8 @@
 <template>
-	<transition :name='animation'>
+	<!-- <transition> -->
 		<div class="handCard" :style="{backgroundImage:cardUrl}" @mouseover="setPreviewCard(cardInfo)" @mouseout="hidePreviewCard()">
 		</div>
-	</transition>
+	<!-- </transition> -->
 	
 </template>
 

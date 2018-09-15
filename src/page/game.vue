@@ -64,11 +64,6 @@
             },
             //游戏开始各摸4张牌
             gameDraw() {
-                this.commit({
-                    targetId: this.self.id,
-                    type: 'draw',
-                    num: 4,
-                })
                 // this.$refs.oppo.draw(4);
                 // this.$refs.self.draw(4);
                 // this.commit.call(this.$refs.oppo.draw(4))

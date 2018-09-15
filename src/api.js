@@ -59,15 +59,8 @@ Array.prototype.matchPlayer = function () {
 	var players = this.splice(0, 2);
 	return players;
 }
-// 禁止右键
-try {
-	//由于此文件还需要在 Node服务端运行，所以要加一个判断条件
-	document.oncontextmenu = function () {
-		return false;
-	}
-}
-catch (e) {
-
+window.json=function(val){
+	return JSON.parse(JSON.stringify(val));
 }
 
 

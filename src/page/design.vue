@@ -169,13 +169,13 @@
             overflow: auto;
             padding: .1rem 0 .1rem 0;
             .cardMini{
-                width: 90%;
+                width: 87%;
                 height: .6rem;
                 line-height: .6rem;
                 border-radius: .1rem;
                 border-top: .02rem solid $border;
                 border-bottom: .02rem solid $border;
-                margin: .01rem auto;
+                margin: .02rem auto;
                 padding: 0 .15rem 0 .15rem;
                 box-shadow: 0 0 .2rem black inset;
                 font-size: .3rem;

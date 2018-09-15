@@ -35,9 +35,10 @@
         methods: {
             init() {
                 this.log();
-            },
-            source(val) {
-                return JSON.parse(JSON.stringify(val));
+                //禁止右键
+                document.oncontextmenu = function () {
+                    return false;
+                }
             },
             log() {
                 console.log('版本:' + this.version);

@@ -77,7 +77,7 @@
             border-radius: .3rem;
             background-size: cover;
             box-shadow:.04rem .08rem .3rem .02rem rgba(0,0,0,.4),
-             0 0 3rem black inset;
+             0 0 4rem .5rem black inset;
             border:.1rem solid $border;
             transition: all .75s;
             .user-info{

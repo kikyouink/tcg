@@ -15,25 +15,28 @@
         data() {
             return {
                 resultCards:[],
+                cardPile:[],
             }
         },
         mounted() {
-            
+            this.init();
         },
         computed: {
             count(){
                 return this.cardPile.length;
             },
-            cardPile(){
+            cardPileInit(){
                 return this.$storage.get('cardPile');
             }
         },
         methods: {
+            init(){
+                this.cardPile=json(this.cardPileInit).slice();
+            },
             requireCard(num){
                 var cards=this.cardPile.splice(0, num);
-                this.resultCards=cards;
-                console.log(this.resultCards);
-                return cards;
+                console.log(json(cards));
+                return json(cards);
             },
         }
     }
