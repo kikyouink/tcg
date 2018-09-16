@@ -31,18 +31,33 @@
             this.init();
         },
         computed: {
+            ...mapState('game',[
+				'UA',
+			]),
 			nickname() {
 				return this.$storage.get('nickname');
 			},
         },
         methods: {
+            ...mapMutations('game',[
+				'setUA'
+			]),
             init() {
+                this._setUA();
                 this.log();
                 //禁止右键
                 this.check();
                 document.oncontextmenu = function () {
                     return false;
                 }
+            },
+            _setUA(){
+                var UA;
+                if(/Android|iPhone|iPod/i.test(navigator.userAgent)){
+                    UA='mobile'
+                }
+                else UA='pc'
+                this.setUA(UA);
             },
             log() {
                 console.log('版本:' + this.version);
@@ -57,7 +72,20 @@
 				}
 			},
             back() {
-                this.$router.back();
+                if(this.$router.currentRoute.name=='gallery'){
+                    if(this.UA=='moblie'){
+                        navigator.notification.confirm(
+                            'You are the winner!', 
+                            function(index){
+                                if(index==1) this.exitApp();
+                            },
+                            'Game Over',    
+                            ['取消','确定']
+                        );
+                    }
+                    else this.$alert.show('glass','不能再返回了哦~');   
+                }
+                else this.$router.back();
             },
             smile() {
                 this.$router.push('user');
@@ -67,7 +95,8 @@
                 location.reload();
             },
             exit() {
-                console.log('See you again!')
+                console.log('See you again!');
+                navigator.app.exitApp();
             }
         },
     }
@@ -75,17 +104,13 @@
 
 <style lang="scss">
     //阿里图标
-    @import url("http://at.alicdn.com/t/font_818705_jrnscykzups.css");
-    @import "assets/scss/animation.scss";
-    @import "assets/scss/ui.scss";
+    @import url("http://at.alicdn.com/t/font_818705_txtrjxpklmn.css");
+    @import "../public/scss/animation.scss";
+    @import "../public/scss/ui.scss";
 
     /*---------------主容器------------------*/
     #warp {
         height: 100%;
-        // background: url('./assets/img/bg/meizi.jpg') no-repeat center bottom;
-        // background: url('./assets/img/bg/chengdu.png') no-repeat center bottom;
-        // background: url('./assets/img/bg/moon.jpg') no-repeat;
-        // background: url('./assets/img/bg/2.jpg') no-repeat;
         background:$bg;
         background-size: cover;
     }

@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import online from '@/page/online'
-import game from '@/page/game'
-import design from '@/page/design'
-import gallery from '@/page/gallery'
-import user from '@/page/user'
-// import update from '@/page/update'
+import online from '@/view/online'
+import game from '@/view/game'
+import design from '@/view/design'
+import gallery from '@/view/gallery'
+import user from '@/view/user'
+// import update from '@/view/update'
 
 Vue.use(Router)
 

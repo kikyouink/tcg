@@ -4,15 +4,15 @@
             <div class="left">
                 <div class="prev" @click="prev()">☵</div>
                 <transition-group name="left" class="cl" mode='in-out' tag="div">
-                    <div class="card" v-for="card in cardStatus" :key="card.id" :style="{backgroundImage:'url(./static/img/card/' + card.id + '.jpg)'}" @click="push(card)"></div>
+                    <div class="card" v-for="card in cardStatus" :key="card.id" :style="{backgroundImage:'url(./img/card/' + card.id + '.jpg)'}" @click="push(card)"></div>
                 </transition-group>
                 <div class="next" @click="next()">☲</div>
             </div>
-            <transition-group name="right" class="right" mode='in-out' tag="div" ref="board">
-                <div class="cardMini" v-for="(card,index) in card.selected" :key="card.id" @click="remove(card,index)" ref="mini">
+            <transition-group name="right" class="right" mode='in-out' tag="ul" ref="board">
+                <li class="cardMini" v-for="(card,index) in card.selected" :key="card.id" @click="remove(card,index)" ref="mini">
                    {{card.data.split('-')[0]}} {{card.name}}
                    <span class="dh" v-if="card.data.split('-')[1]!=0">{{card.data.split('-')[1]}}/{{card.data.split('-')[2]}}</span>
-                </div>
+                </li>
             </transition-group>
         </div>
     </transition>
@@ -57,7 +57,7 @@
             },
             bgUrl() {
                 if (!this.previewCard) return '';
-                else return 'url(./static/img/card/' + this.previewCard.id + '.jpg)';
+                else return 'url(./img/card/' + this.previewCard.id + '.jpg)';
             },
         },
         methods: {
@@ -66,7 +66,7 @@
                 this.loadCardPile();
             },
             getJson() {
-                var url = './static/config/card.min.json';
+                var url = './config/card.min.json';
                 this.axios.get(url).then((res) => {
                     this.$set(this.card, 'all', res.data);
                     this.sort(this.card.all);
@@ -91,11 +91,11 @@
                 var c=JSON.parse(JSON.stringify(card));
                 this.card.selected.push(c);
                 this.sort(this.card.selected);
-                this.$nextTick(function(){
-                    this.$refs.mini[this.miniindex].scrollIntoView({
-                        behavior: 'smooth'
-                    })
-                })
+                // this.$nextTick(function(){
+                //     this.$refs.mini[this.miniindex].scrollIntoView({
+                //         behavior: 'smooth'
+                //     })
+                // })
                 
             },
             sort(list){
@@ -158,7 +158,6 @@
                     margin: 0.1rem 0.2rem;
                     border-radius: 0.1rem;
                     box-shadow: 0 0 0.5rem black;
-                    cursor: pointer;
 
                     &:hover{
                         box-shadow: 0 0 0.1rem .07rem $ymred;
@@ -169,18 +168,19 @@
         }
         .right {
             @include rect(4rem, 8rem);
-            overflow: auto;
             padding: .1rem 0 .1rem 0;
+            overflow: auto;
             .cardMini{
                 width: 87%;
                 height: .6rem;
                 line-height: .6rem;
                 border-radius: .1rem;
-                border-top: .02rem solid $border;
-                border-bottom: .02rem solid $border;
-                margin: .02rem auto;
+                // border-top: .02rem solid $border;
+                // border-bottom: .02rem solid $border;
+                border:.02rem solid $border;
+                margin: .05rem auto;
                 padding: 0 .15rem 0 .15rem;
-                box-shadow: 0 0 .2rem black inset;
+                // box-shadow: 0 0 .2rem black inset;
                 font-size: .3rem;
 
                 .dh{

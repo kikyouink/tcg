@@ -7,6 +7,7 @@ Vue.use(Vuex);
 const game = {
     namespaced: true,
     state: {
+        UA: '',
         mode: '',
         self: {},
         oppo: {},
@@ -34,6 +35,9 @@ const game = {
         },
         setMode(state, mode) {
             state.mode = mode;
+        },
+        setUA(state, ua) {
+            state.ua = ua;
         },
         //注册玩家，并不是定义玩家
         setSelf(state, self) {
@@ -106,7 +110,7 @@ const player = {
                 cardPile: [],
             },
             mutations: {
-                
+
             },
             actions: {}
         }

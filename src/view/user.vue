@@ -5,12 +5,12 @@
                 <div class="user-info">
                     <ul>
                         <li>
-                            <i class='sm margin iconfont icon-nickname'></i>
+                            <i class='sm margin iconfont icon-nickname margin'></i>
                             <span>昵称</span>
                             <input type="text" spellcheck="false" v-model="user.nickname" :placeholder="nickname"/>
                         </li>
                         <li>
-                            <i class='sm margin iconfont icon-sign'></i>
+                            <i class='sm margin iconfont icon-sign margin'></i>
                             <span>签名</span>
                             <input type="text" spellcheck="false" v-model="user.sign" :placeholder="sign"/>
                         </li>
@@ -48,8 +48,8 @@
                 return this.$storage.get('avatar');
             },
             avatarUrl(){
-                if(this.avatar&&!this.change) return 'url(./static/img/player/'+this.avatar+'.png)';
-                else return 'url(./static/img/player/'+this.user.avatar+'.png)';
+                if(this.avatar&&!this.change) return 'url(./img/player/'+this.avatar+'.png)';
+                else return 'url(./img/player/'+this.user.avatar+'.png)';
             }
         },
         methods: {
@@ -61,7 +61,7 @@
             },
             sumbit(){
                 this.$storage.set(['nickname','sign','avatar'],[this.user.nickname,this.user.sign,this.user.avatar]);
-                this.$router.back();
+                this.$router.replace('gallery');
             }
         }
     }
@@ -97,10 +97,6 @@
                         transition: all 0.3s ease-out;
                         transform: translateX(0);
                         // background:$darkHover;
-                        &.active,&:hover{
-                            // transform: translateX(.06rem);
-                            // background:$darkHover;
-                        }
                         input{
                             // outline: none;
                             // width:2.5rem;

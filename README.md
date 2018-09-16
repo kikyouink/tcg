@@ -1,6 +1,21 @@
-# tcg-vue
-如果你想运行它，执行以下命令即可
-```javascript
-yarn
-yarn run dev
+# vue3
+
+## Project setup
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+```
+yarn run serve
+```
+
+### Compiles and minifies for production
+```
+yarn run build
+```
+
+### Lints and fixes files
+```
+yarn run lint
 ```

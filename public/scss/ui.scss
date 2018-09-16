@@ -103,6 +103,9 @@ input,textarea{
     &.sm:hover {
         opacity: 1;
     }
+    &.margin {
+        margin: 0 .1rem;
+    }
     &.icon-back {
         position: absolute;
         top: 1rem;

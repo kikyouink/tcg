@@ -1,2 +1,2 @@
 @echo off
-yarn run build
+yarn build

@@ -1,7 +1,7 @@
 <template>
 	<transition name='fade'>
 		<div id="gallery">
-			<div class="pic" v-for="item in mode" :key="item.id" :style="{backgroundImage:'url(./static/img/start/' + item.img + '.png)'}" @click="start(item)">
+			<div class="pic" v-for="item in mode" :key="item.id" :style="{backgroundImage:'url(./img/start/' + item.img + '.png)'}" @click="start(item)">
 				<div class="banner">
 					{{item.title}}
 				</div>

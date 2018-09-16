@@ -141,7 +141,7 @@
 
         .bt{
             @include ct(8rem,4.55rem,1.8rem);
-            background-image: url('../../static/img/bg/online.png');
+            background-image: url('../../public/img/bg/online.png');
             background-size: cover;
         }
     }
