@@ -1,7 +1,7 @@
 <template>
 	<transition name='fade'>
 		<div id="gallery">
-			<div class="pic" v-for="item in mode" :key="item.id" :style="{backgroundImage:'url('+require('../assets/img/start/' + item.img + '.png')+')'}" @click="start(item)">
+			<div class="pic" v-for="item in mode" :key="item.id" :style="{backgroundImage:'url(./static/img/start/' + item.img + '.png)'}" @click="start(item)">
 				<div class="banner">
 					{{item.title}}
 				</div>
@@ -20,7 +20,6 @@
 		name: 'gallery',
 		data() {
 			return {
-				// basicUrl: '../assets/img/start/',
 				mode: {
 					game: {
 						title: 'AI对战',
@@ -41,36 +40,33 @@
 			}
 		},
 		mounted() {
-			this.check();
+			
 		},
 		computed: {
-			id() {
-				return this.$socket.id;
-			},
-			nickname() {
-				return this.$storage.get('nickname');
-			},
+			
 		},
 		methods: {
 			...mapMutations('game',[
 				'setMode'
 			]),
 			//检测是否已经有昵称
-			check() {
-				if (this.nickname) return ;
-				else {
-					this.$router.push('user');
-					this.$alert.show('smile', '请先设定昵称 ~');
-				}
-			},
-			start(mode) {
+			check(mode){
+				console.log(mode);
 				if(mode.url=='game'){
 					this.$alert.show('cry', '暂未开放~');
-					return ;
 				}
-				this.$router.push(mode.url);
-				console.log('你开始了' + mode.title);
-				this.setMode(mode.title);
+				else if(mode.url=='online'&&!this.$storage.get('cardPile')){
+					this.$alert.show('cry', '请先构筑套牌~');
+				}
+				else return true;
+				return false;
+			},
+			start(mode) {
+				if(this.check(mode)){
+					this.$router.push(mode.url);
+					console.log('你开始了' + mode.title);
+					this.setMode(mode.title);
+				}
 			},
 		},
 

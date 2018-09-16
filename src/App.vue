@@ -31,11 +31,15 @@
             this.init();
         },
         computed: {
+			nickname() {
+				return this.$storage.get('nickname');
+			},
         },
         methods: {
             init() {
                 this.log();
                 //禁止右键
+                this.check();
                 document.oncontextmenu = function () {
                     return false;
                 }
@@ -45,6 +49,13 @@
                 console.log('作者:' + this.author);
                 console.log('日期:' + this.date + ' ' + this.location);
             },
+            check() {
+				if (this.nickname) return ;
+				else {
+					this.$router.replace('user');
+					this.$alert.show('smile', '请先设定昵称 ~');
+				}
+			},
             back() {
                 this.$router.back();
             },

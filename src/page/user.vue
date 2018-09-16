@@ -48,8 +48,8 @@
                 return this.$storage.get('avatar');
             },
             avatarUrl(){
-                if(this.avatar&&!this.change) return 'url('+require('../assets/img/player/'+this.avatar+'.png')+')';
-                else return 'url('+require('../assets/img/player/'+this.user.avatar+'.png')+')';
+                if(this.avatar&&!this.change) return 'url(./static/img/player/'+this.avatar+'.png)';
+                else return 'url(./static/img/player/'+this.user.avatar+'.png)';
             }
         },
         methods: {

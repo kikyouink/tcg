@@ -22,7 +22,7 @@ export default class storageModule {
             return value;
         }
     }
-    delete(key) {
+    remove(key) {
         localStorage.removeItem(key);
     }
     clear() {

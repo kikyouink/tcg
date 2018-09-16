@@ -57,7 +57,7 @@
 					hp: 30,
 					maxHp: 30,
 					maxHandCard: 7,
-					avatarUrl: 'url('+require('../assets/img/player/' + this.playerInfo.avatar + '.png')+')',
+					avatarUrl: 'url(./static/img/player/' + this.playerInfo.avatar + '.png)',
 					handCard: []
 				}
 			}
@@ -72,7 +72,7 @@
 			]),
 			bgUrl(){
 				if(!this.previewCard) return '';
-				else return '../assets/img/card/' + this.previewCard.id + '.jpg)';
+				else return './static/img/card/' + this.previewCard.id + '.jpg)';
 			},
 		},
 		methods: {

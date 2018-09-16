@@ -15,7 +15,6 @@ import './api.js';
 // import './assets/scss/mixin.scss';
 
 const URL='http://loly.club:3000';
-// const URL = 'http://localhost:3000';
 Vue.use(VueSocketio, io(URL), store);
 Vue.use(VueAxios, axios);
 Vue.use(alert);
@@ -30,30 +29,30 @@ if (/Android|iPhone|iPod/i.test(navigator.userAgent)) {
 		const vConsole = new VConsole();
 
 		//开始同步代码
-		codePush.notifyApplicationReady();
-		var text;
-		codePush.sync(function (status) {
-			switch (status) {
-				case SyncStatus.CHECKING_FOR_UPDATE:
-					text = '正在搜寻可用更新...';
-					break;
-				case SyncStatus.DOWNLOADING_PACKAGE:
-					text = '正在努力下载更新，请稍等...';
-					break;
-				case SyncStatus.INSTALLING_UPDATE:
-					text = '下载完毕，安装中...';
-					break;
-				case SyncStatus.UPDATE_INSTALLED:
-					text = '安装完毕，请重新启动靴靴QAQ...';
-					break;
-			}
-			document.querySelector('span').innerHTML=text;
-		}, null, function (downloadProgress) {
-			if (downloadProgress) {
-				var precent = downloadProgress.receivedBytes / downloadProgress.totalBytes;
-				document.querySelector('.inner').style.width = (12 * precent) + 'rem';
-			}
-		});
+		// codePush.notifyApplicationReady();
+		// var text;
+		// codePush.sync(function (status) {
+		// 	switch (status) {
+		// 		case SyncStatus.CHECKING_FOR_UPDATE:
+		// 			text = '正在搜寻可用更新...';
+		// 			break;
+		// 		case SyncStatus.DOWNLOADING_PACKAGE:
+		// 			text = '正在努力下载更新，请稍等...';
+		// 			break;
+		// 		case SyncStatus.INSTALLING_UPDATE:
+		// 			text = '下载完毕，安装中...';
+		// 			break;
+		// 		case SyncStatus.UPDATE_INSTALLED:
+		// 			text = '安装完毕，请重新启动靴靴QAQ...';
+		// 			break;
+		// 	}
+		// 	document.querySelector('span').innerHTML=text;
+		// }, null, function (downloadProgress) {
+		// 	if (downloadProgress) {
+		// 		var precent = downloadProgress.receivedBytes / downloadProgress.totalBytes;
+		// 		document.querySelector('.inner').style.width = (12 * precent) + 'rem';
+		// 	}
+		// });
 
 		// 隐藏状态栏
 		setTimeout(function () {

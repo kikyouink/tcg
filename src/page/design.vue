@@ -4,12 +4,12 @@
             <div class="left">
                 <div class="prev" @click="prev()">☵</div>
                 <transition-group name="left" class="cl" mode='in-out' tag="div">
-                    <div class="card" v-for="card in cardStatus" :key="card.id" :style="{backgroundImage:'url('+require('../assets/img/card/' + card.id + '.jpg')+')'}" @click="push(card)"></div>
+                    <div class="card" v-for="card in cardStatus" :key="card.id" :style="{backgroundImage:'url(./static/img/card/' + card.id + '.jpg)'}" @click="push(card)"></div>
                 </transition-group>
                 <div class="next" @click="next()">☲</div>
             </div>
             <transition-group name="right" class="right" mode='in-out' tag="div" ref="board">
-                <div class="cardMini" v-for="(card,index) in card.selected" :key="card.id" @click="remove(card,index)">
+                <div class="cardMini" v-for="(card,index) in card.selected" :key="card.id" @click="remove(card,index)" ref="mini">
                    {{card.data.split('-')[0]}} {{card.name}}
                    <span class="dh" v-if="card.data.split('-')[1]!=0">{{card.data.split('-')[1]}}/{{card.data.split('-')[2]}}</span>
                 </div>
@@ -46,6 +46,9 @@
 
         },
         computed: {
+            miniindex(){
+                return this.card.selected.length-1;
+            },
             cardStatus() {
                 var start = this.index * 8;
                 var end = start + 8;
@@ -54,7 +57,7 @@
             },
             bgUrl() {
                 if (!this.previewCard) return '';
-                else return 'url(' + require('../assets/img/card/' + this.previewCard.id + '.jpg') + ')';
+                else return 'url(./static/img/card/' + this.previewCard.id + '.jpg)';
             },
         },
         methods: {
@@ -63,7 +66,7 @@
                 this.loadCardPile();
             },
             getJson() {
-                var url = '/static/card/card.min.json';
+                var url = './static/config/card.min.json';
                 this.axios.get(url).then((res) => {
                     this.$set(this.card, 'all', res.data);
                     this.sort(this.card.all);
@@ -72,7 +75,7 @@
                 })
             },
             loadCardPile(){
-                this.card.selected=this.$storage.get('cardPile');
+                this.card.selected=this.$storage.get('cardPile')||[];
             },
             next() {
                 this.index++;
@@ -81,17 +84,18 @@
                 this.index--;
             },
             push(card) {
-                if(this.card.selected.length>=50) {
+                if(this.card.selected&&this.card.selected.length>=50) {
                     this.$alert.show('prompt','套牌已满50张牌');
                     return ;
                 }
                 var c=JSON.parse(JSON.stringify(card));
                 this.card.selected.push(c);
                 this.sort(this.card.selected);
-                // this.$nextTick(function(){
-                //     var div = document.querySelector('.right');
-                //     div.scrollTop = div.scrollHeight;
-                // })
+                this.$nextTick(function(){
+                    this.$refs.mini[this.miniindex].scrollIntoView({
+                        behavior: 'smooth'
+                    })
+                })
                 
             },
             sort(list){
@@ -108,7 +112,8 @@
             leave(){
                 var s=this.card.selected;
                 if(s.length<50) this.$alert.show('prompt','你的套牌需要50张牌');
-                this.$storage.set('cardPile',s);
+                if(s.length) this.$storage.set('cardPile',s);
+                else this.$storage.remove('cardPile');
             }
         }
     }
@@ -119,8 +124,6 @@
         width: 100%;
         height: 100%;
         @include flex;
-        // background-image: url('../assets/img/bg/yangpi1.png');
-        // background-image: url('../assets/img/bg/1.jpg');
         background-size: 100% 100%;
 
         .left {
