@@ -1,12 +1,12 @@
 # tcg-阵面对决
 
-#开始
+# 开始
 ```javascript
 yarn
 yarn serve
 ```
 
-#目前实现的功能
+# 目前实现的功能
 - 用户信息设置
 - 全局插件，例如alert,strorage
 - 在线匹配
